@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bob's Banana Hunt</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Sniglet:wght@400;800&display=swap">
+<style>
+/* Layout: one centered play column (max 940px) under a sticky leaf-green bar; screens swap inside it. Single sunny-jungle look on purpose. */
+:root{
+  --sky:#CDEFF8; --meadow:#E6F6D6; --leaf:#2F8F5B; --leaf-d:#1E5C3B; --leaf-l:#BFE6C8;
+  --banana:#FFD23F; --banana-l:#FFF1B8; --peel:#E39A14; --bark:#6B4226; --bark-l:#A8754A;
+  --ink:#22314A; --ink-2:#55627A; --card:#FFFFFF; --line:#D9E6D4;
+  --berry:#E8506B; --grape:#7457D1; --sea:#2FA3D6; --ok:#2F9E5A; --soft:#F3F8EE;
+  --display:'Sniglet','Chalkboard SE','Comic Sans MS',system-ui,sans-serif;
+  --body:'Andika','Trebuchet MS',system-ui,sans-serif;
+  color-scheme:light;
+}
+html,body{min-height:100%}
+html{background:var(--meadow)}
+[hidden]{display:none!important}
+body{background:linear-gradient(180deg,var(--sky) 0%,var(--meadow) 62%,#d9efc4 100%) fixed;color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.4;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--leaf-d)}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible,input:focus-visible{outline:4px solid var(--sea);outline-offset:2px}
+.ban{width:1em;height:1em;display:inline-block;vertical-align:-.15em}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--leaf-d);color:#fff;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:8px;
+  box-shadow:0 3px 0 rgba(0,0,0,.12)}
+.top-in{max-width:940px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.brand{font-family:var(--display);font-weight:800;font-size:clamp(17px,4.6vw,24px);white-space:nowrap;min-width:0;display:flex;align-items:center;gap:8px;letter-spacing:.3px}
+.brand .ban{font-size:30px}
+.spacer{flex:1}
+.pill{background:var(--banana);color:var(--bark);font-family:var(--display);font-weight:800;font-size:22px;border-radius:999px;padding:6px 16px 6px 12px;display:flex;align-items:center;gap:6px;box-shadow:0 3px 0 var(--peel)}
+.pill.bump{animation:bump .4s}
+@keyframes bump{50%{transform:scale(1.18)}}
+.iconbtn{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.14)}
+.iconbtn svg{width:26px;height:26px}
+
+main{max-width:940px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 40px}
+h1,h2,h3{font-family:var(--display);font-weight:800;margin:0;text-wrap:balance}
+.btn{font-family:var(--display);font-weight:800;font-size:21px;border-radius:18px;padding:12px 22px;min-height:56px;background:var(--card);color:var(--ink);box-shadow:0 4px 0 var(--line);display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.btn.go{background:var(--leaf);color:#fff;box-shadow:0 4px 0 var(--leaf-d)}
+.btn.yel{background:var(--banana);color:var(--bark);box-shadow:0 4px 0 var(--peel)}
+.btn.pur{background:var(--grape);color:#fff;box-shadow:0 4px 0 #4f3a9a}
+.btn[disabled]{opacity:.45;cursor:default}
+.back{font-family:var(--display);font-weight:800;font-size:18px;color:var(--leaf-d);padding:8px 4px;min-height:44px}
+
+/* home */
+.hero{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:20px;align-items:center;background:var(--card);border-radius:28px;padding:18px 22px;box-shadow:0 6px 0 var(--line)}
+.hero .bobwrap{cursor:pointer;position:relative}
+.hero h1{font-size:clamp(28px,5vw,42px);color:var(--leaf-d)}
+.hero p{margin:6px 0 14px;color:var(--ink-2);font-size:19px}
+.hero .row{display:flex;flex-wrap:wrap;gap:12px}
+.tickle-note{font-size:15px;color:var(--ink-2);margin-top:10px}
+.say{font-family:var(--display);font-size:19px;background:var(--banana-l);border-radius:16px;padding:10px 14px;margin:0 0 12px;min-height:1.4em}
+.trail-h{font-size:24px;margin:28px 0 12px;color:var(--leaf-d)}
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.topic{background:var(--card);border-radius:22px;padding:16px;text-align:left;display:flex;gap:12px;align-items:center;box-shadow:0 5px 0 var(--line);min-height:96px}
+.topic .tic{flex:none;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:24px;background:var(--banana);color:var(--bark)}
+.topic b{font-family:var(--display);font-size:20px;display:block}
+.topic small{color:var(--ink-2);font-size:15px;display:block;line-height:1.25}
+.topic.locked{background:rgba(255,255,255,.55);box-shadow:none;cursor:default;color:#8b95a6}
+.topic.locked .tic{background:#E3E7EC;color:#9aa3b0}
+.topic.locked small{color:#9aa3b0}
+.topic.open{outline:4px solid var(--banana)}
+
+/* topic screen */
+.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:12px}
+.gcard{background:var(--card);border-radius:24px;padding:16px;box-shadow:0 5px 0 var(--line);display:flex;flex-direction:column;gap:10px}
+.gcard .gh{display:flex;gap:12px;align-items:center}
+.gcard .gi{flex:none;width:64px;height:64px;border-radius:18px;background:var(--sky);display:grid;place-items:center}
+.gcard .gi svg{width:48px;height:48px}
+.gcard h3{font-size:22px}
+.gcard p{margin:0;color:var(--ink-2);font-size:16px}
+.gcard .stk{font-size:15px;color:var(--ink-2)}
+.gcard .lv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+.gcard .lv .btn{font-size:19px;padding:10px}
+
+/* play */
+.playbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.ptitle{font-family:var(--display);font-weight:800;font-size:22px;display:flex;align-items:center;gap:8px}
+.tag{font-size:14px;border-radius:999px;padding:3px 10px;color:#fff;background:var(--leaf)}
+.tag.adv{background:var(--grape)}
+.dots{display:flex;gap:6px;margin-left:auto}
+.dot{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.7);display:grid;place-items:center;border:2px dashed var(--bark-l)}
+.dot svg{width:22px;height:22px;opacity:0}
+.dot.now{border:3px solid var(--leaf)}
+.dot.star,.dot.ok{background:var(--banana-l);border:2px solid var(--peel)}
+.dot.star svg,.dot.ok svg{opacity:1}
+.dot.shown{background:#EDEFF3;border:2px solid #c3c9d2}
+.qcard{background:var(--card);border-radius:24px;padding:14px 18px;box-shadow:0 5px 0 var(--line)}
+.qtop{display:flex;align-items:flex-start;gap:10px}
+.ask{font-family:var(--display);font-size:clamp(23px,3.6vw,30px);flex:1;min-width:0;line-height:1.25}
+.speak{flex:none;width:52px;height:52px;border-radius:50%;background:var(--sky);display:grid;place-items:center}
+.speak svg{width:28px;height:28px}
+.bonus{display:inline-block;margin-top:6px;background:var(--banana);color:var(--bark);font-family:var(--display);font-weight:800;border-radius:12px;padding:4px 12px;font-size:17px;animation:wig 1.2s ease-in-out infinite}
+@keyframes wig{50%{transform:rotate(-2deg) scale(1.04)}}
+#qvis:empty,#hintvis:empty{display:none}
+#qvis,#hintvis{margin-top:10px}
+#hintvis{border-top:2px dashed var(--line);padding-top:10px}
+.fact{font-family:var(--display);font-weight:800;font-size:clamp(38px,8vw,60px);text-align:center;letter-spacing:1px;color:var(--ink)}
+.fact.words{font-size:clamp(28px,6vw,40px)}
+.blank{display:inline-block;min-width:1.3em;border-bottom:5px solid var(--peel);color:var(--peel)}
+.boxq{display:inline-block;min-width:1.2em;border:4px dashed var(--peel);border-radius:12px;color:var(--peel);padding:0 .1em;line-height:1.1}
+.cap{text-align:center;margin:6px 0 0;color:var(--ink-2);font-family:var(--display);font-size:19px}
+.groups{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.grp{display:flex;flex-wrap:wrap;justify-content:center;align-content:center;gap:2px;max-width:116px;min-height:52px;padding:8px;border-radius:20px;border:3px solid var(--peel);background:var(--banana-l)}
+.grp.g10{max-width:150px}
+.grp .ban{font-size:30px}
+.grp.sm .ban{font-size:22px}
+#qplay{margin-top:12px}
+.bobrow{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.bobmini{flex:none;width:92px}
+.bobmini.jump{animation:jump .7s}
+.bobmini.tilt{animation:tilt .7s}
+@keyframes jump{30%{transform:translateY(-22px) rotate(-4deg)}60%{transform:translateY(0)}75%{transform:translateY(-8px)}}
+@keyframes tilt{30%{transform:rotate(-10deg)}70%{transform:rotate(6deg)}}
+.bubble{flex:1;min-width:200px;background:var(--card);border-radius:20px;padding:12px 16px;font-size:19px;position:relative;box-shadow:0 4px 0 var(--line);min-height:56px}
+.bubble::before{content:"";position:absolute;left:-12px;top:22px;border:8px solid transparent;border-right:12px solid var(--card);border-left:0}
+.bubble b{font-family:var(--display)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.choices{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:12px}
+.choice{font-family:var(--display);font-weight:800;font-size:30px;min-width:92px;min-height:72px;padding:6px 16px;border-radius:20px;background:var(--card);box-shadow:0 5px 0 var(--line);border:3px solid var(--line)}
+.choice.right{background:var(--leaf);color:#fff;border-color:var(--leaf-d);box-shadow:0 5px 0 var(--leaf-d)}
+.choice.wrong{opacity:.4;text-decoration:line-through}
+.choice.glow,.glow{animation:glow 1s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 0 8px rgba(255,210,63,.85),0 0 24px 10px rgba(255,210,63,.7)}}
+
+/* balloon stage */
+.stage{position:relative;height:360px;border-radius:24px;overflow:hidden;background:linear-gradient(180deg,#9FDCF2,#DDF4FA);touch-action:manipulation}
+.stage .hill{position:absolute;left:-10%;right:-10%;bottom:-60px;height:110px;border-radius:50%;background:var(--leaf-l)}
+.cloud{position:absolute;width:120px;height:36px;background:#fff;border-radius:40px;opacity:.8}
+.cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cloud::before{width:50px;height:50px;left:18px;top:-24px}.cloud::after{width:40px;height:40px;left:56px;top:-16px}
+.balloon{position:absolute;left:0;top:0;width:92px;height:150px;will-change:transform;padding:0}
+.balloon svg{width:92px;height:150px;display:block}
+.balloon span{position:absolute;left:0;right:0;top:30px;text-align:center;font-family:var(--display);font-weight:800;color:#fff;font-size:30px;text-shadow:0 2px 0 rgba(0,0,0,.25);pointer-events:none}
+.balloon span.long{font-size:22px;top:38px}
+.balloon.fizz{transition:transform .5s,opacity .5s;opacity:0}
+.balloon.fizz svg{filter:grayscale(1)}
+.balloon.popped{opacity:0;transition:opacity .15s}
+.balloon.glow svg{filter:drop-shadow(0 0 10px #FFD23F) drop-shadow(0 0 18px #FFD23F)}
+.balloon.glow{animation:none}
+.confetti{position:absolute;width:10px;height:10px;border-radius:2px;pointer-events:none}
+
+/* baskets */
+.baskets{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.basket{display:flex;flex-direction:column;align-items:center;gap:6px;width:132px}
+.bk-tap{width:132px;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;border-radius:20px;padding:6px;background:rgba(255,255,255,.6);border:3px dashed var(--bark-l)}
+.bk-tap:disabled{cursor:default}
+.bk-bananas{display:flex;flex-wrap:wrap-reverse;justify-content:center;gap:0;max-width:112px;min-height:30px}
+.bk-bananas .ban{font-size:30px;margin:-3px}
+.bk-tap svg.bk{width:110px;height:56px}
+.basket.full .bk-tap{border:3px solid var(--ok);background:#E3F5E8}
+.basket.over .bk-tap{border:3px solid var(--berry);background:#FDE8EC}
+.bk-row{display:flex;align-items:center;gap:10px}
+.bk-minus{width:44px;height:44px;border-radius:50%;background:var(--card);font-size:26px;font-weight:700;box-shadow:0 3px 0 var(--line)}
+.bk-count{font-family:var(--display);font-weight:800;font-size:28px;min-width:32px;text-align:center}
+.pile{text-align:center;color:var(--ink-2);font-size:16px;margin:0 0 8px}
+
+/* hop */
+.pond{position:relative;background:linear-gradient(180deg,#BDE7F5,#9FD7EE);border-radius:24px;padding:100px 10px 22px;overflow:hidden}
+.stones{display:flex;justify-content:center;gap:8px}
+.stone{width:min(15vw,72px);height:min(11vw,52px);border-radius:50%;background:#9AA6A0;box-shadow:inset 0 -6px 0 rgba(0,0,0,.18);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:clamp(18px,4vw,26px);color:#fff}
+.stone.q{background:var(--banana);color:var(--bark)}
+.stone.done{background:var(--leaf)}
+.hopper{position:absolute;top:8px;left:0;width:64px;transition:transform .7s cubic-bezier(.3,1.5,.6,1)}
+.hopper.hop{animation:hopup .7s}
+@keyframes hopup{40%{margin-top:-40px}}
+.line-wrap{background:var(--card);border-radius:20px;padding:6px}
+.line-wrap svg{width:100%;height:auto;display:block}
+.arc{fill:none;stroke:var(--grape);stroke-width:4;stroke-linecap:round}
+.arcl{font-family:var(--display);font-size:17px;fill:var(--grape);font-weight:800}
+.endl{font-family:var(--display);font-size:18px;font-weight:800;fill:var(--leaf-d);opacity:0}
+.showlbl .endl.k{opacity:1}
+.showall .endl{opacity:1}
+
+/* rows */
+.gridwrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.grid{display:grid;gap:4px;grid-template-columns:repeat(var(--cols),minmax(0,48px));width:min(100%,calc(var(--cols) * 52px))}
+.grid.hd{grid-template-columns:28px repeat(var(--cols),minmax(0,48px));width:min(100%,calc(var(--cols) * 52px + 32px))}
+
+.ghd{font-family:var(--display);font-size:15px;color:var(--ink-2);display:grid;place-items:center}
+.cell{aspect-ratio:1;border-radius:12px;border:2px dashed #C7D3C0;background:rgba(255,255,255,.7);display:grid;place-items:center;padding:0}
+.cell .ban{font-size:min(36px,7vw);opacity:0;transition:opacity .15s,transform .15s;transform:scale(.4)}
+.cell.on{border:2px solid var(--peel);background:var(--banana-l)}
+.cell.on .ban{opacity:1;transform:scale(1)}
+.cell.target{animation:glow 1s infinite}
+.rowlbl{font-family:var(--display);font-size:22px;color:var(--leaf-d);min-height:1.3em}
+
+/* catch */
+.field{position:relative;height:370px;border-radius:24px;overflow:hidden;background:linear-gradient(180deg,#A6DDF0,#E9F7DC 85%);touch-action:none;user-select:none;-webkit-user-select:none}
+.canopy{position:absolute;left:-5%;right:-5%;top:-50px;height:90px;background:var(--leaf);border-radius:0 0 50% 50%/0 0 100% 100%}
+.canopy::after{content:"";position:absolute;inset:auto 10% -14px;height:30px;background:var(--leaf-d);border-radius:50%;opacity:.35}
+.grass{position:absolute;left:0;right:0;bottom:0;height:26px;background:var(--leaf-l)}
+.fb{position:absolute;left:0;top:0;width:76px;height:76px;will-change:transform}
+.fb .ban{width:76px;height:76px}
+.fb b{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);background:#fff;color:var(--ink);font-family:var(--display);font-size:22px;border-radius:999px;padding:0 9px;border:3px solid var(--bark);white-space:nowrap}
+.fb.glow{filter:drop-shadow(0 0 10px #FFD23F) drop-shadow(0 0 16px #fff);animation:none}
+.fb.burst{transition:transform .35s,opacity .35s;opacity:0}
+.bask2{position:absolute;left:0;bottom:16px;width:120px;height:70px;will-change:transform}
+.bask2 svg{width:120px;height:70px}
+.bask2.jig{animation:bump .4s}
+.ctrl{display:flex;justify-content:center;gap:18px;margin-top:10px}
+.ctrl .btn{min-width:110px;font-size:28px}
+
+/* end */
+.endcard{background:var(--card);border-radius:28px;padding:22px;box-shadow:0 6px 0 var(--line);text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.endcard .bigbob{width:170px}
+.endcard h2{font-size:34px;color:var(--leaf-d)}
+.endcard p{margin:0;font-size:20px}
+.endbtns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.sticker{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-size:42px;background:#fff;border:4px solid var(--sea);box-shadow:0 4px 0 rgba(0,0,0,.08)}
+.sticker.gold{border-color:var(--peel);background:radial-gradient(circle at 35% 30%,#FFF6CC,#FFD23F)}
+.sticker.empty{background:rgba(255,255,255,.5);border:3px dashed #c6cfc0;font-size:0}
+.sticker.newp{animation:pop 0.8s}
+@keyframes pop{0%{transform:scale(0) rotate(-30deg)}70%{transform:scale(1.2) rotate(8deg)}100%{transform:scale(1)}}
+
+/* stickers book */
+.book{display:flex;flex-direction:column;gap:14px;margin-top:12px}
+.bookrow{background:var(--card);border-radius:22px;padding:14px 16px;box-shadow:0 5px 0 var(--line)}
+.bookrow h3{font-size:20px;margin-bottom:8px}
+.srow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.srow .sticker{width:56px;height:56px;font-size:30px;border-width:3px}
+
+/* shop */
+.shophead{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:18px;align-items:center;background:var(--card);border-radius:28px;padding:16px 20px;box-shadow:0 6px 0 var(--line)}
+.shophead h1{font-size:32px;color:var(--leaf-d)}
+.shophead p{margin:6px 0 0;color:var(--ink-2)}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.item{background:var(--card);border-radius:22px;padding:12px;box-shadow:0 5px 0 var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.item .prev{width:110px}
+.item b{font-family:var(--display);font-size:19px}
+.item .price{font-family:var(--display);font-weight:800;color:var(--bark);display:flex;align-items:center;gap:4px;font-size:19px}
+.item .btn{width:100%;font-size:18px;min-height:48px;padding:8px}
+.item.wearing{outline:4px solid var(--leaf)}
+.sec-h{font-size:24px;margin:24px 0 12px;color:var(--leaf-d)}
+
+/* settings */
+.panel{background:var(--card);border-radius:24px;padding:20px;box-shadow:0 5px 0 var(--line);display:flex;flex-direction:column;gap:18px;max-width:560px}
+.panel label{display:flex;flex-direction:column;gap:6px;font-family:var(--display);font-size:19px}
+.panel input[type=text]{font:inherit;font-family:var(--body);font-size:20px;padding:10px 14px;border-radius:14px;border:2px solid var(--line);min-height:50px}
+.tog{flex-direction:row!important;align-items:center;justify-content:space-between}
+.tog input{width:28px;height:28px;accent-color:var(--leaf)}
+.warn{background:#FDE8EC;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px}
+
+/* bob */
+.bob{width:100%;height:auto;display:block;overflow:visible}
+.bob .prop{transform-box:fill-box;transform-origin:center;animation:whirl .35s linear infinite}
+@keyframes whirl{50%{transform:scaleX(.12)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.bob .bub{animation:bub 2.4s ease-in infinite}
+.bob .bub2{animation-delay:.8s}.bob .bub3{animation-delay:1.6s}
+@keyframes bub{0%{transform:translate(0,0);opacity:0}20%{opacity:.9}100%{transform:translate(18px,-60px);opacity:0}}
+.bobwrap.giggle .bob{animation:jump .7s}
+.flyb{position:fixed;left:0;top:0;width:34px;height:34px;z-index:50;pointer-events:none}
+
+@media (max-width:620px){
+  .hero,.shophead{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .hero .row{justify-content:center}
+  .hero .bobwrap{width:190px}
+  .shophead .bobwrap{width:170px}
+  .dots{margin-left:0}
+  .bobmini{width:70px}
+  .stage,.field{height:330px}
+  .basket,.bk-tap{width:112px}
+  .choice{min-width:76px;font-size:27px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important}
+  .hopper{transition:none}
+}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ban" viewBox="0 0 64 64">
+    <path d="M7 33 C12 55 45 60 58 29 C50 41 29 45 13 29 Z" fill="#FFD23F" stroke="#C98A12" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M14 35 C24 46 42 47 52 37" fill="none" stroke="#F2B321" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M56 31 l4 -9" stroke="#6B4226" stroke-width="4.5" stroke-linecap="round"/>
+    <circle cx="8.5" cy="33" r="2.6" fill="#6B4226"/>
+  </symbol>
+</svg>
+
+<header class="top"><div class="top-in">
+  <button class="brand" data-act="home" aria-label="Home"><svg class="ban"><use href="#ban"/></svg><span id="brandName">Bob's Banana Hunt</span></button>
+  <span class="spacer"></span>
+  <button class="pill" id="pill" data-act="shop" aria-label="Bananas, open the shop"><svg class="ban"><use href="#ban"/></svg><span id="bcount">0</span></button>
+  <button class="iconbtn" data-act="settings" aria-label="Grown-up settings"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg></button>
+</div></header>
+<main id="screen"></main>
+
+<script>
+(function(){
+"use strict";
+/* ---------- helpers ---------- */
+const $=(s,el=document)=>el.querySelector(s);
+const $$=(s,el=document)=>[...el.querySelectorAll(s)];
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+const BAN='<svg class="ban" aria-hidden="true"><use href="#ban"/></svg>';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const today=()=>new Date().toISOString().slice(0,10);
+
+/* ---------- saved progress ---------- */
+const KEY='bobsBananaHunt_v1';
+const DEF={name:'Tobey',bob:'Bob',bananas:0,owned:[],wear:{},stickers:{},sound:true,autoRead:true,tickle:{day:'',n:0}};
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)return Object.assign({},DEF,s)}catch(e){}return JSON.parse(JSON.stringify(DEF))}
+let S=load();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ---------- sound & speech ---------- */
+let AC=null;
+function ac(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){AC=null}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+function tone(f,d,type,vol,slide,delay){const a=ac();if(!a)return;const t=a.currentTime+(delay||0);const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(slide)o.frequency.exponentialRampToValueAtTime(slide,t+d);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol||.15,t+.02);g.gain.exponentialRampToValueAtTime(0.0001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d+.05)}
+function sfx(k){if(!S.sound)return;try{switch(k){
+ case'pop':tone(700,.09,'triangle',.22,1400);break;
+ case'tap':tone(520,.06,'triangle',.12,700);break;
+ case'ding':tone(660,.14,'sine',.18);tone(990,.22,'sine',.18,null,.12);break;
+ case'boing':tone(260,.3,'sine',.16,130);break;
+ case'buy':[523,659,784,1046].forEach((f,i)=>tone(f,.14,'triangle',.16,null,i*.09));break;
+ case'giggle':[880,760,920,780,960].forEach((f,i)=>tone(f,.08,'sine',.12,null,i*.07));break;
+ case'kazoo':tone(300,.45,'sawtooth',.07,420);break;
+ case'yay':[523,784,1046].forEach((f,i)=>tone(f,.25,'triangle',.16,null,i*.12));break;
+}}catch(e){}}
+function cleanSpeech(t){return String(t).replace(/<[^>]+>/g,' ').replace(/×/g,' times ').replace(/=/g,' equals ').replace(/☐/g,' box ').replace(/(^|[\s,])\?(?=[\s.,]|$)/g,'$1 what number ').replace(/\+(\d)/g,'plus $1').replace(/\s+/g,' ')}
+function speak(t){try{if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(cleanSpeech(t));u.rate=.88;u.pitch=1.15;speechSynthesis.speak(u)}catch(e){}}
+function hush(){try{speechSynthesis.cancel()}catch(e){}}
+
+/* ---------- Bob (original creature) ---------- */
+let uid=0;
+function scallop(cx,cy,r,n,amp){let d='';for(let i=0;i<=n;i++){const a=i/n*Math.PI*2-Math.PI/2;const x=cx+r*Math.cos(a),y=cy+r*Math.sin(a);if(i===0){d+=`M${x.toFixed(1)} ${y.toFixed(1)}`;continue}const m=a-Math.PI/n;const qx=cx+(r+amp)*Math.cos(m),qy=cy+(r+amp)*Math.sin(m);d+=` Q${qx.toFixed(1)} ${qy.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}`}return d+'Z'}
+const BODY=scallop(100,118,70,30,6);
+function bobSVG(wear,mood){
+ wear=wear||{};mood=mood||'happy';const id='bc'+(uid++);
+ const has=s=>wear[s];
+ let back='',head='',feet='',hand='',face='',mouth='',neck='';
+ if(has('back')==='cape')back=`<path d="M60 58 Q22 190 32 232 Q100 246 168 232 Q178 190 140 58 Z" fill="#E8506B" stroke="#B83250" stroke-width="3"/>`;
+ if(has('feet')==='skate')feet=`<g transform="translate(0 24)"><rect x="44" y="204" width="112" height="10" rx="5" fill="#2FA3D6" stroke="#1d6f94" stroke-width="2"/><circle cx="62" cy="219" r="6" fill="#333"/><circle cx="138" cy="219" r="6" fill="#333"/></g>`;
+ const hw=has('hand');
+ if(hw==='wrench')hand=`<g transform="translate(-20 30)"><g transform="translate(186 146) rotate(-35)"><rect x="-4" y="-34" width="8" height="38" rx="3" fill="#9AA6B2" stroke="#5f6b77" stroke-width="2"/><path d="M-11 -44 a11 11 0 1 1 22 0 l-5 4 h-12 z" fill="#9AA6B2" stroke="#5f6b77" stroke-width="2"/></g></g>`;
+ if(hw==='wand')hand=`<g transform="translate(-20 30)"><path d="M186 150 L204 108" stroke="#7457D1" stroke-width="5" stroke-linecap="round"/><circle cx="208" cy="98" r="11" fill="none" stroke="#7457D1" stroke-width="4"/><circle class="bub" cx="214" cy="88" r="8" fill="rgba(160,220,255,.5)" stroke="#8fd0f5" stroke-width="2"/><circle class="bub bub2" cx="206" cy="84" r="6" fill="rgba(160,220,255,.5)" stroke="#8fd0f5" stroke-width="2"/><circle class="bub bub3" cx="220" cy="92" r="5" fill="rgba(160,220,255,.5)" stroke="#8fd0f5" stroke-width="2"/></g>`;
+ if(has('face')==='shades')face=`<g><rect x="58" y="56" width="40" height="28" rx="11" fill="#1f2633"/><rect x="102" y="56" width="40" height="28" rx="11" fill="#1f2633"/><path d="M98 66 h4" stroke="#1f2633" stroke-width="5"/><path d="M65 63 l9 0 M109 63 l9 0" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6"/></g>`;
+ if(has('mouth')==='kazoo')mouth=`<g transform="translate(0 -36)"><path d="M100 146 L138 140 L150 130 L152 160 L138 152 L100 152 Z" fill="#E8506B" stroke="#B83250" stroke-width="2.5" stroke-linejoin="round"/><circle cx="118" cy="146" r="3.5" fill="#B83250"/></g>`;
+ if(has('neck')==='bowtie')neck=`<g transform="translate(0 -36)"><path d="M100 166 L80 155 L80 177 Z M100 166 L120 155 L120 177 Z" fill="#7457D1" stroke="#4f3a9a" stroke-width="2.5" stroke-linejoin="round"/><circle cx="100" cy="166" r="6" fill="#4f3a9a"/></g>`;
+ const hd=has('head');let hg='';
+ if(hd==='party')hg=`<path d="M76 54 L100 -6 L124 54 Z" fill="#2FA3D6" stroke="#1d6f94" stroke-width="2.5" stroke-linejoin="round"/><path d="M83 36 L117 36 M90 18 L110 18" stroke="#FFD23F" stroke-width="5"/><circle cx="100" cy="-8" r="8" fill="#E8506B"/>`;
+ if(hd==='pirate')hg=`<path d="M44 58 Q100 -10 156 58 Q100 40 44 58 Z" fill="#26303f" stroke="#111" stroke-width="2.5"/><path d="M48 56 Q100 40 152 56" stroke="#FFD23F" stroke-width="4" fill="none"/><use href="#ban" x="84" y="16" width="32" height="32"/>`;
+ if(hd==='crown')hg=`<path d="M66 58 L62 16 L82 36 L100 6 L118 36 L138 16 L134 58 Z" fill="#FFD23F" stroke="#C98A12" stroke-width="3" stroke-linejoin="round"/><circle cx="100" cy="40" r="6" fill="#E8506B"/><circle cx="78" cy="46" r="4.5" fill="#2FA3D6"/><circle cx="122" cy="46" r="4.5" fill="#2FA3D6"/>`;
+ if(hd==='copter')hg=`<path d="M70 58 A30 30 0 0 1 130 58 Z" fill="#2F8F5B" stroke="#1E5C3B" stroke-width="2.5"/><path d="M70 56 h60" stroke="#FFD23F" stroke-width="5"/><rect x="97" y="10" width="6" height="22" fill="#6B4226"/><g class="prop"><ellipse cx="78" cy="-14" rx="24" ry="5" fill="#FFD23F" stroke="#C98A12" stroke-width="2"/><ellipse cx="122" cy="-14" rx="24" ry="5" fill="#FFD23F" stroke="#C98A12" stroke-width="2"/></g><circle cx="100" cy="-14" r="6" fill="#E8506B"/><rect x="98" y="-12" width="4" height="24" fill="#6B4226"/>`;
+ if(hg)head=`<g transform="translate(0 -38)">${hg}</g>`;
+ let brows,mouthP,pupil=2;
+ if(mood==='wow'){brows=`<path d="M64 42 q14 -10 28 -2 M108 40 q14 -8 28 2" stroke="#7A4A1E" stroke-width="5" fill="none" stroke-linecap="round"/>`;mouthP=`<ellipse cx="100" cy="112" rx="11" ry="13" fill="#5a2a1a"/><ellipse cx="100" cy="118" rx="7" ry="4" fill="#F27C8E"/>`;pupil=0}
+ else if(mood==='oops'){brows=`<path d="M66 46 q12 -2 24 -9 M110 37 q12 7 24 9" stroke="#7A4A1E" stroke-width="5" fill="none" stroke-linecap="round"/>`;mouthP=`<path d="M84 114 q8 -7 16 0 q8 7 16 0" stroke="#5a2a1a" stroke-width="5" fill="none" stroke-linecap="round"/>`;pupil=4}
+ else{brows=`<path d="M66 44 q12 -7 24 -2 M110 42 q12 -5 24 2" stroke="#7A4A1E" stroke-width="5" fill="none" stroke-linecap="round"/>`;mouthP=`<path d="M80 104 Q100 130 120 104 Z" fill="#5a2a1a" stroke="#5a2a1a" stroke-width="3" stroke-linejoin="round"/><path d="M91 116 Q100 123 109 116 Q100 112 91 116Z" fill="#F27C8E"/>`}
+ const eye=x=>`<circle cx="${x}" cy="70" r="18" fill="#fff" stroke="#7A4A1E" stroke-width="3"/><circle cx="${x+1}" cy="${71+pupil}" r="8.5" fill="#2a2320"/><circle cx="${x+4}" cy="${67+pupil}" r="3" fill="#fff"/>`;
+ const stripes=[132,146,160].map(y=>`<rect x="40" y="${y}" width="120" height="7" fill="#F4F8EE"/>`).join('');
+ return `<svg class="bob" viewBox="-14 -44 228 292" aria-hidden="true">
+ <defs><clipPath id="${id}"><path d="M64 40 Q64 10 100 10 Q136 10 136 40 L146 150 Q150 202 100 202 Q50 202 54 150 Z"/></clipPath></defs>
+ ${back}
+ <ellipse cx="100" cy="234" rx="54" ry="7" fill="rgba(0,0,0,.12)"/>
+ <rect x="70" y="194" width="22" height="16" fill="#3C6E4F"/><rect x="108" y="194" width="22" height="16" fill="#3C6E4F"/>
+ <path d="M68 204 h26 v20 h10 q4 0 4 5 v1 h-42 z" fill="#E23B3B" stroke="#A82222" stroke-width="2.5" stroke-linejoin="round"/>
+ <path d="M106 204 h26 v20 h10 q4 0 4 5 v1 h-42 z" fill="#E23B3B" stroke="#A82222" stroke-width="2.5" stroke-linejoin="round"/>
+ <rect x="66" y="202" width="30" height="7" rx="3" fill="#FF6B6B"/><rect x="104" y="202" width="30" height="7" rx="3" fill="#FF6B6B"/>
+ ${feet}
+ <path d="M58 134 Q40 150 38 176" stroke="#D9A400" stroke-width="15" fill="none" stroke-linecap="round"/><path d="M58 134 Q40 150 38 176" stroke="#FFDD2E" stroke-width="10" fill="none" stroke-linecap="round"/>
+ <path d="M142 134 Q160 150 162 176" stroke="#D9A400" stroke-width="15" fill="none" stroke-linecap="round"/><path d="M142 134 Q160 150 162 176" stroke="#FFDD2E" stroke-width="10" fill="none" stroke-linecap="round"/>
+ <path d="M58 132 Q46 140 42 150" stroke="#2E8B57" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M142 132 Q154 140 158 150" stroke="#2E8B57" stroke-width="16" fill="none" stroke-linecap="round"/>
+ <path d="M64 40 Q64 10 100 10 Q136 10 136 40 L146 150 Q150 202 100 202 Q50 202 54 150 Z" fill="#FFDD2E" stroke="#D9A400" stroke-width="3.5"/>
+ <g clip-path="url(#${id})">
+   <rect x="40" y="124" width="120" height="80" fill="#2E8B57"/>${stripes}
+   <path d="M84 124 L100 140 L116 124 Z" fill="#FFDD2E"/>
+   <path d="M84 124 L100 140 L116 124" fill="none" stroke="#1E5C3B" stroke-width="3" stroke-linejoin="round"/>
+   <rect x="40" y="172" width="120" height="16" fill="#8B5A33"/><rect x="40" y="172" width="120" height="16" fill="none" stroke="#5e3a1e" stroke-width="2.5"/>
+   <rect x="40" y="188" width="120" height="20" fill="#3C6E4F"/>
+ </g>
+ <rect x="64" y="140" width="20" height="18" rx="3" fill="#256f45" stroke="#1E5C3B" stroke-width="2"/>
+ <g transform="translate(74 140) rotate(-12)"><rect x="-2.5" y="-16" width="5" height="18" rx="2" fill="#9AA6B2" stroke="#5f6b77" stroke-width="1.5"/><path d="M-7 -22 a7 7 0 1 1 14 0 l-3 3 h-8 z" fill="#9AA6B2" stroke="#5f6b77" stroke-width="1.5"/></g>
+ <rect x="92" y="171" width="16" height="17" rx="3" fill="#FFC21A" stroke="#C98A12" stroke-width="2.5"/>
+ <rect x="62" y="178" width="18" height="20" rx="4" fill="#A8754A" stroke="#5e3a1e" stroke-width="2.5"/><rect x="67" y="168" width="4" height="12" rx="2" fill="#E8506B"/><rect x="73" y="171" width="3" height="9" rx="1.5" fill="#FFD23F"/>
+ <rect x="120" y="178" width="18" height="20" rx="4" fill="#A8754A" stroke="#5e3a1e" stroke-width="2.5"/><rect x="126" y="166" width="5" height="14" rx="2" fill="#2FA3D6"/>
+ <circle cx="38" cy="178" r="8" fill="#FFDD2E" stroke="#D9A400" stroke-width="2.5"/><circle cx="162" cy="178" r="8" fill="#FFDD2E" stroke="#D9A400" stroke-width="2.5"/>
+ <path d="M100 12 C93 0 98 -12 92 -22 M100 12 C104 -2 114 -6 112 -18 M100 12 C107 4 120 6 125 -2" stroke="#A85A1E" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+ ${eye(80)}${eye(120)}
+ <circle cx="66" cy="96" r="8" fill="#F7A3B1" opacity=".7"/><circle cx="134" cy="96" r="8" fill="#F7A3B1" opacity=".7"/>
+ ${brows}${mouthP}${face}${mouth}${neck}${hand}${head}
+ </svg>`;
+}
+
+/* ---------- content data ---------- */
+const TOPICS=[
+ {id:'mult',name:'Times & Groups',blurb:'Equal groups, skip counting and times facts',icon:'×',open:true},
+ {id:'add',name:'Adding & Taking Away',blurb:'Facts up to 20',icon:'+'},
+ {id:'place',name:'Tens & Ones',blurb:'Bundles of ten',icon:'10'},
+ {id:'count',name:'Counting to 120',blurb:'Count on and back',icon:'120'},
+ {id:'measure',name:'Measuring',blurb:'Longer and shorter',icon:'↔'},
+ {id:'time',name:'Telling Time',blurb:'Hours and half hours',icon:'◷'},
+ {id:'shapes',name:'Shapes',blurb:'Flat and solid shapes',icon:'△'}
+];
+const STICKERS={balloon:['🎈','🎉','🪁','🎊','🌈','⭐'],bunch:['🍌','🧺','🍍','🥥','🍇','🍓'],hop:['🐸','🐇','🦘','🌸','🍀','🐢'],rows:['🌱','🌻','🌴','🌵','🍄','🌳'],catch:['🧢','⚽','🏀','🎯','🪀','🏆']};
+const ITEMS=[
+ {id:'party',name:'Party hat',slot:'head',price:6,cat:'wear'},
+ {id:'bowtie',name:'Bow tie',slot:'neck',price:10,cat:'wear'},
+ {id:'shades',name:'Sunglasses',slot:'face',price:15,cat:'wear'},
+ {id:'cape',name:'Super cape',slot:'back',price:25,cat:'wear'},
+ {id:'pirate',name:'Pirate hat',slot:'head',price:35,cat:'wear'},
+ {id:'crown',name:'Banana crown',slot:'head',price:60,cat:'wear'},
+ {id:'wrench',name:'Toy wrench',slot:'hand',price:8,cat:'toy'},
+ {id:'wand',name:'Bubble wand',slot:'hand',price:12,cat:'toy'},
+ {id:'kazoo',name:'Kazoo',slot:'mouth',price:18,cat:'toy'},
+ {id:'skate',name:'Skateboard',slot:'feet',price:30,cat:'toy'},
+ {id:'copter',name:'Banana-copter',slot:'head',price:50,cat:'toy'}
+];
+const CHEERS=['Banana-tastic!','You are a top banana!','Ap-peel-ing work!','Peel-fect!','That was bananas good!','A whole bunch of awesome!','Yellow-tastic!','Hooray! Hip hip banana!','Super duper!','Bob is doing a happy dance!'];
+const INTROS=['You can do it!','Take your time.','Let us look together.','Ready? Here we go!','Bob is watching. Ooh!'];
+
+/* ---------- math helpers ---------- */
+const skip=(s,n,start)=>Array.from({length:n},(_,i)=>(start==null?s:start)+i*s);
+function countBy(a,b){const big=Math.max(a,b),small=Math.min(a,b);return `Count by ${big}s, ${small} ${small===1?'time':'times'}: ${skip(big,small).join(', ')}.`}
+function distract(n,a,b,k){const c=shuffle([n+b,n-b,a+b,n+1,n-1]).concat(shuffle([n+2,n-2,n+a,n-a,n+10,n+3]));const out=[];for(const x of c){if(x>0&&x!==n&&!out.includes(x))out.push(x);if(out.length>=(k||3))break}return out}
+function near(n,step,k){const c=shuffle([n+step,n-step,n+1,n-1]).concat([n+2,n-2,n+step*2,n+3]);const out=[];for(const x of c){if(x>0&&x!==n&&!out.includes(x))out.push(x);if(out.length>=(k||3))break}return out}
+function basicFact(){const P=[];for(let a=1;a<=5;a++)for(const b of[1,2,3,5,10]){if(a===1&&b===1)continue;if(a*b<=50)P.push([a,b])}const p=pick(P);return Math.random()<.5?p:[p[1],p[0]]}
+function advFact(){if(Math.random()<.2){const a=rnd(2,9);return Math.random()<.5?[a,10]:[10,a]}return [rnd(2,6),rnd(3,6)]}
+function groupsHTML(a,b){const cls=b>=10?'grp g10':(a*b>24?'grp sm':'grp');let h='<div class="groups">';for(let i=0;i<a;i++){h+=`<div class="${cls}">`+BAN.repeat(b)+'</div>'}return h+'</div>'}
+const factHTML=(a,b)=>`<div class="fact">${a} × ${b} = <span class="blank">?</span></div>`;
+
+function factHints(a,b){return[{text:`${a} × ${b} means ${a} groups of ${b}.`},{text:`Here are ${a} groups of ${b}. Count them all.`,vis:groupsHTML(a,b)},{text:countBy(a,b)}]}
+function picHints(a,b){return[{text:`Count the groups. There are ${a}.`},{text:`Each group has ${b} bananas.`},{text:`Count by ${b}s: ${skip(b,a).join(', ')}.`}]}
+
+function qPic(a,b){return{key:'p'+a+'x'+b,ask:'How many bananas in all?',vis:groupsHTML(a,b)+`<p class="cap">${a} groups of ${b}</p>`,answer:a*b,others:distract(a*b,a,b),hints:picHints(a,b),explain:`${a} groups of ${b} is ${a*b}.`}}
+function qFact(a,b){return{key:'f'+a+'x'+b,ask:`What is ${a} × ${b}?`,vis:factHTML(a,b),answer:a*b,others:distract(a*b,a,b),hints:factHints(a,b),explain:`${a} × ${b} = ${a*b}.`}}
+function qWords(a,b){return{key:'w'+a+'x'+b,ask:`${a} groups of ${b}. How many in all?`,vis:`<div class="fact words">${a} groups of ${b}</div>`,answer:a*b,others:distract(a*b,a,b),hints:[{text:`Make ${a} groups. Put ${b} in each group.`},{text:`Here they are. Count them all.`,vis:groupsHTML(a,b)},{text:`Count by ${b}s: ${skip(b,a).join(', ')}.`}],explain:`${a} groups of ${b} is ${a*b}. That is ${a} × ${b}.`}}
+function qMissingB(a,b){const N=a*b;return{key:'mb'+a+'x'+b,ask:'What number goes in the box?',vis:`<div class="fact">${a} × <span class="boxq">?</span> = ${N}</div>`,answer:b,others:near(b,1,3).filter(x=>x!==b),hints:[{text:`We need ${a} equal groups that make ${N}.`},{text:`Try a number. Count by it ${a} times. Do you land on ${N}?`},{text:`Count by ${b}s ${a} times: ${skip(b,a).join(', ')}. So the box is ${b}.`}],explain:`${a} × ${b} = ${N}, so the box is ${b}.`}}
+function qMissingA(a,b){const N=a*b;return{key:'ma'+a+'x'+b,ask:'Catch the number for the box!',vis:`<div class="fact"><span class="boxq">?</span> × ${b} = ${N}</div>`,answer:a,others:near(a,1,3),hints:[{text:`How many groups of ${b} make ${N}?`},{text:`Count by ${b}s until you say ${N}. Count how many numbers you said.`},{text:`${skip(b,a).join(', ')}. That is ${a} numbers, so the box is ${a}.`}],explain:`${a} × ${b} = ${N}, so the box is ${a}.`}}
+function qMatch(a,b){const ans=`${a} × ${b}`;return{key:'m'+a+'x'+b,ask:'Which times fact matches the picture?',vis:groupsHTML(a,b),answer:ans,others:shuffle([`${a} + ${b}`,`${a} × ${b+1}`,`${a+1} × ${b}`]),hints:[{text:`Count the groups. There are ${a}.`},{text:`Count the bananas in one group. There are ${b}.`},{text:`${a} groups of ${b} is ${a} × ${b}.`}],explain:`${a} groups of ${b} is ${a} × ${b} = ${a*b}.`}}
+
+/* choice buttons shared by several games */
+function choicesHTML(vals){return `<div class="choices">${vals.map(v=>`<button class="choice" data-v="${esc(v)}">${esc(v)}</button>`).join('')}</div>`}
+function wireChoices(box,q,api,onRight){const btns=$$('.choice',box);btns.forEach(b=>b.addEventListener('click',()=>{if(api.solved()||b.disabled)return;const ok=api.submit(b.dataset.v);if(ok){b.classList.add('right');onRight&&onRight()}else{b.classList.add('wrong');b.disabled=true}}));return{glow(){const r=btns.find(b=>b.dataset.v===String(q.answer));r&&r.classList.add('glow')}}}
+
+/* ---------- GAMES ---------- */
+const BALLOON_SVG=c=>`<svg viewBox="0 0 92 150"><path d="M46 104 Q40 122 50 134 Q58 144 48 150" stroke="#55627A" stroke-width="2" fill="none"/><path d="M46 6 C18 6 6 30 8 52 C10 78 30 98 46 104 C62 98 82 78 84 52 C86 30 74 6 46 6 Z" fill="${c}"/><path d="M40 104 L52 104 L46 96 Z" fill="${c}"/><ellipse cx="30" cy="34" rx="8" ry="14" fill="#fff" opacity=".35" transform="rotate(-20 30 34)"/></svg>`;
+
+const Balloon={id:'balloon',name:'Balloon Pop',blurb:'Pop the balloon with the right answer.',
+ icon:`<svg viewBox="0 0 48 48"><path d="M24 4C14 4 9 12 10 20c1 9 8 15 14 17 6-2 13-8 14-17 1-8-4-16-14-16z" fill="#E8506B"/><path d="M24 37q-3 5 1 10" stroke="#55627A" stroke-width="2" fill="none"/><ellipse cx="18" cy="14" rx="3" ry="5" fill="#fff" opacity=".4"/></svg>`,
+ make(L){
+  if(L==='basic'){const t=pick(['pic','pic','fact','fact','words']);
+   if(t==='pic')return qPic(rnd(2,4),rnd(2,5));
+   if(t==='fact'){const[a,b]=basicFact();return qFact(a,b)}
+   return qWords(rnd(2,5),pick([2,5,10]))}
+  const t=pick(['fact','fact','missing','match']);
+  if(t==='fact'){const[a,b]=advFact();return qFact(a,b)}
+  if(t==='missing')return qMissingB(rnd(2,5),pick([2,3,4,5,10]));
+  return qMatch(rnd(2,4),rnd(2,5));
+ },
+ mount(q,el,api,L){
+  el.innerHTML=`<div class="stage"><div class="cloud" style="left:8%;top:40px"></div><div class="cloud" style="left:62%;top:90px;transform:scale(.8)"></div><div class="hill"></div></div>`;
+  const st=el.firstChild;const W=st.clientWidth||600,H=st.clientHeight||360;
+  const n=W<520?3:4;const vals=shuffle([q.answer].concat(q.others.slice(0,n-1)));
+  const colors=shuffle(['#E8506B','#7457D1','#2FA3D6','#2F8F5B','#F08A24']);
+  const startY=shuffle([.12,.3,.48,.62]);
+  const bs=vals.map((v,i)=>{const b=document.createElement('button');b.className='balloon';b.setAttribute('aria-label','Balloon '+v);
+   b.innerHTML=BALLOON_SVG(colors[i])+`<span class="${String(v).length>3?'long':''}">${esc(v)}</span>`;st.appendChild(b);
+   const o={el:b,v:String(v),x0:(i+.5)*W/n,y:startY[i]*(H-120),sp:(L==='basic'?26:32)*(0.85+Math.random()*.3)*(RM?.4:1),ph:Math.random()*6,alive:true};
+   b.addEventListener('pointerdown',e=>{e.preventDefault();hit(o)});b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hit(o)}});return o});
+  function hit(o){if(!o.alive||api.solved())return;
+   if(o.v===String(q.answer)){o.alive=false;sfx('pop');confetti(st,o.x,o.y+50);o.el.classList.add('popped');api.submit(o.v);bs.forEach(x=>{if(x!==o){x.alive=false;x.el.style.transition='opacity .6s';x.el.style.opacity='.25'}})}
+   else{o.alive=false;o.el.classList.add('fizz');o.el.style.transform+=' scale(.3)';api.submit(o.v)}}
+  let raf,last=performance.now(),t=0;
+  function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;
+   for(const o of bs){if(!o.alive&&!o.el.classList.contains('glow'))continue;o.y-=o.sp*dt;if(o.y<-160)o.y=H+10;o.x=o.x0+Math.sin(t*1.1+o.ph)*14;o.el.style.transform=`translate(${o.x-46}px,${o.y}px)`}
+   raf=requestAnimationFrame(loop)}
+  bs.forEach(o=>{o.x=o.x0;o.el.style.transform=`translate(${o.x-46}px,${o.y}px)`});
+  raf=requestAnimationFrame(loop);
+  return{stop(){cancelAnimationFrame(raf)},glow(){const o=bs.find(o=>o.v===String(q.answer));if(o){o.el.classList.add('glow');o.sp*=.5}}};
+ }};
+function confetti(st,x,y){if(RM)return;const cols=['#FFD23F','#E8506B','#2FA3D6','#2F8F5B','#7457D1'];for(let i=0;i<16;i++){const c=document.createElement('span');c.className='confetti';c.style.background=pick(cols);c.style.left=x+'px';c.style.top=y+'px';st.appendChild(c);const a=Math.random()*Math.PI*2,d=40+Math.random()*60;c.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d+30}px) rotate(${rnd(90,360)}deg)`,opacity:0}],{duration:800,easing:'cubic-bezier(.2,.7,.4,1)'}).onfinish=()=>c.remove()}}
+
+const BASKET_SVG=`<svg class="bk" viewBox="0 0 110 56"><path d="M4 6 H106 L94 52 H16 Z" fill="#A8754A" stroke="#5e3a1e" stroke-width="3" stroke-linejoin="round"/><path d="M10 18 H100 M13 30 H97 M16 42 H94" stroke="#7a4f2c" stroke-width="3"/><path d="M30 8 L34 52 M55 8 V52 M80 8 L76 52" stroke="#7a4f2c" stroke-width="3"/></svg>`;
+const Bunch={id:'bunch',name:'Banana Bunches',blurb:'Fill the baskets with the same number of bananas.',
+ icon:`<svg viewBox="0 0 48 48"><use href="#ban" x="8" y="2" width="20" height="20"/><use href="#ban" x="20" y="4" width="20" height="20"/><path d="M4 22H44L39 44H9Z" fill="#A8754A" stroke="#5e3a1e" stroke-width="2.5" stroke-linejoin="round"/><path d="M7 30H41M9 37H39" stroke="#7a4f2c" stroke-width="2"/></svg>`,
+ make(L){let a,b;if(L==='basic'){do{a=rnd(2,4);b=rnd(2,4)}while(a*b>16)}else{a=rnd(3,5);b=rnd(3,6)}
+  return{key:'b'+a+'x'+b,a,b,L,phase:1,ask:`Put ${b} bananas in each basket.`,answer:a*b,others:distract(a*b,a,b),explain:`${a} groups of ${b} is ${a*b}. ${a} × ${b} = ${a*b}.`}},
+ hints(q){const{a,b}=q;if(q.phase===1)return[{text:`Each basket needs ${b} bananas.`},{text:'Tap a basket to put a banana in. Tap the minus button to take one out.'},{text:`Make every number under the baskets say ${b}.`}];
+  return[{text:`There are ${a} baskets. Each one has ${b} bananas.`},{text:`Count by ${b}s. Point to one basket each time you count.`},{text:`${skip(b,a).join(', ')}. That is ${a*b}!`}]},
+ mount(q,el,api){const{a,b}=q;const cnt=Array(a).fill(0);
+  el.innerHTML=`<p class="pile">Tap a basket to drop in a banana.</p><div class="baskets">${cnt.map((_,i)=>`<div class="basket" data-i="${i}"><button class="bk-tap" aria-label="Add a banana to basket ${i+1}"><div class="bk-bananas"></div>${BASKET_SVG}</button><div class="bk-row"><button class="bk-minus" aria-label="Take a banana out of basket ${i+1}">−</button><span class="bk-count">0</span></div></div>`).join('')}</div><div id="bch"></div>`;
+  const baskets=$$('.basket',el);let ch=null;
+  function draw(i){const k=baskets[i];$('.bk-bananas',k).innerHTML=BAN.repeat(cnt[i]);$('.bk-count',k).textContent=cnt[i];k.classList.toggle('full',cnt[i]===b);k.classList.toggle('over',cnt[i]>b)}
+  baskets.forEach((k,i)=>{$('.bk-tap',k).addEventListener('click',()=>{if(q.phase!==1)return;if(cnt[i]>=b+3){api.say(`That basket is very full. It only needs ${b}.`);return}cnt[i]++;sfx('tap');draw(i);
+     if(cnt[i]===b+1)api.say(`Oops, that basket has ${cnt[i]}. It needs ${b}. Tap the minus button.`);check()});
+   $('.bk-minus',k).addEventListener('click',()=>{if(q.phase!==1||cnt[i]===0)return;cnt[i]--;sfx('tap');draw(i);check()})});
+  function check(){if(cnt.every(c=>c===b)){q.phase=2;sfx('ding');$$('button',el).forEach(x=>{if(!x.classList.contains('choice'))x.disabled=true});$('.pile',el).textContent=`${a} baskets with ${b} in each.`;
+    api.setAsk(q.L==='basic'?'How many bananas in all?':`${a} × ${b} = ? How many bananas in all?`);api.resetHints();api.say(`Every basket has ${b}! That is ${a} groups of ${b}.`);
+    const box=$('#bch',el);box.innerHTML=choicesHTML(shuffle([q.answer].concat(q.others)));ch=wireChoices(box,q,api);if(S.autoRead)speak(`Every basket has ${b}. How many bananas in all?`)}}
+  return{glow(){ch&&ch.glow()},reveal(){if(q.phase===1){cnt.fill(b);baskets.forEach((_,i)=>draw(i))}}};
+ }};
+
+const Hop={id:'hop',name:'Hop Along',blurb:'Help Bob skip count on the stepping stones.',
+ icon:`<svg viewBox="0 0 48 48"><path d="M4 38H44" stroke="#55627A" stroke-width="2.5"/><path d="M6 36Q12 18 18 36M18 36Q24 18 30 36M30 36Q36 18 42 36" fill="none" stroke="#7457D1" stroke-width="3" stroke-linecap="round"/></svg>`,
+ make(L){const bob=S.bob;
+  let t=L==='basic'?pick(['next','next','missing']):pick(['next','missing','hops','hops']);
+  if(t==='hops'){let n,s;if(Math.random()<.25){s=10;n=rnd(2,4)}else{do{n=rnd(2,5);s=rnd(2,5)}while(n*s>25)}const ans=n*s;
+   return{key:'h'+n+'x'+s,t,n,s,ask:`${bob} makes ${n} hops of ${s}. Where does he land?`,answer:ans,others:near(ans,s,3),
+    hints:[{text:`Each hop is ${s} long.`},{text:`Count by ${s}s. Say one number for each hop.`,act:'lbl'},{text:`${skip(s,n).join(', ')}. ${n} × ${s} = ${ans}.`,act:'all'}],explain:`${n} hops of ${s} lands on ${ans}. ${n} × ${s} = ${ans}.`}}
+  const s=L==='basic'?pick([2,5,10]):pick([2,3,4,5,10]);const start=L==='basic'?s:s*rnd(1,3);
+  if(t==='next'){const seq=skip(s,4,start);const ans=start+4*s;return{key:'n'+s+'_'+start,t,s,stones:seq.concat(['?']),bobAt:3,qi:4,ask:`${bob} hops by ${s}s. Where does he land next?`,answer:ans,others:near(ans,s,3),
+    hints:[{text:`${bob} hops ${s} each time.`},{text:`Look: ${seq[0]}, then ${seq[1]}. Each stone is ${s} more.`},{text:`${seq[3]} + ${s} = ${ans}.`}],explain:`${seq[3]} and ${s} more is ${ans}.`}}
+  const seq=skip(s,5,start);const qi=rnd(1,3);const ans=seq[qi];const st=seq.map((v,i)=>i===qi?'?':v);
+  return{key:'m'+s+'_'+start+'_'+qi,t,s,stones:st,bobAt:qi-1,qi,ask:'Which number is missing?',answer:ans,others:near(ans,s,3),
+   hints:[{text:`The stones go up by ${s}.`},{text:`Look at the stone before the gap. It says ${seq[qi-1]}.`},{text:`${seq[qi-1]} + ${s} = ${ans}.`}],explain:`Counting by ${s}s: ${seq.join(', ')}.`}},
+ mount(q,el,api){const vals=shuffle([q.answer].concat(q.others));
+  if(q.t==='hops'){const max=Math.max(10,Math.ceil((q.n*q.s+3)/5)*5);const X=v=>24+v*(612/max);
+   let svg=`<svg viewBox="0 0 660 170" role="img" aria-label="Number line from 0 to ${max} with ${q.n} hops of ${q.s}"><line x1="${X(0)}" y1="120" x2="${X(max)}" y2="120" stroke="#55627A" stroke-width="3"/>`;
+   for(let v=0;v<=max;v++){const big=v%5===0;svg+=`<line x1="${X(v)}" y1="${big?108:113}" x2="${X(v)}" y2="${big?132:127}" stroke="#55627A" stroke-width="${big?3:1.5}"/>`;if(big)svg+=`<text x="${X(v)}" y="154" text-anchor="middle" font-family="Sniglet,sans-serif" font-size="18" fill="#22314A">${v}</text>`}
+   for(let i=0;i<q.n;i++){const x1=X(i*q.s),x2=X((i+1)*q.s),h=Math.min(70,26+q.s*6);svg+=`<path class="arc" d="M${x1} 116 Q${(x1+x2)/2} ${116-h*2} ${x2} 116"/><text class="arcl" x="${(x1+x2)/2}" y="${116-h-6}" text-anchor="middle">+${q.s}</text>`;
+    svg+=`<text class="endl${i<q.n-1?' k':''}" x="${x2}" y="102" text-anchor="middle">${(i+1)*q.s}</text>`}
+   svg+=`<circle cx="${X(0)}" cy="120" r="7" fill="#2F8F5B"/></svg>`;
+   el.innerHTML=`<div class="line-wrap">${svg}</div>`+choicesHTML(vals);
+   const ch=wireChoices(el,q,api,()=>$('.line-wrap',el).classList.add('showall'));
+   return{glow:ch.glow,reveal(){$('.line-wrap',el).classList.add('showall')},hint(act){$('.line-wrap',el).classList.add(act==='all'?'showall':'showlbl')}}}
+  el.innerHTML=`<div class="pond"><div class="hopper">${bobSVG(S.wear,'happy')}</div><div class="stones">${q.stones.map((v,i)=>`<div class="stone${v==='?'?' q':''}">${v}</div>`).join('')}</div></div>`+choicesHTML(vals);
+  const hop=$('.hopper',el),stones=$$('.stone',el);
+  const place=i=>{const s=stones[i];hop.style.transform=`translateX(${s.offsetLeft+s.offsetWidth/2-32}px)`};
+  requestAnimationFrame(()=>place(q.bobAt));
+  const land=()=>{const s=stones[q.qi];s.textContent=q.answer;s.classList.remove('q');s.classList.add('done');hop.classList.remove('hop');void hop.offsetWidth;hop.classList.add('hop');place(q.qi)};
+  const ch=wireChoices(el,q,api,land);
+  const onR=()=>place(q.bobAt);window.addEventListener('resize',onR);
+  return{glow:ch.glow,reveal:land,stop(){window.removeEventListener('resize',onR)}};
+ }};
+
+const Rows={id:'rows',name:'Banana Rows',blurb:'Build rows of bananas and count them.',
+ icon:`<svg viewBox="0 0 48 48">${[0,1,2].map(r=>[0,1,2].map(c=>`<use href="#ban" x="${4+c*14}" y="${4+r*14}" width="13" height="13"/>`).join('')).join('')}</svg>`,
+ make(L){let t=L==='basic'?pick(['build','build','count']):pick(['build','fact','count']);
+  if(t==='build'){let r,c,R,C;if(L==='basic'){R=4;C=6;r=rnd(2,4);c=rnd(2,5)}else{R=5;C=8;do{r=rnd(2,5);c=rnd(3,8)}while(r*c>40)}
+   return{key:'rb'+r+'x'+c,t,r,c,R,C,L,phase:1,ask:`Make ${r} rows with ${c} bananas in each row.`,answer:r*c,others:distract(r*c,r,c),explain:`${r} rows of ${c} is ${r*c}. ${r} × ${c} = ${r*c}.`}}
+  let r,c;if(L==='basic'){r=rnd(2,3);c=rnd(2,5)}else{r=rnd(2,5);c=rnd(3,6)}
+  if(t==='count')return{key:'rc'+r+'x'+c,t,r,c,ask:'How many bananas?',answer:r*c,others:distract(r*c,r,c),explain:`${r} rows of ${c} is ${r*c}.`,
+   hints:[{text:`There are ${r} rows. Rows go across.`},{text:`Each row has ${c} bananas.`},{text:`Count by ${c}s, one row at a time: ${skip(c,r).join(', ')}.`}]};
+  return{key:'rf'+r+'x'+c,t,r,c,ask:'Which times fact matches?',answer:`${r} × ${c}`,others:shuffle([`${r} + ${c}`,`${r} × ${c+1}`,`${r+1} × ${c}`]),explain:`${r} rows of ${c} is ${r} × ${c} = ${r*c}.`,
+   hints:[{text:`Count the rows going across. There are ${r}.`},{text:`Count the bananas in one row. There are ${c}.`},{text:`${r} rows of ${c} is ${r} × ${c}.`}]}},
+ hints(q){if(q.t!=='build')return q.hints;const{r,c}=q;
+  if(q.phase===1)return[{text:'Rows go across, from left to right. Tap a spot to fill up to it.'},{text:`Find row ${r} on the side. Find ${c} on the top.`},{text:`Tap the glowing spot where row ${r} meets ${c}.`,act:'target'}];
+  return[{text:`There are ${r} rows with ${c} in each row.`},{text:`Count by ${c}s, one row at a time.`},{text:`${skip(c,r).join(', ')}. That is ${r*c}!`}]},
+ mount(q,el,api){
+  if(q.t!=='build'){let g=`<div class="gridwrap"><div class="grid" style="--cols:${q.c}">`;for(let i=0;i<q.r*q.c;i++)g+=`<div class="cell on">${BAN}</div>`;g+='</div></div>';
+   el.innerHTML=g+choicesHTML(shuffle([q.answer].concat(q.others)));return wireChoices(el,q,api)}
+  const{R,C}=q;let g=`<div class="gridwrap"><div class="rowlbl" aria-live="polite">Tap a spot to start.</div><div class="grid hd" style="--cols:${C}"><span></span>`;
+  for(let j=1;j<=C;j++)g+=`<span class="ghd">${j}</span>`;
+  for(let i=0;i<R;i++){g+=`<span class="ghd">${i+1}</span>`;for(let j=0;j<C;j++)g+=`<button class="cell" data-r="${i}" data-c="${j}" aria-label="Row ${i+1}, spot ${j+1}">${BAN}</button>`}
+  g+='</div></div><div id="rch"></div>';el.innerHTML=g;
+  const cells=$$('.cell',el),lbl=$('.rowlbl',el);let ch=null;
+  function fill(fr,fc){cells.forEach(x=>{const on=+x.dataset.r<fr&&+x.dataset.c<fc;x.classList.toggle('on',on)});lbl.textContent=`${fr} ${fr===1?'row':'rows'} of ${fc}`}
+  cells.forEach(x=>x.addEventListener('click',()=>{if(q.phase!==1)return;const fr=+x.dataset.r+1,fc=+x.dataset.c+1;sfx('tap');fill(fr,fc);
+   if(fr===q.r&&fc===q.c)done();else if(fr===q.r)api.say(`Good, ${fr} rows! Now each row needs ${q.c}.`);else if(fc===q.c)api.say(`Good, ${fc} in each row! Now make ${q.r} rows.`)}));
+  function done(){q.phase=2;sfx('ding');cells.forEach(x=>{x.disabled=true;x.classList.remove('target')});api.setAsk(q.L==='basic'?'How many bananas in all?':`${q.r} × ${q.c} = ? How many in all?`);api.resetHints();api.say(`Yes! ${q.r} rows of ${q.c}.`);
+   const box=$('#rch',el);box.innerHTML=choicesHTML(shuffle([q.answer].concat(q.others)));ch=wireChoices(box,q,api);if(S.autoRead)speak(`${q.r} rows of ${q.c}. How many bananas in all?`)}
+  return{glow(){ch&&ch.glow()},reveal(){if(q.phase===1){fill(q.r,q.c)}},hint(act){if(act==='target'){const t=cells.find(x=>+x.dataset.r===q.r-1&&+x.dataset.c===q.c-1);t&&t.classList.add('target')}}};
+ }};
+
+const CATCH_BASKET=`<svg viewBox="0 0 120 70"><path d="M4 10 H116 L102 66 H18 Z" fill="#A8754A" stroke="#5e3a1e" stroke-width="3.5" stroke-linejoin="round"/><path d="M10 26 H110 M14 42 H106 M17 56 H103" stroke="#7a4f2c" stroke-width="3"/><path d="M34 12 L38 66 M60 12 V66 M86 12 L82 66" stroke="#7a4f2c" stroke-width="3"/></svg>`;
+const Catch={id:'catch',name:'Banana Catch',blurb:'Move the basket to catch the right banana.',
+ icon:`<svg viewBox="0 0 48 48"><use href="#ban" x="14" y="0" width="20" height="20"/><path d="M6 28H42L37 46H11Z" fill="#A8754A" stroke="#5e3a1e" stroke-width="2.5" stroke-linejoin="round"/></svg>`,
+ make(L){let t=L==='basic'?pick(['skip','fact','fact']):pick(['fact','fact','missing','skip']);
+  if(t==='skip'){const s=L==='basic'?pick([2,5,10]):pick([3,4,5]);const start=s*(L==='basic'?1:rnd(1,3));const seq=skip(s,3,start);const ans=start+3*s;
+   return{key:'cs'+s+'_'+start,ask:'Catch the number that comes next!',vis:`<div class="fact">${seq.join(', ')}, <span class="blank">?</span></div>`,answer:ans,others:near(ans,s,3),
+    hints:[{text:`The numbers go up by ${s}.`},{text:`What comes after ${seq[2]} when you count by ${s}s?`},{text:`${seq[2]} + ${s} = ${ans}.`}],explain:`Counting by ${s}s: ${seq.join(', ')}, ${ans}.`}}
+  if(t==='missing')return qMissingA(rnd(2,5),pick([2,3,4,5,10]));
+  let a,b;if(L==='basic'){do{[a,b]=basicFact()}while(a*b>30)}else[a,b]=advFact();
+  const q=qFact(a,b);q.ask=`Catch the answer to ${a} × ${b}!`;return q},
+ mount(q,el,api,L){
+  el.innerHTML=`<div class="field" tabindex="0" aria-label="Catch field. Use the arrow buttons or slide your finger."><div class="canopy"></div><div class="grass"></div><div class="bask2">${CATCH_BASKET}</div></div><div class="ctrl"><button class="btn" data-d="-1" aria-label="Move basket left">◀</button><button class="btn" data-d="1" aria-label="Move basket right">▶</button></div>`;
+  const f=$('.field',el),bk=$('.bask2',el);const W=f.clientWidth||600,H=f.clientHeight||370;
+  const n=W<520?3:4,lane=W/n;const vals=shuffle([q.answer].concat(q.others.slice(0,n-1)));
+  const sp=(L==='basic'?38:50)*(RM?.6:1);
+  const fs=vals.map((v,i)=>{const d=document.createElement('div');d.className='fb';d.innerHTML=BAN+`<b>${esc(v)}</b>`;f.appendChild(d);return{el:d,v:String(v),x:(i+.5)*lane,y:20+Math.random()*90-i*25,alive:true}});
+  let bx=W/2,tx=W/2;
+  const setT=x=>{tx=Math.max(60,Math.min(W-60,x))};
+  f.addEventListener('pointerdown',e=>{const r=f.getBoundingClientRect();setT(e.clientX-r.left);try{f.setPointerCapture(e.pointerId)}catch(_){}});
+  f.addEventListener('pointermove',e=>{if(e.pointerType==='mouse'||e.buttons){const r=f.getBoundingClientRect();setT(e.clientX-r.left)}});
+  $$('.ctrl button',el).forEach(b=>b.addEventListener('click',()=>{const li=Math.round(tx/lane-.5)+(+b.dataset.d);setT((Math.max(0,Math.min(n-1,li))+.5)*lane)}));
+  const onKey=e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();const li=Math.round(tx/lane-.5)+(e.key==='ArrowLeft'?-1:1);setT((Math.max(0,Math.min(n-1,li))+.5)*lane)}};
+  document.addEventListener('keydown',onKey);
+  let raf,last=performance.now(),done=false;
+  function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;
+   bx+=(tx-bx)*Math.min(1,dt*9);bk.style.transform=`translateX(${bx-60}px)`;
+   for(const o of fs){if(!o.alive)continue;o.y+=(done?sp*2:sp)*dt;
+    const bottom=o.y+70,top=H-16-70;
+    if(!done&&bottom>=top+14&&bottom<=top+46&&Math.abs(o.x-bx)<62){catchIt(o)}
+    else if(o.y>H+10){if(done){o.alive=false;o.el.style.opacity=0}else o.y=-80-Math.random()*60}
+    o.el.style.transform=`translate(${o.x-38}px,${o.y}px)`}
+   raf=requestAnimationFrame(loop)}
+  function catchIt(o){if(api.solved())return;bk.classList.remove('jig');void bk.offsetWidth;bk.classList.add('jig');
+   if(o.v===String(q.answer)){o.alive=false;o.el.style.opacity=0;done=true;sfx('pop');api.submit(o.v)}
+   else{o.alive=false;sfx('boing');o.el.classList.add('burst');api.submit(o.v);if(!api.solved())api.say(`You caught ${o.v}. That is not it. Try again!`)}}
+  fs.forEach(o=>{o.el.style.transform=`translate(${o.x-38}px,${o.y}px)`});bk.style.transform=`translateX(${bx-60}px)`;
+  raf=requestAnimationFrame(loop);
+  return{stop(){cancelAnimationFrame(raf);document.removeEventListener('keydown',onKey)},glow(){const o=fs.find(o=>o.v===String(q.answer));o&&o.el.classList.add('glow')},reveal(){done=true;const o=fs.find(o=>o.v===String(q.answer));o&&o.el.classList.add('glow')}};
+ }};
+
+const GAMES=[Balloon,Bunch,Hop,Rows,Catch];
+const GBY=Object.fromEntries(GAMES.map(g=>[g.id,g]));
+
+/* ---------- screens ---------- */
+const scr=$('#screen');let hooks=null,R=null,view='home',lastTopic='mult';
+function stopGame(){if(hooks&&hooks.stop)hooks.stop();hooks=null}
+function go(v){stopGame();hush();view=v;window.scrollTo(0,0);({home:renderHome,topic:renderTopic,shop:renderShop,stickers:renderStickers,settings:renderSettings}[v]||renderHome)()}
+function updateCount(bump){$('#bcount').textContent=S.bananas;if(bump){const p=$('#pill');p.classList.remove('bump');void p.offsetWidth;p.classList.add('bump')}}
+function setBrand(){$('#brandName').textContent=`${S.bob}'s Banana Hunt`;document.title=`${S.bob}'s Banana Hunt`}
+
+function stickerCount(gid){const s=S.stickers[gid]||{};return{basic:s.basic||0,adv:s.adv||0}}
+
+function renderHome(){
+ const tk=S.tickle.day===today()?S.tickle.n:0;
+ scr.innerHTML=`<section class="hero"><div class="bobwrap" id="tickle" role="button" tabindex="0" aria-label="Tickle ${esc(S.bob)}">${bobSVG(S.wear,'happy')}</div>
+ <div><div class="say" id="homesay">Hi ${esc(S.name)}! I'm ${esc(S.bob)}. Let's find bananas!</div><h1>Pick a trail, ${esc(S.name)}!</h1><p>Answer questions, earn bananas, and buy cool stuff for ${esc(S.bob)}.</p>
+ <div class="row"><button class="btn go" data-act="topic" data-t="mult">Play Times &amp; Groups</button><button class="btn yel" data-act="shop">${BAN} Shop</button><button class="btn" data-act="stickers">Sticker book</button></div>
+ <div class="tickle-note">Tickle ${esc(S.bob)} for a surprise! (${Math.max(0,5-tk)} banana${5-tk===1?'':'s'} left today)</div></div></section>
+ <h2 class="trail-h">Math trails</h2><div class="topics">${TOPICS.map(t=>t.open?`<button class="topic open" data-act="topic" data-t="${t.id}"><span class="tic">${t.icon}</span><span><b>${t.name}</b><small>${t.blurb}</small></span></button>`:`<div class="topic locked" aria-disabled="true"><span class="tic">${t.icon}</span><span><b>${t.name}</b><small>${esc(S.bob)} is still exploring</small></span></div>`).join('')}</div>`;
+ const tw=$('#tickle');const doT=()=>tickle(tw);tw.addEventListener('click',doT);tw.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();doT()}});
+}
+const GIGGLES=['Hee hee hee!','Ha ha! That tickles!','Bello! Hee hee!','Stop! Ha ha ha!','Banana giggles!'];
+function tickle(tw){if(S.tickle.day!==today())S.tickle={day:today(),n:0};
+ tw.classList.remove('giggle');void tw.offsetWidth;tw.classList.add('giggle');tw.innerHTML=bobSVG(S.wear,'wow');setTimeout(()=>{if(tw.isConnected)tw.innerHTML=bobSVG(S.wear,'happy')},800);
+ sfx(S.wear.mouth==='kazoo'?'kazoo':'giggle');
+ let msg=pick(GIGGLES);
+ if(S.tickle.n<5){S.tickle.n++;S.bananas++;save();updateCount(true);flyBananas(1,tw);msg+=' Here is a banana for you!'}else msg+=' No more tickle bananas today. Play a game to earn more!';
+ $('#homesay').textContent=msg;const note=$('.tickle-note');if(note)note.textContent=`Tickle ${S.bob} for a surprise! (${5-S.tickle.n} banana${5-S.tickle.n===1?'':'s'} left today)`}
+
+function renderTopic(){
+ scr.innerHTML=`<button class="back" data-act="home">← Trails</button><h1 style="font-size:32px;color:var(--leaf-d)">Times &amp; Groups</h1><p style="margin:4px 0 0;color:var(--ink-2)">Pick a game. Basic is warm-up. Advanced has bigger numbers and gold stickers.</p>
+ <div class="games">${GAMES.map(g=>{const s=stickerCount(g.id);return`<div class="gcard"><div class="gh"><div class="gi">${g.icon}</div><div><h3>${g.name}</h3><p>${g.blurb}</p></div></div>
+ <div class="stk">Stickers: ${s.basic}/6 &nbsp;·&nbsp; Gold: ${s.adv}/6</div><div class="lv"><button class="btn go" data-act="play" data-g="${g.id}" data-l="basic">Basic</button><button class="btn pur" data-act="play" data-g="${g.id}" data-l="adv">Advanced</button></div></div>`}).join('')}</div>`;
+}
+
+/* ---------- play engine ---------- */
+const SPK=`<svg viewBox="0 0 24 24" fill="none" stroke="#1E5C3B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z" fill="#1E5C3B"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>`;
+function startRound(gid,L){view='play';R={gid,L,i:0,earned:0,bonus:rnd(1,4),used:new Set(),res:[]};
+ const G=GBY[gid];
+ scr.innerHTML=`<section class="play"><div class="playbar"><button class="back" data-act="topic">← Games</button><div class="ptitle">${G.name}<span class="tag ${L==='adv'?'adv':''}">${L==='adv'?'Advanced':'Basic'}</span></div><div class="dots" id="dots"></div></div>
+ <div id="pbody"><div class="qcard"><div class="qtop"><div class="ask" id="ask" aria-live="polite"></div><button class="speak" id="speakBtn" aria-label="Read it to me">${SPK}</button></div><div id="bonusTag"></div><div id="qvis"></div><div id="hintvis"></div></div>
+ <div id="qplay"></div>
+ <div class="bobrow"><div class="bobmini" id="bobmini">${bobSVG(S.wear,'happy')}</div><div class="bubble" id="bubble" aria-live="polite"></div><div class="actions"><button class="btn yel" id="hintBtn">Hint</button><button class="btn go" id="nextBtn" hidden>Next ➜</button></div></div></div></section>`;
+ $('#speakBtn').onclick=()=>speak(R.q.ask+'. '+(R.q.vis?$('#qvis').textContent:''));
+ $('#hintBtn').onclick=showHint;$('#nextBtn').onclick=()=>{R.i++;nextQ()};
+ nextQ();
+}
+const api={
+ submit(v){return submit(v)},say(t){say(t)},solved:()=>R&&R.solved,
+ setAsk(t){R.q.ask=t;$('#ask').textContent=t},resetHints(){R.hint=0;$('#hintvis').innerHTML='';updHint()}
+};
+function say(t){const b=$('#bubble');if(b)b.innerHTML=t}
+function drawDots(){$('#dots').innerHTML=Array.from({length:5},(_,i)=>`<span class="dot ${R.res[i]||''} ${i===R.i&&!R.res[i]?'now':''}">${BAN}</span>`).join('')}
+function updHint(){const b=$('#hintBtn');if(!b)return;const hs=getHints();const left=hs.length-R.hint;b.disabled=left<=0||R.solved;b.textContent=left>0?`Hint (${left})`:'No more hints'}
+function getHints(){const G=GBY[R.gid];return(G.hints?G.hints(R.q):R.q.hints)||[]}
+function nextQ(){stopGame();hush();
+ if(R.i>=5)return endRound();
+ const G=GBY[R.gid];let q;for(let k=0;k<40;k++){q=G.make(R.L);if(!R.used.has(q.key))break}R.used.add(q.key);
+ Object.assign(R,{q,tries:0,hint:0,solved:false});
+ $('#ask').textContent=q.ask;$('#qvis').innerHTML=q.vis||'';$('#hintvis').innerHTML='';
+ $('#bonusTag').innerHTML=R.i===R.bonus?`<span class="bonus">${BAN} Banana Bonus! Double bananas on this one.</span>`:'';
+ $('#nextBtn').hidden=true;say(`<b>${pick(INTROS)}</b>`);setBob('happy');drawDots();
+ hooks=G.mount(q,$('#qplay'),api,R.L)||null;updHint();
+ if(S.autoRead)setTimeout(()=>{if(R&&R.q===q&&!R.solved)speak(q.ask+'. '+(q.vis?$('#qvis').textContent:''))},250);
+}
+function setBob(m,anim){const b=$('#bobmini');if(!b)return;b.innerHTML=bobSVG(S.wear,m);if(anim){b.classList.remove('jump','tilt');void b.offsetWidth;b.classList.add(anim)}}
+function showHint(){const hs=getHints();if(R.solved||R.hint>=hs.length)return;const h=hs[R.hint++];say(`<b>Hint:</b> ${esc(h.text)}`);if(h.vis)$('#hintvis').innerHTML=h.vis;if(h.act&&hooks&&hooks.hint)hooks.hint(h.act);updHint();speak(h.text);sfx('tap')}
+function submit(v){if(!R||R.solved)return false;const q=R.q;
+ if(String(v)===String(q.answer)){R.solved=true;correct();return true}
+ R.tries++;sfx('boing');setBob('oops','tilt');
+ if(R.tries>=3){reveal()}else{say(`<b>${esc(v)}</b> is not it. Try again! ${R.tries===2?'Look for the glowing one.':'You can tap Hint for help.'}`);if(R.tries===2&&hooks&&hooks.glow)hooks.glow()}
+ updHint();return false}
+function correct(){const q=R.q;const base=R.L==='basic'?(R.tries===0?2:1):(R.tries===0?4:2);const bonus=R.i===R.bonus;const got=base*(bonus?2:1);
+ S.bananas+=got;R.earned+=got;save();R.res[R.i]=R.tries===0?'star':'ok';drawDots();
+ const cheer=pick(CHEERS);say(`<b>${cheer}</b> ${esc(q.explain)} <b>+${got}</b> ${BAN}${bonus?' (bonus!)':''}`);
+ setBob('wow','jump');sfx('ding');flyBananas(got,$('#bobmini'));setTimeout(()=>updateCount(true),650);
+ $('#nextBtn').hidden=false;updHint();setTimeout(()=>{const n=$('#nextBtn');n&&n.focus({preventScroll:true})},50);
+ if(S.autoRead)speak(cheer+' '+q.explain)}
+function reveal(){const q=R.q;R.solved=true;R.res[R.i]='shown';drawDots();
+ say(`The answer is <b>${esc(q.answer)}</b>. ${esc(q.explain)} Let's try the next one!`);
+ if(hooks&&hooks.reveal)hooks.reveal();if(hooks&&hooks.glow)hooks.glow();$('#nextBtn').hidden=false;updHint();
+ if(S.autoRead)speak(`The answer is ${q.answer}. ${q.explain}`)}
+function endRound(){stopGame();const G=GBY[R.gid];const lv=R.L==='adv'?'adv':'basic';
+ S.stickers[R.gid]=S.stickers[R.gid]||{basic:0,adv:0};const cur=S.stickers[R.gid][lv]||0;let stk='';
+ if(cur<6){S.stickers[R.gid][lv]=cur+1;const e=STICKERS[R.gid][cur];stk=`<div class="sticker ${lv==='adv'?'gold':''} newp">${e}</div><p>New ${lv==='adv'?'gold ':''}sticker for your book!</p>`}
+ else{S.bananas+=3;R.earned+=3;stk=`<p>Your ${lv==='adv'?'gold ':''}${G.name} stickers are all collected! Here are 3 extra bananas.</p>`}
+ save();updateCount(true);sfx('yay');
+ const stars=R.res.filter(x=>x==='star').length;
+ $('#pbody').innerHTML=`<div class="endcard"><div class="bigbob">${bobSVG(S.wear,'wow')}</div><h2>Round done, ${esc(S.name)}!</h2><p>You earned <b>${R.earned} bananas</b>.${stars?` ${stars} right on the first try!`:''}</p>${stk}
+ <div class="endbtns"><button class="btn go" data-act="play" data-g="${R.gid}" data-l="${R.L}">Play again</button>${R.L==='basic'?`<button class="btn pur" data-act="play" data-g="${R.gid}" data-l="adv">Try Advanced</button>`:''}<button class="btn" data-act="topic">Other games</button><button class="btn yel" data-act="shop">${BAN} Shop</button></div></div>`;
+ drawDots();if(S.autoRead)speak(`Round done! You earned ${R.earned} bananas.`)}
+function flyBananas(n,from){if(RM||!from)return;const a=from.getBoundingClientRect(),b=$('#pill').getBoundingClientRect();
+ for(let k=0;k<Math.min(n,6);k++){const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('class','flyb');s.innerHTML='<use href="#ban"/>';document.body.appendChild(s);
+  const x0=a.left+a.width/2-17+rnd(-20,20),y0=a.top+a.height/3,x1=b.left+10,y1=b.top+4;
+  s.animate([{transform:`translate(${x0}px,${y0}px) scale(1)`},{transform:`translate(${(x0+x1)/2}px,${Math.min(y0,y1)-60}px) scale(1.3)`,offset:.4},{transform:`translate(${x1}px,${y1}px) scale(.6)`}],{duration:650+k*90,easing:'ease-in-out'}).onfinish=()=>s.remove()}}
+
+/* ---------- shop ---------- */
+function renderShop(msg){
+ const card=it=>{const own=S.owned.includes(it.id),on=S.wear[it.slot]===it.id,can=S.bananas>=it.price;
+  return`<div class="item ${on?'wearing':''}"><div class="prev">${bobSVG({[it.slot]:it.id},'happy')}</div><b>${it.name}</b>${own?`<button class="btn ${on?'':'go'}" data-act="wear" data-id="${it.id}">${on?'Take off':(it.cat==='toy'?'Use it':'Wear it')}</button>`:`<span class="price">${BAN} ${it.price}</span><button class="btn yel" data-act="buy" data-id="${it.id}" ${can?'':'disabled'}>${can?'Buy':'Need '+(it.price-S.bananas)+' more'}</button>`}</div>`};
+ scr.innerHTML=`<button class="back" data-act="home">← Trails</button><section class="shophead"><div class="bobwrap">${bobSVG(S.wear,'happy')}</div><div><h1>${esc(S.bob)}'s Treehouse Shop</h1><p>You have <b>${S.bananas}</b> bananas. Things you buy are yours forever.</p><div class="say" style="margin-top:10px" id="shopsay">${msg||'What should '+esc(S.bob)+' try on?'}</div></div></section>
+ <h2 class="sec-h">Things to wear</h2><div class="items">${ITEMS.filter(i=>i.cat==='wear').map(card).join('')}</div>
+ <h2 class="sec-h">Toys &amp; tools</h2><div class="items">${ITEMS.filter(i=>i.cat==='toy').map(card).join('')}</div>`;
+}
+function buy(id){const it=ITEMS.find(i=>i.id===id);if(!it||S.owned.includes(id)||S.bananas<it.price)return;S.bananas-=it.price;S.owned.push(id);S.wear[it.slot]=id;save();updateCount(true);sfx('buy');const y=window.scrollY;renderShop(`Yay! ${S.bob} has a new ${it.name.toLowerCase()}!`);window.scrollTo(0,y)}
+function wear(id){const it=ITEMS.find(i=>i.id===id);if(!it)return;if(S.wear[it.slot]===id)delete S.wear[it.slot];else S.wear[it.slot]=id;save();sfx('tap');const y=window.scrollY;renderShop(S.wear[it.slot]===id?`${S.bob} loves the ${it.name.toLowerCase()}!`:`${it.name} put away.`);window.scrollTo(0,y)}
+
+/* ---------- stickers ---------- */
+function renderStickers(){
+ scr.innerHTML=`<button class="back" data-act="home">← Trails</button><h1 style="font-size:32px;color:var(--leaf-d)">${esc(S.name)}'s Sticker Book</h1><p style="margin:4px 0 0;color:var(--ink-2)">Finish a round to get a sticker. Advanced rounds give gold stickers.</p>
+ <div class="book">${GAMES.map(g=>{const s=stickerCount(g.id);const row=(n,gold)=>STICKERS[g.id].map((e,i)=>i<n?`<div class="sticker ${gold?'gold':''}">${e}</div>`:`<div class="sticker empty" aria-label="empty"></div>`).join('');
+  return`<div class="bookrow"><h3>${g.name}</h3><div class="srow">${row(s.basic,false)}</div><div class="srow">${row(s.adv,true)}</div></div>`}).join('')}</div>`;
+}
+
+/* ---------- settings ---------- */
+function renderSettings(confirming){
+ scr.innerHTML=`<button class="back" data-act="home">← Trails</button><h1 style="font-size:30px;color:var(--leaf-d);margin-bottom:12px">Grown-up settings</h1><div class="panel">
+ <label for="setName">Player name<input type="text" id="setName" value="${esc(S.name)}" maxlength="20" autocomplete="off"></label>
+ <label for="setBob">Creature name<input type="text" id="setBob" value="${esc(S.bob)}" maxlength="20" autocomplete="off"></label>
+ <label class="tog" for="setSound">Sound effects<input type="checkbox" id="setSound" ${S.sound?'checked':''}></label>
+ <label class="tog" for="setRead">Read questions out loud by itself<input type="checkbox" id="setRead" ${S.autoRead?'checked':''}></label>
+ <p style="margin:0;color:var(--ink-2);font-size:16px">The speaker button always reads the question, even when this is off. Progress is saved on this device only.</p>
+ ${confirming?`<div class="warn"><b>Erase all bananas, stickers and shop items?</b><div class="row" style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" data-act="resetno">Keep everything</button><button class="btn" style="background:var(--berry);color:#fff;box-shadow:0 4px 0 #b83250" data-act="resetyes">Yes, start over</button></div></div>`:`<button class="btn" data-act="reset">Reset progress…</button>`}
+ </div>`;
+ $('#setName').addEventListener('input',e=>{S.name=e.target.value.trim()||'friend';save()});
+ $('#setBob').addEventListener('input',e=>{S.bob=e.target.value.trim()||'Bob';save();setBrand()});
+ $('#setSound').addEventListener('change',e=>{S.sound=e.target.checked;save();sfx('ding')});
+ $('#setRead').addEventListener('change',e=>{S.autoRead=e.target.checked;save()});
+}
+
+/* ---------- global clicks ---------- */
+document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t)return;ac();const a=t.dataset.act;
+ if(a==='home')go('home');else if(a==='topic')go('topic');else if(a==='shop')go('shop');else if(a==='stickers')go('stickers');else if(a==='settings')go('settings');
+ else if(a==='play'){stopGame();hush();window.scrollTo(0,0);startRound(t.dataset.g,t.dataset.l)}
+ else if(a==='buy')buy(t.dataset.id);else if(a==='wear')wear(t.dataset.id);
+ else if(a==='reset')renderSettings(true);else if(a==='resetno')renderSettings(false);
+ else if(a==='resetyes'){const keep={name:S.name,bob:S.bob,sound:S.sound,autoRead:S.autoRead};S=Object.assign(JSON.parse(JSON.stringify(DEF)),keep);save();updateCount();renderSettings(false)}
+});
+
+setBrand();updateCount();go('home');
+})();
+</script>
+
+</body>
+</html>
