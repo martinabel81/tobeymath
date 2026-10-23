@@ -54,7 +54,7 @@ h1,h2,h3{font-family:var(--display);font-weight:800;margin:0;text-wrap:balance}
 
 /* home */
 .hero{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:20px;align-items:center;background:var(--card);border-radius:28px;padding:18px 22px;box-shadow:0 6px 0 var(--line)}
-.hero .bobwrap{cursor:pointer;position:relative}
+#tickle{cursor:pointer}.hero .bobwrap{position:relative}
 .hero h1{font-size:clamp(28px,5vw,42px);color:var(--leaf-d)}
 .hero p{margin:6px 0 14px;color:var(--ink-2);font-size:19px}
 .hero .row{display:flex;flex-wrap:wrap;gap:12px}
@@ -262,6 +262,81 @@ h1,h2,h3{font-family:var(--display);font-weight:800;margin:0;text-wrap:balance}
 .bobwrap.giggle .bob{animation:jump .7s}
 .flyb{position:fixed;left:0;top:0;width:34px;height:34px;z-index:50;pointer-events:none}
 
+
+/* clocks */
+.clock{width:100%;height:auto;display:block}
+.clock .fives,.clock .ghost{opacity:0;transition:opacity .3s}
+.showfives .clock .fives{opacity:1}.showghost .clock .ghost{opacity:.5}
+.clockwrap{width:min(230px,62vw);margin:0 auto}
+.clockwrap.big{width:min(320px,82vw);touch-action:none;cursor:grab}
+.clockwrap.st{width:min(170px,40vw)}
+.timeshow{display:flex;flex-direction:column;align-items:center;gap:4px}
+.digital{display:inline-block;font-family:var(--display);font-weight:800;background:#1E3B2C;color:#FFDD2E;border-radius:14px;padding:2px 18px;font-size:clamp(36px,8vw,52px);letter-spacing:2px;box-shadow:inset 0 0 0 4px #2F8F5B;font-variant-numeric:tabular-nums}
+.digital.sm{font-size:clamp(20px,5vw,28px);padding:2px 10px;border-radius:10px}
+.timewords{font-family:var(--display);font-size:20px;color:var(--ink-2)}
+.setctl{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin-top:10px}
+.hand-ctl{display:flex;align-items:center;gap:8px;background:var(--card);border-radius:16px;padding:6px 10px;box-shadow:0 3px 0 var(--line)}
+.hand-ctl b{font-family:var(--display);font-size:17px}
+.chip{width:18px;height:18px;border-radius:50%}.chip.red{background:#E23B3B}.chip.blue{background:#2F7FD6}
+.btn.sm{min-height:46px;min-width:52px;padding:6px 10px;font-size:20px}
+.btn.big{font-size:23px;padding:12px 28px}
+.balloon span.clk{top:12px;left:13px;right:13px;text-shadow:none}
+.balloon span.clk svg{width:66px;height:66px;display:block}
+.choice.clk{padding:6px;min-width:0}.choice.clk svg{width:112px;height:112px}
+.choice.wide{font-size:22px;min-width:150px;max-width:260px;line-height:1.2;padding:10px 16px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.choice .emo{font-size:34px}
+/* memory */
+.mem{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:540px;margin:0 auto}
+.mcard{aspect-ratio:1;border-radius:18px;padding:6px;background:var(--leaf);box-shadow:0 4px 0 var(--leaf-d);display:grid;place-items:center;transition:transform .25s}
+.mcard .back .ban{font-size:42px;opacity:.9}
+.mcard .front{display:none;width:100%;height:100%;place-items:center}
+.mcard.up{background:#fff;box-shadow:0 4px 0 var(--line);transform:rotateY(0)}
+.mcard.up .front{display:grid}.mcard.up .back{display:none}
+.mcard.got{background:#E3F5E8;box-shadow:0 0 0 3px var(--ok)}
+.mcard .clock{width:92%}
+/* busy day */
+.slots{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.slot{width:118px;min-height:112px;border:3px dashed var(--bark-l);border-radius:18px;display:grid;place-items:center;background:rgba(255,255,255,.5)}
+.slot .sn{font-family:var(--display);font-size:30px;color:var(--bark-l)}
+.evpool{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.evc{width:118px;min-height:106px;background:#fff;border-radius:18px;box-shadow:0 4px 0 var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-family:var(--display);font-size:16px;line-height:1.15;padding:6px}
+.evc .emo{font-size:38px}
+.evc.placed{box-shadow:0 0 0 3px var(--ok);background:#E3F5E8;cursor:default}
+.evc.shake{animation:tilt .5s}
+/* express */
+.station{position:relative;background:linear-gradient(180deg,#BFE6F5,#E6F6D6);border-radius:24px;padding:14px 14px 0;overflow:hidden}
+.post{display:flex;flex-direction:column;align-items:center}
+.pole{width:12px;height:22px;background:#6B4226;border-radius:0 0 4px 4px}
+.track{position:relative;height:110px;margin:0 -14px}
+.rails{position:absolute;left:0;right:0;bottom:12px;height:10px;background:repeating-linear-gradient(90deg,#8B5A33 0 10px,transparent 10px 26px);border-top:4px solid #6b7785}
+.train{position:absolute;left:8px;bottom:18px;width:230px;transition:transform 1.8s ease-in-out}
+.trainsvg{width:230px;height:90px;display:block}
+/* scenes & goal */
+.bobwrap.scened{position:relative;border-radius:22px;overflow:hidden;padding:8px 6px 2px}
+.bobwrap .scene{position:absolute;inset:0;width:100%;height:100%}
+.bobwrap .bob{position:relative}
+.scene .tw{animation:twinkle 1.6s ease-in-out infinite alternate}
+@keyframes twinkle{to{opacity:.2}}
+.bob .flame{transform-box:fill-box;transform-origin:right center;animation:flick .16s infinite alternate}
+.bob .flamev{transform-box:fill-box;transform-origin:center top;animation:flickv .16s infinite alternate}
+@keyframes flick{to{transform:scaleX(.55)}}@keyframes flickv{to{transform:scaleY(.6)}}
+.goal{display:flex;gap:14px;align-items:center;background:var(--card);border-radius:22px;padding:12px 16px;margin-top:16px;box-shadow:0 5px 0 var(--line)}
+.goal-prev{flex:none;width:64px}
+.goal-main{flex:1;min-width:0}
+.goal-top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:18px}
+.goal-num{font-family:var(--display);font-weight:800;color:var(--bark)}
+.bar{height:18px;border-radius:999px;background:#EEF3E8;margin:6px 0;overflow:hidden;border:2px solid var(--line)}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--banana),var(--peel));border-radius:999px}
+.goal-left,.goal-ready{font-size:16px;color:var(--ink-2);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.btn.sm2{min-height:40px;font-size:17px;padding:4px 14px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 14px}
+.tab{font-family:var(--display);font-weight:800;font-size:19px;padding:10px 20px;border-radius:999px;background:rgba(255,255,255,.7);min-height:48px}
+.tab.on{background:var(--leaf);color:#fff}
+.item.pricey .price{color:var(--grape)}
+.savebtn{font-size:15px;color:var(--ink-2);padding:4px 8px;min-height:36px;border-radius:10px}
+.savebtn.on{color:var(--peel);font-weight:700;background:var(--banana-l)}
+.item .prev .bobwrap.scened{padding:4px 2px 0}
+@media (max-width:620px){.mem{grid-template-columns:repeat(3,minmax(0,1fr))}.mem.m12{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.slot,.evc{width:96px}.evc .emo{font-size:30px}.evc{font-size:14px}.choice.clk svg{width:90px;height:90px}}
 @media (max-width:620px){
   .hero,.shophead{grid-template-columns:1fr;text-align:center;justify-items:center}
   .hero .row{justify-content:center}
@@ -315,7 +390,7 @@ const today=()=>new Date().toISOString().slice(0,10);
 
 /* ---------- saved progress ---------- */
 const KEY='bobsBananaHunt_v1';
-const DEF={name:'Tobey',bob:'Bob',bananas:0,owned:[],wear:{},stickers:{},sound:true,autoRead:true,tickle:{day:'',n:0}};
+const DEF={name:'Tobey',bob:'Bob',bananas:0,owned:[],wear:{},goal:null,stickers:{},sound:true,autoRead:true,tickle:{day:'',n:0}};
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)return Object.assign({},DEF,s)}catch(e){}return JSON.parse(JSON.stringify(DEF))}
 let S=load();
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
@@ -334,7 +409,7 @@ function sfx(k){if(!S.sound)return;try{switch(k){
  case'kazoo':tone(300,.45,'sawtooth',.07,420);break;
  case'yay':[523,784,1046].forEach((f,i)=>tone(f,.25,'triangle',.16,null,i*.12));break;
 }}catch(e){}}
-function cleanSpeech(t){return String(t).replace(/<[^>]+>/g,' ').replace(/×/g,' times ').replace(/=/g,' equals ').replace(/☐/g,' box ').replace(/(^|[\s,])\?(?=[\s.,]|$)/g,'$1 what number ').replace(/\+(\d)/g,'plus $1').replace(/\s+/g,' ')}
+function cleanSpeech(t){return String(t).replace(/<[^>]+>/g,' ').replace(/\b(\d{1,2}):00\b/g,"$1 o'clock").replace(/\b(\d{1,2}):0(\d)\b/g,'$1 oh $2').replace(/×/g,' times ').replace(/=/g,' equals ').replace(/☐/g,' box ').replace(/(^|[\s,])\?(?=[\s.,]|$)/g,'$1 what number ').replace(/\+(\d)/g,'plus $1').replace(/\s+/g,' ')}
 function speak(t){try{if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(cleanSpeech(t));u.rate=.88;u.pitch=1.15;speechSynthesis.speak(u)}catch(e){}}
 function hush(){try{speechSynthesis.cancel()}catch(e){}}
 
@@ -345,31 +420,58 @@ const BODY=scallop(100,118,70,30,6);
 function bobSVG(wear,mood){
  wear=wear||{};mood=mood||'happy';const id='bc'+(uid++);
  const has=s=>wear[s];
- let back='',head='',feet='',hand='',face='',mouth='',neck='';
- if(has('back')==='cape')back=`<path d="M60 58 Q22 190 32 232 Q100 246 168 232 Q178 190 140 58 Z" fill="#E8506B" stroke="#B83250" stroke-width="3"/>`;
- if(has('feet')==='skate')feet=`<g transform="translate(0 24)"><rect x="44" y="204" width="112" height="10" rx="5" fill="#2FA3D6" stroke="#1d6f94" stroke-width="2"/><circle cx="62" cy="219" r="6" fill="#333"/><circle cx="138" cy="219" r="6" fill="#333"/></g>`;
+ let back='',head='',feet='',hand='',face='',mouth='',neck='',pet='',petBehind='';
+ const bk=has('back');
+ if(bk==='cape')back=`<path d="M60 58 Q22 190 32 232 Q100 246 168 232 Q178 190 140 58 Z" fill="#E8506B" stroke="#B83250" stroke-width="3"/>`;
+ if(bk==='jetpack')back=`<g><rect x="34" y="66" width="24" height="76" rx="11" fill="#C9D3DC" stroke="#6b7785" stroke-width="3"/><rect x="142" y="66" width="24" height="76" rx="11" fill="#C9D3DC" stroke="#6b7785" stroke-width="3"/><rect x="34" y="84" width="24" height="7" fill="#E8506B"/><rect x="142" y="84" width="24" height="7" fill="#E8506B"/><path d="M38 142 h16 l-3 8 h-10 z M146 142 h16 l-3 8 h-10 z" fill="#6b7785"/><path class="flamev" d="M40 150 h12 l-6 26 z" fill="#FFB020"/><path class="flamev" d="M148 150 h12 l-6 26 z" fill="#FFB020"/><path class="flamev" d="M43 150 h6 l-3 14 z" fill="#FFF1B8"/><path class="flamev" d="M151 150 h6 l-3 14 z" fill="#FFF1B8"/></g>`;
+ const ft=has('feet');
+ if(ft==='skate')feet=`<g transform="translate(0 24)"><rect x="44" y="204" width="112" height="10" rx="5" fill="#2FA3D6" stroke="#1d6f94" stroke-width="2"/><circle cx="62" cy="219" r="6" fill="#333"/><circle cx="138" cy="219" r="6" fill="#333"/></g>`;
+ if(ft==='rocket')feet=[66,104].map(x=>`<rect x="${x}" y="229" width="42" height="7" rx="3" fill="#5f6b77"/><rect x="${x+8}" y="235" width="30" height="10" rx="5" fill="#7457D1" stroke="#4f3a9a" stroke-width="2"/><path class="flame" d="M${x+8} 236 l-16 4 l16 4 z" fill="#FFB020"/>`).join('');
  const hw=has('hand');
  if(hw==='wrench')hand=`<g transform="translate(-20 30)"><g transform="translate(186 146) rotate(-35)"><rect x="-4" y="-34" width="8" height="38" rx="3" fill="#9AA6B2" stroke="#5f6b77" stroke-width="2"/><path d="M-11 -44 a11 11 0 1 1 22 0 l-5 4 h-12 z" fill="#9AA6B2" stroke="#5f6b77" stroke-width="2"/></g></g>`;
  if(hw==='wand')hand=`<g transform="translate(-20 30)"><path d="M186 150 L204 108" stroke="#7457D1" stroke-width="5" stroke-linecap="round"/><circle cx="208" cy="98" r="11" fill="none" stroke="#7457D1" stroke-width="4"/><circle class="bub" cx="214" cy="88" r="8" fill="rgba(160,220,255,.5)" stroke="#8fd0f5" stroke-width="2"/><circle class="bub bub2" cx="206" cy="84" r="6" fill="rgba(160,220,255,.5)" stroke="#8fd0f5" stroke-width="2"/><circle class="bub bub3" cx="220" cy="92" r="5" fill="rgba(160,220,255,.5)" stroke="#8fd0f5" stroke-width="2"/></g>`;
- if(has('face')==='shades')face=`<g><rect x="58" y="56" width="40" height="28" rx="11" fill="#1f2633"/><rect x="102" y="56" width="40" height="28" rx="11" fill="#1f2633"/><path d="M98 66 h4" stroke="#1f2633" stroke-width="5"/><path d="M65 63 l9 0 M109 63 l9 0" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6"/></g>`;
+ if(hw==='guitar')hand=`<g><path d="M170 186 L206 124" stroke="#6B4226" stroke-width="7" stroke-linecap="round"/><rect x="200" y="110" width="12" height="18" rx="3" fill="#6B4226" transform="rotate(30 206 119)"/><circle cx="174" cy="178" r="12" fill="#F08A24" stroke="#A85A1E" stroke-width="3"/><circle cx="164" cy="196" r="16" fill="#F08A24" stroke="#A85A1E" stroke-width="3"/><circle cx="168" cy="188" r="5" fill="#5e3a1e"/><path d="M160 200 L204 124" stroke="#fff" stroke-width="1.2" opacity=".8"/></g>`;
+ if(hw==='trophy')hand=`<g><path d="M150 138 h28 v10 a14 14 0 0 1 -28 0 z" fill="#FFC21A" stroke="#C98A12" stroke-width="3"/><path d="M150 142 q-10 0 -8 9 q2 6 10 5 M178 142 q10 0 8 9 q-2 6 -10 5" fill="none" stroke="#C98A12" stroke-width="3"/><rect x="161" y="161" width="6" height="9" fill="#FFC21A" stroke="#C98A12" stroke-width="2"/><rect x="153" y="169" width="22" height="8" rx="2" fill="#FFC21A" stroke="#C98A12" stroke-width="2.5"/><use href="#ban" x="153" y="116" width="22" height="22"/></g>`;
+ const fc=has('face');
+ if(fc==='shades')face=`<g><rect x="58" y="56" width="40" height="28" rx="11" fill="#1f2633"/><rect x="102" y="56" width="40" height="28" rx="11" fill="#1f2633"/><path d="M98 66 h4" stroke="#1f2633" stroke-width="5"/><path d="M65 63 l9 0 M109 63 l9 0" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6"/></g>`;
+ if(fc==='mask')face=`<g><path fill-rule="evenodd" d="M74 52 h52 a18 18 0 0 1 0 36 h-52 a18 18 0 0 1 0 -36 Z M65 70 a15 15 0 1 0 30 0 a15 15 0 1 0 -30 0 Z M105 70 a15 15 0 1 0 30 0 a15 15 0 1 0 -30 0 Z" fill="#E23B3B" stroke="#A82222" stroke-width="2"/><path d="M142 62 L160 54 L156 68 Z M142 76 L160 82 L154 70 Z" fill="#E23B3B" stroke="#A82222" stroke-width="2" stroke-linejoin="round"/></g>`;
  if(has('mouth')==='kazoo')mouth=`<g transform="translate(0 -36)"><path d="M100 146 L138 140 L150 130 L152 160 L138 152 L100 152 Z" fill="#E8506B" stroke="#B83250" stroke-width="2.5" stroke-linejoin="round"/><circle cx="118" cy="146" r="3.5" fill="#B83250"/></g>`;
- if(has('neck')==='bowtie')neck=`<g transform="translate(0 -36)"><path d="M100 166 L80 155 L80 177 Z M100 166 L120 155 L120 177 Z" fill="#7457D1" stroke="#4f3a9a" stroke-width="2.5" stroke-linejoin="round"/><circle cx="100" cy="166" r="6" fill="#4f3a9a"/></g>`;
+ const nk=has('neck');
+ if(nk==='bowtie')neck=`<g transform="translate(0 -36)"><path d="M100 166 L80 155 L80 177 Z M100 166 L120 155 L120 177 Z" fill="#7457D1" stroke="#4f3a9a" stroke-width="2.5" stroke-linejoin="round"/><circle cx="100" cy="166" r="6" fill="#4f3a9a"/></g>`;
+ if(nk==='medal')neck=`<g><path d="M86 124 L100 146 L114 124" fill="none" stroke="#2FA3D6" stroke-width="7" stroke-linejoin="round"/><circle cx="100" cy="152" r="12" fill="#FFC21A" stroke="#C98A12" stroke-width="3"/><use href="#ban" x="91" y="143" width="18" height="18"/></g>`;
+ const pk=has('pocket');
+ const pocketItem=pk==='flower'
+  ?`<path d="M74 146 Q71 130 74 116" stroke="#2F8F5B" stroke-width="3" fill="none"/><ellipse cx="68" cy="132" rx="6" ry="3" fill="#2F8F5B" transform="rotate(-30 68 132)"/>${[0,72,144,216,288].map(a=>`<circle cx="${74+7*Math.cos(a*Math.PI/180)}" cy="${110+7*Math.sin(a*Math.PI/180)}" r="5.5" fill="#FF8FB1"/>`).join('')}<circle cx="74" cy="110" r="4.5" fill="#FFD23F"/><rect x="64" y="140" width="20" height="18" rx="3" fill="#256f45" stroke="#1E5C3B" stroke-width="2"/>`
+  :`<rect x="64" y="140" width="20" height="18" rx="3" fill="#256f45" stroke="#1E5C3B" stroke-width="2"/><g transform="translate(74 140) rotate(-12)"><rect x="-2.5" y="-16" width="5" height="18" rx="2" fill="#9AA6B2" stroke="#5f6b77" stroke-width="1.5"/><path d="M-7 -22 a7 7 0 1 1 14 0 l-3 3 h-8 z" fill="#9AA6B2" stroke="#5f6b77" stroke-width="1.5"/></g>`;
+ const pt=has('pet');
+ if(pt==='parrot')pet=`<g><path d="M42 122 L32 146 L42 140 L46 124 Z" fill="#FFD23F" stroke="#C98A12" stroke-width="1.5"/><ellipse cx="46" cy="110" rx="10" ry="15" fill="#E8506B" stroke="#B83250" stroke-width="2"/><path d="M40 104 Q32 118 42 126 Q50 116 46 104 Z" fill="#2FA3D6"/><circle cx="48" cy="92" r="9" fill="#E8506B" stroke="#B83250" stroke-width="2"/><path d="M41 90 Q34 92 38 99 L43 95 Z" fill="#F08A24"/><circle cx="50" cy="90" r="3" fill="#fff"/><circle cx="50.5" cy="90" r="1.6" fill="#222"/><path d="M44 125 v5 M50 125 v5" stroke="#F08A24" stroke-width="2.5" stroke-linecap="round"/></g>`;
+ if(pt==='robot')petBehind=`<g><path d="M7 172 V162" stroke="#6b7785" stroke-width="3"/><circle cx="7" cy="160" r="4" fill="#E8506B"/><rect x="-8" y="172" width="30" height="22" rx="6" fill="#C9D3DC" stroke="#6b7785" stroke-width="2.5"/><circle cx="2" cy="183" r="4" fill="#2FD6E8"/><circle cx="13" cy="183" r="4" fill="#2FD6E8"/><rect x="-10" y="197" width="34" height="27" rx="6" fill="#C9D3DC" stroke="#6b7785" stroke-width="2.5"/><circle cx="7" cy="210" r="5" fill="#FFD23F" stroke="#C98A12" stroke-width="1.5"/><rect x="-12" y="225" width="38" height="9" rx="4.5" fill="#3a4250"/></g>`;
  const hd=has('head');let hg='';
  if(hd==='party')hg=`<path d="M76 54 L100 -6 L124 54 Z" fill="#2FA3D6" stroke="#1d6f94" stroke-width="2.5" stroke-linejoin="round"/><path d="M83 36 L117 36 M90 18 L110 18" stroke="#FFD23F" stroke-width="5"/><circle cx="100" cy="-8" r="8" fill="#E8506B"/>`;
  if(hd==='pirate')hg=`<path d="M44 58 Q100 -10 156 58 Q100 40 44 58 Z" fill="#26303f" stroke="#111" stroke-width="2.5"/><path d="M48 56 Q100 40 152 56" stroke="#FFD23F" stroke-width="4" fill="none"/><use href="#ban" x="84" y="16" width="32" height="32"/>`;
  if(hd==='crown')hg=`<path d="M66 58 L62 16 L82 36 L100 6 L118 36 L138 16 L134 58 Z" fill="#FFD23F" stroke="#C98A12" stroke-width="3" stroke-linejoin="round"/><circle cx="100" cy="40" r="6" fill="#E8506B"/><circle cx="78" cy="46" r="4.5" fill="#2FA3D6"/><circle cx="122" cy="46" r="4.5" fill="#2FA3D6"/>`;
  if(hd==='copter')hg=`<path d="M70 58 A30 30 0 0 1 130 58 Z" fill="#2F8F5B" stroke="#1E5C3B" stroke-width="2.5"/><path d="M70 56 h60" stroke="#FFD23F" stroke-width="5"/><rect x="97" y="10" width="6" height="22" fill="#6B4226"/><g class="prop"><ellipse cx="78" cy="-14" rx="24" ry="5" fill="#FFD23F" stroke="#C98A12" stroke-width="2"/><ellipse cx="122" cy="-14" rx="24" ry="5" fill="#FFD23F" stroke="#C98A12" stroke-width="2"/></g><circle cx="100" cy="-14" r="6" fill="#E8506B"/><rect x="98" y="-12" width="4" height="24" fill="#6B4226"/>`;
+ if(hd==='hardhat')hg=`<path d="M64 58 Q64 18 100 18 Q136 18 136 58 Z" fill="#FFB020" stroke="#C98A12" stroke-width="3"/><path d="M100 19 V57 M84 24 V57 M116 24 V57" stroke="#C98A12" stroke-width="3"/><rect x="54" y="53" width="92" height="10" rx="5" fill="#FFB020" stroke="#C98A12" stroke-width="3"/>`;
+ if(hd==='chef')hg=`<circle cx="78" cy="30" r="15" fill="#fff" stroke="#cfd6dd" stroke-width="2.5"/><circle cx="122" cy="30" r="15" fill="#fff" stroke="#cfd6dd" stroke-width="2.5"/><circle cx="100" cy="18" r="20" fill="#fff" stroke="#cfd6dd" stroke-width="2.5"/><rect x="70" y="34" width="60" height="24" rx="4" fill="#fff" stroke="#cfd6dd" stroke-width="2.5"/>`;
+ if(hd==='wizard')hg=`<path d="M62 58 L106 -52 L138 58 Z" fill="#5B3FB8" stroke="#3d2a85" stroke-width="3" stroke-linejoin="round"/><ellipse cx="100" cy="58" rx="50" ry="9" fill="#5B3FB8" stroke="#3d2a85" stroke-width="3"/><text x="88" y="30" font-size="16" fill="#FFD23F">★</text><text x="104" y="2" font-size="12" fill="#FFD23F">★</text><text x="108" y="46" font-size="11" fill="#FFD23F">★</text>`;
  if(hg)head=`<g transform="translate(0 -38)">${hg}</g>`;
+ if(hd==='astro')head=`<g><circle cx="100" cy="64" r="60" fill="rgba(190,230,255,.25)" stroke="#9AA6B2" stroke-width="5"/><path d="M62 40 Q74 18 100 14" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" opacity=".8"/><rect x="48" y="120" width="104" height="14" rx="7" fill="#E9EEF3" stroke="#9AA6B2" stroke-width="3"/><path d="M140 16 L150 -6" stroke="#9AA6B2" stroke-width="3"/><circle cx="151" cy="-8" r="5" fill="#E8506B"/></g>`;
  let brows,mouthP,pupil=2;
  if(mood==='wow'){brows=`<path d="M64 42 q14 -10 28 -2 M108 40 q14 -8 28 2" stroke="#7A4A1E" stroke-width="5" fill="none" stroke-linecap="round"/>`;mouthP=`<ellipse cx="100" cy="112" rx="11" ry="13" fill="#5a2a1a"/><ellipse cx="100" cy="118" rx="7" ry="4" fill="#F27C8E"/>`;pupil=0}
  else if(mood==='oops'){brows=`<path d="M66 46 q12 -2 24 -9 M110 37 q12 7 24 9" stroke="#7A4A1E" stroke-width="5" fill="none" stroke-linecap="round"/>`;mouthP=`<path d="M84 114 q8 -7 16 0 q8 7 16 0" stroke="#5a2a1a" stroke-width="5" fill="none" stroke-linecap="round"/>`;pupil=4}
  else{brows=`<path d="M66 44 q12 -7 24 -2 M110 42 q12 -5 24 2" stroke="#7A4A1E" stroke-width="5" fill="none" stroke-linecap="round"/>`;mouthP=`<path d="M80 104 Q100 130 120 104 Z" fill="#5a2a1a" stroke="#5a2a1a" stroke-width="3" stroke-linejoin="round"/><path d="M91 116 Q100 123 109 116 Q100 112 91 116Z" fill="#F27C8E"/>`}
  const eye=x=>`<circle cx="${x}" cy="70" r="18" fill="#fff" stroke="#7A4A1E" stroke-width="3"/><circle cx="${x+1}" cy="${71+pupil}" r="8.5" fill="#2a2320"/><circle cx="${x+4}" cy="${67+pupil}" r="3" fill="#fff"/>`;
- const stripes=[132,146,160].map(y=>`<rect x="40" y="${y}" width="120" height="7" fill="#F4F8EE"/>`).join('');
+ const rainbow=has('shirt')==='rainbow';
+ const shirt=rainbow
+  ?`<rect x="40" y="124" width="120" height="80" fill="#E23B3B"/>${['#F08A24','#FFD23F','#2F9E5A','#2F7FD6','#7457D1'].map((c,i)=>`<rect x="40" y="${132+i*8}" width="120" height="8" fill="${c}"/>`).join('')}`
+  :`<rect x="40" y="124" width="120" height="80" fill="#2E8B57"/>${[132,146,160].map(y=>`<rect x="40" y="${y}" width="120" height="7" fill="#F4F8EE"/>`).join('')}`;
+ const sleeve=rainbow?'#7457D1':'#2E8B57';
+ const P='M64 40 Q64 10 100 10 Q136 10 136 40 L146 150 Q150 202 100 202 Q50 202 54 150 Z';
  return `<svg class="bob" viewBox="-14 -44 228 292" aria-hidden="true">
- <defs><clipPath id="${id}"><path d="M64 40 Q64 10 100 10 Q136 10 136 40 L146 150 Q150 202 100 202 Q50 202 54 150 Z"/></clipPath></defs>
+ <defs><clipPath id="${id}"><path d="${P}"/></clipPath></defs>
  ${back}
  <ellipse cx="100" cy="234" rx="54" ry="7" fill="rgba(0,0,0,.12)"/>
+ ${petBehind}
  <rect x="70" y="194" width="22" height="16" fill="#3C6E4F"/><rect x="108" y="194" width="22" height="16" fill="#3C6E4F"/>
  <path d="M68 204 h26 v20 h10 q4 0 4 5 v1 h-42 z" fill="#E23B3B" stroke="#A82222" stroke-width="2.5" stroke-linejoin="round"/>
  <path d="M106 204 h26 v20 h10 q4 0 4 5 v1 h-42 z" fill="#E23B3B" stroke="#A82222" stroke-width="2.5" stroke-linejoin="round"/>
@@ -377,52 +479,80 @@ function bobSVG(wear,mood){
  ${feet}
  <path d="M58 134 Q40 150 38 176" stroke="#D9A400" stroke-width="15" fill="none" stroke-linecap="round"/><path d="M58 134 Q40 150 38 176" stroke="#FFDD2E" stroke-width="10" fill="none" stroke-linecap="round"/>
  <path d="M142 134 Q160 150 162 176" stroke="#D9A400" stroke-width="15" fill="none" stroke-linecap="round"/><path d="M142 134 Q160 150 162 176" stroke="#FFDD2E" stroke-width="10" fill="none" stroke-linecap="round"/>
- <path d="M58 132 Q46 140 42 150" stroke="#2E8B57" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M142 132 Q154 140 158 150" stroke="#2E8B57" stroke-width="16" fill="none" stroke-linecap="round"/>
- <path d="M64 40 Q64 10 100 10 Q136 10 136 40 L146 150 Q150 202 100 202 Q50 202 54 150 Z" fill="#FFDD2E" stroke="#D9A400" stroke-width="3.5"/>
+ <path d="M58 132 Q46 140 42 150" stroke="${sleeve}" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M142 132 Q154 140 158 150" stroke="${sleeve}" stroke-width="16" fill="none" stroke-linecap="round"/>
+ <path d="${P}" fill="#FFDD2E" stroke="#D9A400" stroke-width="3.5"/>
  <g clip-path="url(#${id})">
-   <rect x="40" y="124" width="120" height="80" fill="#2E8B57"/>${stripes}
+   ${shirt}
    <path d="M84 124 L100 140 L116 124 Z" fill="#FFDD2E"/>
    <path d="M84 124 L100 140 L116 124" fill="none" stroke="#1E5C3B" stroke-width="3" stroke-linejoin="round"/>
    <rect x="40" y="172" width="120" height="16" fill="#8B5A33"/><rect x="40" y="172" width="120" height="16" fill="none" stroke="#5e3a1e" stroke-width="2.5"/>
    <rect x="40" y="188" width="120" height="20" fill="#3C6E4F"/>
  </g>
- <rect x="64" y="140" width="20" height="18" rx="3" fill="#256f45" stroke="#1E5C3B" stroke-width="2"/>
- <g transform="translate(74 140) rotate(-12)"><rect x="-2.5" y="-16" width="5" height="18" rx="2" fill="#9AA6B2" stroke="#5f6b77" stroke-width="1.5"/><path d="M-7 -22 a7 7 0 1 1 14 0 l-3 3 h-8 z" fill="#9AA6B2" stroke="#5f6b77" stroke-width="1.5"/></g>
+ ${pocketItem}
  <rect x="92" y="171" width="16" height="17" rx="3" fill="#FFC21A" stroke="#C98A12" stroke-width="2.5"/>
  <rect x="62" y="178" width="18" height="20" rx="4" fill="#A8754A" stroke="#5e3a1e" stroke-width="2.5"/><rect x="67" y="168" width="4" height="12" rx="2" fill="#E8506B"/><rect x="73" y="171" width="3" height="9" rx="1.5" fill="#FFD23F"/>
  <rect x="120" y="178" width="18" height="20" rx="4" fill="#A8754A" stroke="#5e3a1e" stroke-width="2.5"/><rect x="126" y="166" width="5" height="14" rx="2" fill="#2FA3D6"/>
  <circle cx="38" cy="178" r="8" fill="#FFDD2E" stroke="#D9A400" stroke-width="2.5"/><circle cx="162" cy="178" r="8" fill="#FFDD2E" stroke="#D9A400" stroke-width="2.5"/>
- <path d="M100 12 C93 0 98 -12 92 -22 M100 12 C104 -2 114 -6 112 -18 M100 12 C107 4 120 6 125 -2" stroke="#A85A1E" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+ ${hd==='astro'?'':`<path d="M100 12 C93 0 98 -12 92 -22 M100 12 C104 -2 114 -6 112 -18 M100 12 C107 4 120 6 125 -2" stroke="#A85A1E" stroke-width="5.5" fill="none" stroke-linecap="round"/>`}
  ${eye(80)}${eye(120)}
  <circle cx="66" cy="96" r="8" fill="#F7A3B1" opacity=".7"/><circle cx="134" cy="96" r="8" fill="#F7A3B1" opacity=".7"/>
- ${brows}${mouthP}${face}${mouth}${neck}${hand}${head}
+ ${brows}${mouthP}${face}${mouth}${neck}${hand}${head}${pet}
  </svg>`;
 }
 
+/* backgrounds ("Places") drawn behind Bob */
+function sceneSVG(id){
+ const wrap=b=>`<svg class="scene" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${b}</svg>`;
+ if(id==='beach')return wrap(`<rect width="300" height="300" fill="#9FDCF5"/><circle cx="244" cy="58" r="30" fill="#FFE066"/><rect y="168" width="300" height="56" fill="#3BB0D9"/><path d="M0 176 q25 -8 50 0 t50 0 t50 0 t50 0 t50 0 t50 0" stroke="#fff" stroke-width="3" fill="none" opacity=".7"/><rect y="218" width="300" height="82" fill="#F4D9A0"/><path d="M44 236 Q52 160 74 112" stroke="#8B5A33" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M74 112 q-40 -10 -56 16 M74 112 q-30 -30 -58 -18 M74 112 q10 -36 42 -36 M74 112 q36 -6 50 22 M74 112 q-6 -40 -2 -50" stroke="#2F8F5B" stroke-width="10" fill="none" stroke-linecap="round"/><circle cx="250" cy="262" r="8" fill="#F7A3B1"/>`);
+ if(id==='space'){let st='';const pts=[[20,30],[60,90],[110,20],[150,70],[200,30],[280,120],[30,170],[260,200],[90,140],[180,110],[230,160],[130,190],[15,250],[285,40]];pts.forEach(([x,y],i)=>st+=`<circle cx="${x}" cy="${y}" r="${i%3?1.6:2.6}" fill="#fff" class="${i%2?'tw':''}"/>`);
+  return wrap(`<rect width="300" height="300" fill="#1B1F4B"/>${st}<circle cx="232" cy="70" r="28" fill="#F08A24"/><ellipse cx="232" cy="70" rx="46" ry="10" fill="none" stroke="#FFD23F" stroke-width="5" transform="rotate(-18 232 70)"/><circle cx="58" cy="60" r="18" fill="#E9EEF3"/><circle cx="52" cy="56" r="4" fill="#c9d1d9"/><circle cx="64" cy="66" r="3" fill="#c9d1d9"/><ellipse cx="150" cy="330" rx="230" ry="84" fill="#6B5BA8"/><circle cx="90" cy="268" r="10" fill="#5a4b93"/><circle cx="220" cy="276" r="7" fill="#5a4b93"/>`)}
+ if(id==='castle')return wrap(`<rect width="300" height="300" fill="#F9D7E8"/><circle cx="60" cy="56" r="24" fill="#FFE59A"/><ellipse cx="150" cy="320" rx="240" ry="110" fill="#8ED08A"/><rect x="176" y="126" width="96" height="104" fill="#C9D3DC" stroke="#8a96a3" stroke-width="3"/><path d="M176 126 v-10 h12 v10 h12 v-10 h12 v10 h12 v-10 h12 v10 h12 v-10 h12 v10 h12 v-10 h12" fill="none" stroke="#8a96a3" stroke-width="3"/><rect x="160" y="96" width="30" height="134" fill="#B8C2CC" stroke="#8a96a3" stroke-width="3"/><rect x="258" y="96" width="30" height="134" fill="#B8C2CC" stroke="#8a96a3" stroke-width="3"/><path d="M156 96 L175 56 L194 96 Z M254 96 L273 56 L292 96 Z" fill="#7457D1"/><path d="M175 56 v-18 l14 6 l-14 6 M273 56 v-18 l14 6 l-14 6" stroke="#6B4226" stroke-width="2" fill="#E8506B"/><path d="M210 230 v-36 a14 14 0 0 1 28 0 v36 z" fill="#6B4226"/><rect x="200" y="146" width="12" height="18" rx="6" fill="#4f3a9a"/><rect x="236" y="146" width="12" height="18" rx="6" fill="#4f3a9a"/>`);
+ return '';
+}
+function bobStage(mood,extra){const sc=S.wear.scene;return `<div class="bobwrap ${sc?'scened':''} ${extra||''}">${sc?sceneSVG(sc):''}${bobSVG(S.wear,mood)}</div>`}
+
 /* ---------- content data ---------- */
 const TOPICS=[
- {id:'mult',name:'Times & Groups',blurb:'Equal groups, skip counting and times facts',icon:'×',open:true},
+ {id:'mult',name:'Times & Groups',blurb:'Equal groups, skip counting and times facts',icon:'×',open:true,games:['balloon','bunch','hop','rows','catch'],intro:'Pick a game. Basic is warm-up. Advanced has bigger numbers and gold stickers.'},
  {id:'add',name:'Adding & Taking Away',blurb:'Facts up to 20',icon:'+'},
  {id:'place',name:'Tens & Ones',blurb:'Bundles of ten',icon:'10'},
  {id:'count',name:'Counting to 120',blurb:'Count on and back',icon:'120'},
  {id:'measure',name:'Measuring',blurb:'Longer and shorter',icon:'↔'},
- {id:'time',name:'Telling Time',blurb:'Hours and half hours',icon:'◷'},
+ {id:'time',name:'Telling Time',blurb:'Clocks, half past and a busy day',icon:'◷',open:true,games:['setclock','timepop','memory','day','express'],intro:'Basic is o\'clock and half past. Advanced adds quarter past, quarter to, minutes by 5s and "1 hour later" puzzles.'},
  {id:'shapes',name:'Shapes',blurb:'Flat and solid shapes',icon:'△'}
 ];
-const STICKERS={balloon:['🎈','🎉','🪁','🎊','🌈','⭐'],bunch:['🍌','🧺','🍍','🥥','🍇','🍓'],hop:['🐸','🐇','🦘','🌸','🍀','🐢'],rows:['🌱','🌻','🌴','🌵','🍄','🌳'],catch:['🧢','⚽','🏀','🎯','🪀','🏆']};
+const STICKERS={balloon:['🎈','🎉','🪁','🎊','🌈','⭐'],bunch:['🍌','🧺','🍍','🥥','🍇','🍓'],hop:['🐸','🐇','🦘','🌸','🍀','🐢'],rows:['🌱','🌻','🌴','🌵','🍄','🌳'],catch:['🧢','⚽','🏀','🎯','🪀','🏆'],setclock:['⏰','🕰️','⌚','⏳','🔔','🌞'],timepop:['🎀','🍭','🧁','🎁','🪅','🎠'],memory:['🃏','🧩','🎲','🎴','🔮','💎'],day:['🌅','🏫','🍎','🛁','🌙','🌈'],express:['🚂','🚃','🚉','🛤️','🎫','🏁']};
 const ITEMS=[
  {id:'party',name:'Party hat',slot:'head',price:6,cat:'wear'},
  {id:'bowtie',name:'Bow tie',slot:'neck',price:10,cat:'wear'},
+ {id:'flower',name:'Pocket flower',slot:'pocket',price:15,cat:'wear'},
  {id:'shades',name:'Sunglasses',slot:'face',price:15,cat:'wear'},
+ {id:'hardhat',name:'Hard hat',slot:'head',price:20,cat:'wear'},
  {id:'cape',name:'Super cape',slot:'back',price:25,cat:'wear'},
+ {id:'medal',name:'Banana medal',slot:'neck',price:30,cat:'wear'},
  {id:'pirate',name:'Pirate hat',slot:'head',price:35,cat:'wear'},
+ {id:'chef',name:'Chef hat',slot:'head',price:40,cat:'wear'},
+ {id:'mask',name:'Superhero mask',slot:'face',price:45,cat:'wear'},
  {id:'crown',name:'Banana crown',slot:'head',price:60,cat:'wear'},
+ {id:'wizard',name:'Wizard hat',slot:'head',price:120,cat:'wear'},
+ {id:'astro',name:'Space helmet',slot:'head',price:250,cat:'wear'},
+ {id:'rainbow',name:'Rainbow shirt',slot:'shirt',price:500,cat:'wear'},
  {id:'wrench',name:'Toy wrench',slot:'hand',price:8,cat:'toy'},
  {id:'wand',name:'Bubble wand',slot:'hand',price:12,cat:'toy'},
  {id:'kazoo',name:'Kazoo',slot:'mouth',price:18,cat:'toy'},
  {id:'skate',name:'Skateboard',slot:'feet',price:30,cat:'toy'},
- {id:'copter',name:'Banana-copter',slot:'head',price:50,cat:'toy'}
+ {id:'copter',name:'Banana-copter',slot:'head',price:50,cat:'toy'},
+ {id:'guitar',name:'Guitar',slot:'hand',price:80,cat:'toy'},
+ {id:'rocket',name:'Rocket skates',slot:'feet',price:120,cat:'toy'},
+ {id:'jetpack',name:'Jetpack',slot:'back',price:200,cat:'toy'},
+ {id:'trophy',name:'Golden banana trophy',slot:'hand',price:400,cat:'toy'},
+ {id:'parrot',name:'Pet parrot',slot:'pet',price:100,cat:'friend'},
+ {id:'robot',name:'Robot buddy',slot:'pet',price:300,cat:'friend'},
+ {id:'beach',name:'Beach',slot:'scene',price:90,cat:'place'},
+ {id:'space',name:'Outer space',slot:'scene',price:180,cat:'place'},
+ {id:'castle',name:'Castle',slot:'scene',price:250,cat:'place'}
 ];
+const TABS=[['wear','Wear'],['toy','Toys'],['friend','Friends'],['place','Places']];
 const CHEERS=['Banana-tastic!','You are a top banana!','Ap-peel-ing work!','Peel-fect!','That was bananas good!','A whole bunch of awesome!','Yellow-tastic!','Hooray! Hip hip banana!','Super duper!','Bob is doing a happy dance!'];
 const INTROS=['You can do it!','Take your time.','Let us look together.','Ready? Here we go!','Bob is watching. Ooh!'];
 
@@ -472,7 +602,7 @@ const Balloon={id:'balloon',name:'Balloon Pop',blurb:'Pop the balloon with the r
   const colors=shuffle(['#E8506B','#7457D1','#2FA3D6','#2F8F5B','#F08A24']);
   const startY=shuffle([.12,.3,.48,.62]);
   const bs=vals.map((v,i)=>{const b=document.createElement('button');b.className='balloon';b.setAttribute('aria-label','Balloon '+v);
-   b.innerHTML=BALLOON_SVG(colors[i])+`<span class="${String(v).length>3?'long':''}">${esc(v)}</span>`;st.appendChild(b);
+   b.innerHTML=BALLOON_SVG(colors[i])+(q.clockLabels?`<span class="clk">${clockSVG(parseT(v),{cls:'mini'})}</span>`:`<span class="${String(v).length>3?'long':''}">${esc(v)}</span>`);st.appendChild(b);
    const o={el:b,v:String(v),x0:(i+.5)*W/n,y:startY[i]*(H-120),sp:(L==='basic'?26:32)*(0.85+Math.random()*.3)*(RM?.4:1),ph:Math.random()*6,alive:true};
    b.addEventListener('pointerdown',e=>{e.preventDefault();hit(o)});b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hit(o)}});return o});
   function hit(o){if(!o.alive||api.solved())return;
@@ -610,7 +740,161 @@ const Catch={id:'catch',name:'Banana Catch',blurb:'Move the basket to catch the 
   return{stop(){cancelAnimationFrame(raf);document.removeEventListener('keydown',onKey)},glow(){const o=fs.find(o=>o.v===String(q.answer));o&&o.el.classList.add('glow')},reveal(){done=true;const o=fs.find(o=>o.v===String(q.answer));o&&o.el.classList.add('glow')}};
  }};
 
-const GAMES=[Balloon,Bunch,Hop,Rows,Catch];
+/* ---------- TIME helpers ---------- */
+const nt=t=>((t%720)+720)%720;
+function hOf(t){const h=Math.floor(nt(t)/60);return h===0?12:h}
+const fmtT=t=>`${hOf(t)}:${String(nt(t)%60).padStart(2,'0')}`;
+function wordsT(t){const h=hOf(t),m=nt(t)%60,nx=hOf(t+60);if(m===0)return `${h} o'clock`;if(m===30)return `half past ${h}`;if(m===15)return `quarter past ${h}`;if(m===45)return `quarter to ${nx}`;return `${m} minutes past ${h}`}
+function randTime(L){const h=rnd(1,12);const m=L==='basic'?pick([0,0,30]):pick([15,45,15,45,0,30,5,10,20,25,35,40,50,55]);return nt(h*60+m)}
+function swapT(t){const h=hOf(t),m=nt(t)%60;if(m%5||m===0)return null;return nt((m/5)*60+(h===12?0:h*5))}
+function timeOthers(t,L,k){const m=nt(t)%60;let a=[t+60,t-60,t+30,t-30],b=[t+15,t-15,t+120];
+ if(L!=='basic'){const s=swapT(t);a=(s!=null?[s]:[]).concat(a);if(m%15)b=[t+5,t-5].concat(b)}
+ const out=[];for(const x of shuffle(a).concat(shuffle(b))){const v=fmtT(x);if(v!==fmtT(t)&&!out.includes(v))out.push(v);if(out.length>=(k||3))break}return out}
+function clockSVG(t,o){o=o||{};const T=nt(t);let s=`<svg class="clock ${o.cls||''}" viewBox="0 0 200 200" role="img" aria-label="${o.label||'A clock'}">`;
+ s+=`<circle cx="100" cy="100" r="96" fill="#FFDD2E" stroke="#D9A400" stroke-width="5"/><circle cx="100" cy="100" r="82" fill="#fff" stroke="#E9C53A" stroke-width="2"/>`;
+ for(let i=0;i<60;i++){const big=i%5===0,a=i*6*Math.PI/180,r1=80,r2=big?70:75;s+=`<line x1="${(100+r1*Math.sin(a)).toFixed(1)}" y1="${(100-r1*Math.cos(a)).toFixed(1)}" x2="${(100+r2*Math.sin(a)).toFixed(1)}" y2="${(100-r2*Math.cos(a)).toFixed(1)}" stroke="#55627A" stroke-width="${big?3:1.3}"/>`}
+ if(!o.noNums)for(let n=1;n<=12;n++){const a=n*30*Math.PI/180;s+=`<text x="${(100+57*Math.sin(a)).toFixed(1)}" y="${(100-57*Math.cos(a)+7.5).toFixed(1)}" text-anchor="middle" font-family="Sniglet,Chalkboard SE,sans-serif" font-size="21" font-weight="800" fill="#22314A">${n}</text>`}
+ s+='<g class="fives">';for(let n=1;n<=12;n++){const a=n*30*Math.PI/180;s+=`<text x="${(100+89*Math.sin(a)).toFixed(1)}" y="${(100-89*Math.cos(a)+4).toFixed(1)}" text-anchor="middle" font-family="Sniglet,sans-serif" font-size="11" font-weight="800" fill="#1E5C3B">${String((n*5)%60).padStart(2,'0')}</text>`}s+='</g>';
+ if(o.ghost!=null){const g=nt(o.ghost);s+=`<g class="ghost"><g transform="rotate(${g/2} 100 100)"><line x1="100" y1="100" x2="100" y2="56" stroke="#E23B3B" stroke-width="9" stroke-dasharray="6 5" stroke-linecap="round"/></g><g transform="rotate(${(g%60)*6} 100 100)"><line x1="100" y1="100" x2="100" y2="28" stroke="#2F7FD6" stroke-width="6" stroke-dasharray="6 5" stroke-linecap="round"/></g></g>`}
+ s+=`<g class="hh" transform="rotate(${T/2} 100 100)"><line x1="100" y1="110" x2="100" y2="56" stroke="#E23B3B" stroke-width="10" stroke-linecap="round"/></g>`;
+ s+=`<g class="mh" transform="rotate(${(T%60)*6} 100 100)"><line x1="100" y1="114" x2="100" y2="26" stroke="#2F7FD6" stroke-width="6.5" stroke-linecap="round"/><path d="M100 18 l-7 12 h14 z" fill="#2F7FD6"/></g>`;
+ s+=`<circle cx="100" cy="100" r="8" fill="#22314A"/><circle cx="100" cy="100" r="3" fill="#FFDD2E"/></svg>`;return s}
+function setClock(svg,t){if(!svg)return;const T=nt(t);svg.querySelector('.hh').setAttribute('transform',`rotate(${T/2} 100 100)`);svg.querySelector('.mh').setAttribute('transform',`rotate(${(T%60)*6} 100 100)`)}
+function spinClock(svg,from,to,dur,done){if(RM){setClock(svg,to);done&&done();return}const t0=performance.now();(function f(now){const k=Math.min(1,(now-t0)/dur);const e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;const t=from+(to-from)*e;svg.querySelector('.hh').setAttribute('transform',`rotate(${t/2} 100 100)`);svg.querySelector('.mh').setAttribute('transform',`rotate(${t*6} 100 100)`);if(k<1)requestAnimationFrame(f);else done&&done()})(t0)}
+const digHTML=t=>`<span class="digital">${fmtT(t)}</span>`;
+function readHints(t){const h=hOf(t),m=nt(t)%60,nx=hOf(t+60),f=fmtT(t);
+ if(m===0)return[{text:"Look at the long blue hand. It points straight up to 12. That means o'clock."},{text:`Now look at the short red hand. It points right at the ${h}.`},{text:`It is ${h} o'clock. We write it ${f}.`}];
+ if(m===30)return[{text:'The long blue hand points down to the 6. That means 30 minutes, or half past.'},{text:`The short red hand is between ${h} and ${nx}. It has passed the ${h}, so the hour is ${h}.`},{text:`It is half past ${h}. We write it ${f}.`}];
+ if(m===15)return[{text:'The long blue hand points to the 3. That means 15 minutes, or quarter past.'},{text:`The short red hand is just past the ${h}, so the hour is ${h}.`},{text:`It is quarter past ${h}. We write it ${f}.`}];
+ if(m===45)return[{text:'The long blue hand points to the 9. That means 45 minutes.'},{text:`The short red hand is almost at ${nx}, but not yet. So the hour is still ${h}.`},{text:`It is ${f}. You can also say quarter to ${nx}.`}];
+ return[{text:`Count by 5s from the 12 to the long blue hand: ${skip(5,m/5).join(', ')}. That is ${m} minutes.`,act:'fives'},{text:`The short red hand has passed the ${h}, but not the ${nx}. So the hour is ${h}.`},{text:`It is ${m} minutes past ${h}. We write it ${f}.`}]}
+function clockHints(t){const h=hOf(t),m=nt(t)%60,nx=hOf(t+60);const mpos=m===0?12:m/5;
+ const a=m===0?{text:"For o'clock, the long blue hand points straight up to the 12."}:m%15?{text:`Count by 5s around the clock to ${m}. Move the long blue hand to the ${mpos}.`,act:'fives'}:{text:`For ${m} minutes, the long blue hand points to the ${mpos}.`};
+ const b=m===0?{text:`Now the short red hand points right at the ${h}. Use the red arrow buttons to move it.`}:{text:`The short red hand should be a little past the ${h}, on the way to ${nx}. It moves by itself when you turn the long hand.`};
+ return[a,b,{text:'Make the hands sit on the dashed hands.',act:'ghost'}]}
+function clockChoices(vals){return `<div class="choices">${vals.map(v=>`<button class="choice clk" data-v="${v}" aria-label="Clock showing ${v}">${clockSVG(parseT(v),{cls:'mini'})}</button>`).join('')}</div>`}
+const parseT=s=>{const[a,b]=String(s).split(':').map(Number);return nt(a*60+b)};
+
+/* Game: Set the Clock */
+const SetClock={id:'setclock',name:'Set the Clock',blurb:'Drag the clock hands to show the time.',
+ icon:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#fff" stroke="#FFDD2E" stroke-width="5"/><path d="M24 24V10" stroke="#2F7FD6" stroke-width="3.5" stroke-linecap="round"/><path d="M24 24l8 5" stroke="#E23B3B" stroke-width="4.5" stroke-linecap="round"/><path d="M38 6l4 4M10 6L6 10" stroke="#55627A" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+ make(L){const t=randTime(L);return{key:'sc'+t,t,L,ask:`Make the clock say ${fmtT(t)}`,vis:`<div class="timeshow">${digHTML(t)}<span class="timewords">${wordsT(t)}</span></div>`,answer:fmtT(t),hints:clockHints(t),explain:`${fmtT(t)} is ${wordsT(t)}.`}},
+ mount(q,el,api,L){const step=L==='basic'?15:5;let cur=q.t===0?360:0;
+  el.innerHTML=`<div class="clockwrap big" id="cw">${clockSVG(cur,{ghost:q.t,label:'Clock you can set'})}</div>
+  <div class="setctl"><div class="hand-ctl"><span class="chip red"></span><b>Short hand</b><button class="btn sm" data-h="-60" aria-label="Short hand back">◀</button><button class="btn sm" data-h="60" aria-label="Short hand forward">▶</button></div>
+  <div class="hand-ctl"><span class="chip blue"></span><b>Long hand</b><button class="btn sm" data-h="-${step}" aria-label="Long hand back">◀</button><button class="btn sm" data-h="${step}" aria-label="Long hand forward">▶</button></div></div>
+  <div class="choices"><button class="btn go big" id="checkBtn">Check my clock ✓</button></div>`;
+  const cw=$('#cw',el),svg=$('svg',cw);
+  const draw=()=>setClock(svg,cur);
+  $$('[data-h]',el).forEach(b=>b.addEventListener('click',()=>{if(api.solved())return;cur=nt(cur+ +b.dataset.h);draw();sfx('tap')}));
+  let drag=null;
+  const ang=e=>{const r=svg.getBoundingClientRect();const x=(e.clientX-r.left)/r.width*200-100,y=(e.clientY-r.top)/r.height*200-100;return{a:(Math.atan2(x,-y)*180/Math.PI+360)%360,d:Math.hypot(x,y)}};
+  const diff=(a,b)=>{const d=Math.abs(a-b)%360;return d>180?360-d:d};
+  svg.addEventListener('pointerdown',e=>{if(api.solved())return;const p=ang(e);const ha=(cur/2)%360,ma=(cur%60)*6;
+   drag=(p.d<62&&diff(p.a,ha)<diff(p.a,ma)+15)?'h':'m';try{svg.setPointerCapture(e.pointerId)}catch(_){}move(e);e.preventDefault()});
+  svg.addEventListener('pointermove',e=>{if(drag)move(e)});
+  const end=()=>{if(drag){drag=null;sfx('tap')}};svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
+  function move(e){const p=ang(e);const m=cur%60;
+   if(drag==='m'){let nm=Math.round(p.a/6/step)*step%60;const d=nm-m;let hb=Math.floor(cur/60);if(d<-30)hb++;else if(d>30)hb--;cur=nt(hb*60+nm)}
+   else{let H=Math.round((p.a-m*.5)/30);H=((H%12)+12)%12;cur=nt(H*60+m)}draw()}
+  $('#checkBtn',el).addEventListener('click',()=>{if(api.solved())return;const ok=api.submit(fmtT(cur));if(ok){sfx('pop')}else if(!api.solved())api.say(`Your clock says <b>${fmtT(cur)}</b>. We need <b>${q.answer}</b>. Try again!`)});
+  return{glow(){cw.classList.add('showghost')},hint(act){if(act==='ghost')cw.classList.add('showghost');if(act==='fives')cw.classList.add('showfives')},reveal(){cw.classList.add('showghost');spinClock(svg,cur,cur+((q.t-cur)%720+720)%720,1200);cur=q.t}};
+ }};
+
+/* Game: Time Pop (balloons) */
+const TimePop={id:'timepop',name:'Time Pop',blurb:'Read the clock and pop the matching time.',
+ icon:`<svg viewBox="0 0 48 48"><path d="M24 4C14 4 9 12 10 20c1 9 8 15 14 17 6-2 13-8 14-17 1-8-4-16-14-16z" fill="#7457D1"/><circle cx="24" cy="19" r="8" fill="#fff"/><path d="M24 19v-5M24 19h4" stroke="#22314A" stroke-width="2" stroke-linecap="round"/><path d="M24 37q-3 5 1 10" stroke="#55627A" stroke-width="2" fill="none"/></svg>`,
+ make(L){const t=randTime(L);const mode=L==='basic'?pick(['read','read','find']):pick(['read','read','find','find']);
+  if(mode==='find')return{key:'tf'+t,ask:`Pop the clock that shows ${fmtT(t)}`,vis:`<div class="timeshow">${digHTML(t)}<span class="timewords">${wordsT(t)}</span></div>`,answer:fmtT(t),others:timeOthers(t,L),clockLabels:true,hints:clockHints(t).slice(0,2).concat([{text:`Look for the clock with the long blue hand on the ${nt(t)%60===0?12:(nt(t)%60)/5} and the short red hand near the ${hOf(t)}.`}]),explain:`That clock shows ${fmtT(t)}, ${wordsT(t)}.`};
+  return{key:'tr'+t,ask:'What time does the clock show?',vis:`<div class="clockwrap">${clockSVG(t,{label:'Clock'})}</div>`,answer:fmtT(t),others:timeOthers(t,L),hints:readHints(t),explain:`The clock shows ${fmtT(t)}. That is ${wordsT(t)}.`}},
+ mount(q,el,api,L){const h=Balloon.mount(q,el,api,L);return Object.assign({},h,{hint(act){if(act==='fives'){const w=$('#qvis .clockwrap');w&&w.classList.add('showfives')}}})}};
+
+/* Game: Clock Memory */
+const Memory={id:'memory',name:'Clock Memory',blurb:'Flip cards to match each clock with its time.',rounds:3,
+ icon:`<svg viewBox="0 0 48 48"><rect x="4" y="8" width="18" height="26" rx="4" fill="#2F8F5B"/><rect x="26" y="14" width="18" height="26" rx="4" fill="#fff" stroke="#55627A" stroke-width="2"/><circle cx="35" cy="27" r="6" fill="none" stroke="#2F7FD6" stroke-width="2"/><path d="M35 27v-4M35 27h3" stroke="#E23B3B" stroke-width="2"/></svg>`,
+ make(L){const n=L==='basic'?4:6;const ts=[];
+  if(L!=='basic'){let a;do{a=nt(rnd(1,11)*60+pick([10,20,25,35,40,50]))}while(swapT(a)==null||fmtT(swapT(a))===fmtT(a));ts.push(a,swapT(a))}
+  let g=0;while(ts.length<n&&g++<200){const t=randTime(L);if(!ts.some(x=>fmtT(x)===fmtT(t)))ts.push(t)}
+  const cards=shuffle(ts.flatMap(t=>[{t,k:'c'},{t,k:'d'}]));
+  return{key:'mem'+ts.join('-'),ts,cards,ask:'Find the pairs! Match each clock with its time.',answer:'done',explain:'You matched every clock with its time!',
+   hints:[{text:'Each clock card has a number card that shows the same time.'},{text:'Read a clock first: short red hand for the hour, long blue hand for the minutes. Then look for its number card.'},{text:'Peek! All the cards will flip over for a moment.',act:'peek'}]}},
+ mount(q,el,api){
+  el.innerHTML=`<div class="mem ${q.cards.length>8?'m12':''}">${q.cards.map((c,i)=>`<button class="mcard" data-i="${i}" aria-label="Card ${i+1}"><span class="back">${BAN}</span><span class="front">${c.k==='c'?clockSVG(c.t,{cls:'mini'}):`<span class="digital sm">${fmtT(c.t)}</span>`}</span></button>`).join('')}</div>`;
+  const cs=$$('.mcard',el);let open=[],lock=false,got=0;
+  cs.forEach(b=>b.addEventListener('click',()=>{if(lock||api.solved()||b.classList.contains('up'))return;b.classList.add('up');sfx('tap');open.push(b);
+   if(open.length===2){const[x,y]=open.map(o=>q.cards[+o.dataset.i]);
+    if(fmtT(x.t)===fmtT(y.t)&&x.k!==y.k){open.forEach(o=>o.classList.add('got'));open=[];got++;sfx('ding');api.say(`A match! ${fmtT(x.t)} is ${wordsT(x.t)}.`);if(got===q.ts.length)setTimeout(()=>api.submit('done'),350)}
+    else{lock=true;const c=x.k==='c'?x:(y.k==='c'?y:null);api.say(x.k===y.k?(x.k==='c'?'Two clocks! Find a clock and a number card.':'Two number cards! Find a clock and a number card.'):`Not a match. That clock says ${fmtT(c.t)}.`);
+     setTimeout(()=>{open.forEach(o=>o.classList.remove('up'));open=[];lock=false},1300)}}}));
+  return{hint(act){if(act==='peek'){lock=true;cs.forEach(c=>c.classList.add('up','peek'));setTimeout(()=>{cs.forEach(c=>{c.classList.remove('peek');if(!c.classList.contains('got'))c.classList.remove('up')});open=[];lock=false},2200)}},reveal(){cs.forEach(c=>c.classList.add('up','got'))}};
+ }};
+
+/* Game: Bob's Busy Day */
+const SEQS=[
+ {name:'Bob’s day',h:'Think about what Bob does first when the day starts.',items:[['🛏️','Wake up'],['🥣','Eat breakfast'],['🚌','Ride to school'],['🏫','Learn at school'],['🍝','Eat dinner'],['🛁','Take a bath'],['🌙','Go to sleep']]},
+ {name:'a banana smoothie',h:'What do you need to do before you can drink it?',items:[['🍌','Peel the bananas'],['🥛','Pour in milk'],['🔄','Blend it up'],['🥤','Drink it']]},
+ {name:'a sunflower',h:'Think about how a plant grows.',items:[['🕳️','Dig a hole'],['🌰','Plant a seed'],['💧','Water it'],['🌱','A sprout pops up'],['🌻','A flower grows']]},
+ {name:'a snowman',h:'You need snow before you can build!',items:[['❄️','Snow falls'],['⚪','Roll big snowballs'],['⛄','Stack them up'],['🥕','Add a carrot nose'],['☀️','The sun melts it']]}
+];
+const PARTS=[['Bob eats breakfast','Morning'],['The sun comes up','Morning'],['Bob wakes up and stretches','Morning'],['Bob plays outside after school','Afternoon'],['Bob has a snack after school','Afternoon'],['Bob eats lunch, then goes to the park','Afternoon'],['Bob looks at the stars','Night'],['Bob goes to sleep','Night'],['The moon is shining','Night']];
+const LONGER=[['Brush your teeth','Sleep all night'],['Eat a banana','A whole day at school'],['Tie your shoes','Watch a movie'],['Blink your eyes','Read a book'],['Wash your hands','Bake a cake'],['Sing the ABC song','A long train trip']];
+const HOWLONG=[['Brush your teeth','2 minutes',['2 minutes','2 hours','2 days']],['A night of sleep','10 hours',['10 seconds','10 hours','10 weeks']],['Clap your hands 5 times','5 seconds',['5 seconds','5 hours','5 days']],['Watch a movie','2 hours',['2 seconds','2 hours','2 weeks']],['Summer vacation','2 months',['2 minutes','2 hours','2 months']],['Eat a banana','1 minute',['1 minute','1 day','1 year']]];
+const DAYTIMES=[['Bob eats breakfast',[[7,0],[7,30],[8,0]]],['Bob gets to school',[[8,0],[8,30]]],['Bob eats lunch',[[12,0],[12,30],[11,30]]],['Bob gets home from school',[[3,0],[3,30]]],['Bob eats dinner',[[6,0],[5,30],[6,30]]],['Bob goes to bed',[[8,0],[7,30],[8,30]]]];
+const PART_EMO={Morning:'🌅',Afternoon:'☀️',Night:'🌙'};
+const BusyDay={id:'day',name:'Bob’s Busy Day',blurb:'Put things in order and think about time in a day.',
+ icon:`<svg viewBox="0 0 48 48"><circle cx="16" cy="18" r="9" fill="#FFD23F"/><path d="M34 10a10 10 0 1 0 8 15a8 8 0 0 1-8-15z" fill="#7457D1"/><path d="M4 40h40" stroke="#2F8F5B" stroke-width="5" stroke-linecap="round"/></svg>`,
+ make(L){const t=L==='basic'?pick(['order','order','part','longer','timeof']):pick(['order','order','howlong','clockpick','timeof']);
+  if(t==='order'){const n=L==='basic'?4:5;const set=pick(SEQS.filter(s=>s.items.length>=n));let items=set.items;if(items.length>n){const keep=shuffle(items.map((_,i)=>i)).slice(0,n).sort((a,b)=>a-b);items=keep.map(i=>items[i])}
+   return{key:'o'+set.name+items.map(x=>x[1]).join(),t,set,seq:items,placed:0,ask:`Put ${set.name} in order. Tap what happens first.`,answer:'done',explain:`The order is: ${items.map(x=>x[1].toLowerCase()).join(', then ')}.`}}
+  if(t==='part'){const[e,a]=pick(PARTS);return{key:'p'+e,t,ask:`${e}. When does this happen?`,answer:a,rich:['Morning','Afternoon','Night'].map(v=>({v,h:`<span class="emo">${PART_EMO[v]}</span>${v}`})),
+   hints:[{text:'Morning is when the day starts. Afternoon is after lunch. Night is when it is dark.'},{text:'Is it light or dark outside? Is it before lunch or after lunch?'},{text:`This happens in the ${a.toLowerCase()}.`}],explain:`${e} in the ${a.toLowerCase()}.`}}
+  if(t==='longer'){const[s,l]=pick(LONGER);const fast=Math.random()<.35;const ans=fast?s:l;return{key:'l'+s,t,ask:fast?'Which one is faster?':'Which one takes longer?',answer:ans,rich:shuffle([s,l]).map(v=>({v,h:v})),
+   hints:[{text:'Imagine doing each one.'},{text:'Could you finish one of them while you count to 10?'},{text:`${s} is quick. ${l} takes a long time.`}],explain:`${s} is quick, but ${l.toLowerCase()} takes a long time.`}}
+  if(t==='howlong'){const[e,a,ch]=pick(HOWLONG);return{key:'hl'+e,t,ask:`About how long does this take? ${e}.`,answer:a,rich:shuffle(ch).map(v=>({v,h:v})),
+   hints:[{text:'Seconds are very quick. Minutes are longer. Hours are much longer. Days, weeks and months are very long.'},{text:'Think about the last time you did it. Was it fast or slow?'},{text:`${e} takes about ${a}.`}],explain:`${e} takes about ${a}.`}}
+  const[e,opts]=pick(DAYTIMES);let[h,m]=pick(opts);if(L!=='basic'&&Math.random()<.6)m=pick([15,45]);const tt=nt(h*60+m);
+  if(t==='clockpick')return{key:'cp'+e+tt,t,ask:`${e} at ${fmtT(tt)}. Which clock shows ${fmtT(tt)}?`,answer:fmtT(tt),others:timeOthers(tt,L),clockPick:true,hints:clockHints(tt).slice(0,2).concat([{text:`Find the clock with the short red hand near the ${hOf(tt)}.`}]),explain:`${fmtT(tt)} is ${wordsT(tt)}.`};
+  return{key:'to'+e+tt,t:'timeof',ask:`${e} at this time. What time is it?`,vis:`<div class="clockwrap">${clockSVG(tt)}</div>`,answer:fmtT(tt),others:timeOthers(tt,L),hints:readHints(tt),explain:`${e} at ${fmtT(tt)}, ${wordsT(tt)}.`}},
+ hints(q){if(q.t!=='order')return q.hints;const nx=q.seq[Math.min(q.placed,q.seq.length-1)];return[{text:q.set.h},{text:`Next comes: ${nx[1].toLowerCase()}.`},{text:`The order is: ${q.seq.map(x=>x[1].toLowerCase()).join(', then ')}.`}]},
+ mount(q,el,api){
+  if(q.t==='order'){const pool=shuffle(q.seq.map((x,i)=>({x,i})));
+   el.innerHTML=`<div class="slots">${q.seq.map((_,i)=>`<div class="slot" data-s="${i}"><span class="sn">${i+1}</span></div>`).join('')}</div><p class="pile">Tap the cards in order.</p><div class="evpool">${pool.map(p=>`<button class="evc" data-i="${p.i}"><span class="emo">${p.x[0]}</span><span>${p.x[1]}</span></button>`).join('')}</div>`;
+   const place=b=>{const s=$(`.slot[data-s="${q.placed}"]`,el);s.innerHTML='';s.appendChild(b);b.disabled=true;b.classList.add('placed');q.placed++};
+   $$('.evc',el).forEach(b=>b.addEventListener('click',()=>{if(api.solved()||b.disabled)return;
+    if(+b.dataset.i===q.placed){place(b);sfx('tap');api.resetHints();if(q.placed===q.seq.length)api.submit('done');else api.say(`Yes! What comes next?`)}
+    else{api.submit(q.seq[+b.dataset.i][1]);if(!api.solved())api.say(`Hmm, does that come ${q.placed===0?'first':'next'}? Try another card.`);b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake')}}));
+   return{reveal(){while(q.placed<q.seq.length){const b=$(`.evc[data-i="${q.placed}"]`,el);place(b)}}}}
+  if(q.clockPick){el.innerHTML=clockChoices(shuffle([q.answer].concat(q.others)));return wireChoices(el,q,api)}
+  const items=q.rich||shuffle([q.answer].concat(q.others)).map(v=>({v,h:v}));
+  el.innerHTML=`<div class="choices">${items.map(it=>`<button class="choice ${q.rich?'wide':''}" data-v="${esc(it.v)}">${it.h}</button>`).join('')}</div>`;
+  const ch=wireChoices(el,q,api);return Object.assign({},ch,{hint(act){if(act==='fives'){const w=$('#qvis .clockwrap');w&&w.classList.add('showfives')}}});
+ }};
+
+/* Game: Banana Express */
+const TRAIN=`<svg class="trainsvg" viewBox="0 0 230 90" aria-hidden="true"><rect x="150" y="26" width="64" height="40" rx="8" fill="#2F8F5B" stroke="#1E5C3B" stroke-width="3"/><rect x="160" y="34" width="18" height="14" rx="3" fill="#CDEFF8"/><rect x="186" y="34" width="18" height="14" rx="3" fill="#CDEFF8"/><rect x="76" y="26" width="64" height="40" rx="8" fill="#E8506B" stroke="#B83250" stroke-width="3"/><rect x="86" y="34" width="18" height="14" rx="3" fill="#CDEFF8"/><rect x="112" y="34" width="18" height="14" rx="3" fill="#CDEFF8"/><path d="M4 66 V30 a10 10 0 0 1 10 -10 H48 V8 h14 V20 h4 a6 6 0 0 1 6 6 V66 Z" fill="#FFDD2E" stroke="#C98A12" stroke-width="3" stroke-linejoin="round"/><rect x="40" y="2" width="30" height="8" rx="3" fill="#6B4226"/><use href="#ban" x="12" y="30" width="30" height="30"/><path d="M140 52 h10 M66 52 h10" stroke="#55627A" stroke-width="4"/>${[18,48,92,124,166,198].map(x=>`<circle cx="${x}" cy="72" r="10" fill="#3a4250" stroke="#22314A" stroke-width="2"/><circle cx="${x}" cy="72" r="3" fill="#C9D3DC"/>`).join('')}</svg>`;
+const Express={id:'express',name:'Banana Express',blurb:'Figure out what time the train arrives.',
+ icon:`<svg viewBox="0 0 48 48"><path d="M6 36V18a6 6 0 0 1 6-6h18v24z" fill="#FFDD2E" stroke="#C98A12" stroke-width="2.5"/><rect x="30" y="18" width="14" height="18" rx="3" fill="#E8506B"/><circle cx="14" cy="38" r="5" fill="#3a4250"/><circle cx="36" cy="38" r="5" fill="#3a4250"/></svg>`,
+ make(L){let start,dur,back=false;
+  if(L==='basic'){start=nt(rnd(1,12)*60+pick([0,0,30]));dur=60}
+  else{const k=pick(['30','60','120','back','back30']);start=nt(rnd(1,12)*60+pick([0,30,15,45]));dur=k==='30'||k==='back30'?30:k==='120'?120:60;back=k.startsWith('back')}
+  const ans=nt(start+(back?-dur:dur));const dw=dur===30?'half an hour':dur===60?'1 hour':'2 hours';
+  const story=back?pick([`The Banana Express got to the station at ${fmtT(start)}. The ride took ${dw}. What time did it leave?`,`Bob got off the train at ${fmtT(start)}. He was on the train for ${dw}. What time did he get on?`])
+   :pick([`The Banana Express leaves at ${fmtT(start)}. The ride takes ${dw}. What time does it get there?`,`Bob gets on the train at ${fmtT(start)}. The trip takes ${dw}. What time does he arrive?`,`It is ${fmtT(start)}. The next train comes in ${dw}. What time will it come?`]);
+  const h=hOf(start),nx=hOf(start+60),pv=hOf(start-60);
+  const h1=dur===30?{text:'Half an hour is 30 minutes. The long blue hand goes halfway around the clock.'}:dur===60?{text:'In 1 hour, the long blue hand goes all the way around once. It ends up back where it started.'}:{text:'In 2 hours, the long blue hand goes all the way around two times.'};
+  const h2=back?{text:dur===30?'Go backward. Turn the long blue hand back halfway around.':`Go backward. The short red hand moves back ${dur===60?'one number':'two numbers'}.`}:{text:dur===30?`Move the long blue hand forward halfway around from ${fmtT(start)}.`:`The short red hand moves forward ${dur===60?`one number, from ${h} to ${nx}`:'two numbers'}.`};
+  return{key:'x'+start+'_'+dur+back,start,dur,back,ask:story,answer:fmtT(ans),others:timeOthers(ans,L).filter(v=>v!==fmtT(start)).concat([fmtT(start)]).slice(0,3),
+   hints:[h1,h2,{text:`Watch the clock move! It shows ${fmtT(ans)}.`,act:'spin'}],explain:`${back?`${dw} before`:`${dw} after`} ${fmtT(start)} is ${fmtT(ans)}.`}},
+ mount(q,el,api){const end=nt(q.start+(q.back?-q.dur:q.dur));
+  el.innerHTML=`<div class="station"><div class="post"><div class="clockwrap st">${clockSVG(q.start,{label:'Station clock'})}</div><div class="pole"></div></div><div class="track"><div class="train">${TRAIN}</div><div class="rails"></div></div></div>`+choicesHTML(shuffle([q.answer].concat(q.others)));
+  const svg=$('.clockwrap svg',el),tr=$('.train',el),trk=$('.track',el);let spun=false;
+  if(q.back){tr.style.transform=`translateX(${Math.max(0,trk.clientWidth-240)}px)`}
+  function go(){if(spun)return;spun=true;spinClock(svg,q.start,q.start+(q.back?-q.dur:q.dur),1800);tr.style.transform=q.back?'translateX(0px)':`translateX(${Math.max(0,trk.clientWidth-240)}px)`;sfx('kazoo')}
+  const ch=wireChoices(el,q,api,go);
+  return{glow:ch.glow,reveal:go,hint(act){if(act==='spin')go()}};
+ }};
+
+const GAMES=[Balloon,Bunch,Hop,Rows,Catch,SetClock,TimePop,Memory,BusyDay,Express];
 const GBY=Object.fromEntries(GAMES.map(g=>[g.id,g]));
 
 /* ---------- screens ---------- */
@@ -622,33 +906,38 @@ function setBrand(){$('#brandName').textContent=`${S.bob}'s Banana Hunt`;documen
 
 function stickerCount(gid){const s=S.stickers[gid]||{};return{basic:s.basic||0,adv:s.adv||0}}
 
+function goalHTML(){const it=S.goal&&ITEMS.find(i=>i.id===S.goal);if(!it||S.owned.includes(it.id))return '';const have=Math.min(S.bananas,it.price),pct=Math.round(have/it.price*100);
+ return `<div class="goal"><div class="goal-prev">${previewHTML(it)}</div><div class="goal-main"><div class="goal-top"><span>Saving for: <b>${it.name}</b></span><span class="goal-num">${BAN} ${have} / ${it.price}</span></div><div class="bar"><i style="width:${pct}%"></i></div>${S.bananas>=it.price?`<div class="goal-ready">You have enough! <button class="btn yel sm2" data-act="shop">Go buy it</button></div>`:`<div class="goal-left">${it.price-S.bananas} more to go!</div>`}</div></div>`}
 function renderHome(){
  const tk=S.tickle.day===today()?S.tickle.n:0;
- scr.innerHTML=`<section class="hero"><div class="bobwrap" id="tickle" role="button" tabindex="0" aria-label="Tickle ${esc(S.bob)}">${bobSVG(S.wear,'happy')}</div>
+ scr.innerHTML=`<section class="hero"><div id="tickle" role="button" tabindex="0" aria-label="Tickle ${esc(S.bob)}">${bobStage('happy')}</div>
  <div><div class="say" id="homesay">Hi ${esc(S.name)}! I'm ${esc(S.bob)}. Let's find bananas!</div><h1>Pick a trail, ${esc(S.name)}!</h1><p>Answer questions, earn bananas, and buy cool stuff for ${esc(S.bob)}.</p>
- <div class="row"><button class="btn go" data-act="topic" data-t="mult">Play Times &amp; Groups</button><button class="btn yel" data-act="shop">${BAN} Shop</button><button class="btn" data-act="stickers">Sticker book</button></div>
+ <div class="row"><button class="btn yel" data-act="shop">${BAN} Shop</button><button class="btn" data-act="stickers">Sticker book</button></div>
  <div class="tickle-note">Tickle ${esc(S.bob)} for a surprise! (${Math.max(0,5-tk)} banana${5-tk===1?'':'s'} left today)</div></div></section>
+ ${goalHTML()}
  <h2 class="trail-h">Math trails</h2><div class="topics">${TOPICS.map(t=>t.open?`<button class="topic open" data-act="topic" data-t="${t.id}"><span class="tic">${t.icon}</span><span><b>${t.name}</b><small>${t.blurb}</small></span></button>`:`<div class="topic locked" aria-disabled="true"><span class="tic">${t.icon}</span><span><b>${t.name}</b><small>${esc(S.bob)} is still exploring</small></span></div>`).join('')}</div>`;
  const tw=$('#tickle');const doT=()=>tickle(tw);tw.addEventListener('click',doT);tw.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();doT()}});
 }
 const GIGGLES=['Hee hee hee!','Ha ha! That tickles!','Bello! Hee hee!','Stop! Ha ha ha!','Banana giggles!'];
 function tickle(tw){if(S.tickle.day!==today())S.tickle={day:today(),n:0};
- tw.classList.remove('giggle');void tw.offsetWidth;tw.classList.add('giggle');tw.innerHTML=bobSVG(S.wear,'wow');setTimeout(()=>{if(tw.isConnected)tw.innerHTML=bobSVG(S.wear,'happy')},800);
+ const w=$('.bobwrap',tw);w.classList.remove('giggle');void w.offsetWidth;w.classList.add('giggle');
+ const swap=m=>{const b=$('svg.bob',tw);if(b)b.outerHTML=bobSVG(S.wear,m)};swap('wow');setTimeout(()=>{if(tw.isConnected)swap('happy')},800);
  sfx(S.wear.mouth==='kazoo'?'kazoo':'giggle');
  let msg=pick(GIGGLES);
  if(S.tickle.n<5){S.tickle.n++;S.bananas++;save();updateCount(true);flyBananas(1,tw);msg+=' Here is a banana for you!'}else msg+=' No more tickle bananas today. Play a game to earn more!';
- $('#homesay').textContent=msg;const note=$('.tickle-note');if(note)note.textContent=`Tickle ${S.bob} for a surprise! (${5-S.tickle.n} banana${5-S.tickle.n===1?'':'s'} left today)`}
+ $('#homesay').textContent=msg;const note=$('.tickle-note');if(note)note.textContent=`Tickle ${S.bob} for a surprise! (${5-S.tickle.n} banana${5-S.tickle.n===1?'':'s'} left today)`;
+ const g=$('.goal');if(g)g.outerHTML=goalHTML()}
 
-function renderTopic(){
- scr.innerHTML=`<button class="back" data-act="home">← Trails</button><h1 style="font-size:32px;color:var(--leaf-d)">Times &amp; Groups</h1><p style="margin:4px 0 0;color:var(--ink-2)">Pick a game. Basic is warm-up. Advanced has bigger numbers and gold stickers.</p>
- <div class="games">${GAMES.map(g=>{const s=stickerCount(g.id);return`<div class="gcard"><div class="gh"><div class="gi">${g.icon}</div><div><h3>${g.name}</h3><p>${g.blurb}</p></div></div>
+function renderTopic(){const T=TOPICS.find(t=>t.id===lastTopic&&t.open)||TOPICS[0];
+ scr.innerHTML=`<button class="back" data-act="home">← Trails</button><h1 style="font-size:32px;color:var(--leaf-d)">${T.name.replace('&','&amp;')}</h1><p style="margin:4px 0 0;color:var(--ink-2)">${esc(T.intro)}</p>
+ <div class="games">${T.games.map(id=>GBY[id]).map(g=>{const s=stickerCount(g.id);return`<div class="gcard"><div class="gh"><div class="gi">${g.icon}</div><div><h3>${g.name}</h3><p>${g.blurb}</p></div></div>
  <div class="stk">Stickers: ${s.basic}/6 &nbsp;·&nbsp; Gold: ${s.adv}/6</div><div class="lv"><button class="btn go" data-act="play" data-g="${g.id}" data-l="basic">Basic</button><button class="btn pur" data-act="play" data-g="${g.id}" data-l="adv">Advanced</button></div></div>`}).join('')}</div>`;
 }
 
 /* ---------- play engine ---------- */
 const SPK=`<svg viewBox="0 0 24 24" fill="none" stroke="#1E5C3B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z" fill="#1E5C3B"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>`;
-function startRound(gid,L){view='play';R={gid,L,i:0,earned:0,bonus:rnd(1,4),used:new Set(),res:[]};
- const G=GBY[gid];
+function startRound(gid,L){view='play';const G=GBY[gid];const n=G.rounds||5;R={gid,L,n,i:0,earned:0,bonus:rnd(1,n-1),used:new Set(),res:[]};
+ lastTopic=(TOPICS.find(t=>t.games&&t.games.includes(gid))||TOPICS[0]).id;
  scr.innerHTML=`<section class="play"><div class="playbar"><button class="back" data-act="topic">← Games</button><div class="ptitle">${G.name}<span class="tag ${L==='adv'?'adv':''}">${L==='adv'?'Advanced':'Basic'}</span></div><div class="dots" id="dots"></div></div>
  <div id="pbody"><div class="qcard"><div class="qtop"><div class="ask" id="ask" aria-live="polite"></div><button class="speak" id="speakBtn" aria-label="Read it to me">${SPK}</button></div><div id="bonusTag"></div><div id="qvis"></div><div id="hintvis"></div></div>
  <div id="qplay"></div>
@@ -662,11 +951,11 @@ const api={
  setAsk(t){R.q.ask=t;$('#ask').textContent=t},resetHints(){R.hint=0;$('#hintvis').innerHTML='';updHint()}
 };
 function say(t){const b=$('#bubble');if(b)b.innerHTML=t}
-function drawDots(){$('#dots').innerHTML=Array.from({length:5},(_,i)=>`<span class="dot ${R.res[i]||''} ${i===R.i&&!R.res[i]?'now':''}">${BAN}</span>`).join('')}
+function drawDots(){$('#dots').innerHTML=Array.from({length:R.n},(_,i)=>`<span class="dot ${R.res[i]||''} ${i===R.i&&!R.res[i]?'now':''}">${BAN}</span>`).join('')}
 function updHint(){const b=$('#hintBtn');if(!b)return;const hs=getHints();const left=hs.length-R.hint;b.disabled=left<=0||R.solved;b.textContent=left>0?`Hint (${left})`:'No more hints'}
 function getHints(){const G=GBY[R.gid];return(G.hints?G.hints(R.q):R.q.hints)||[]}
 function nextQ(){stopGame();hush();
- if(R.i>=5)return endRound();
+ if(R.i>=R.n)return endRound();
  const G=GBY[R.gid];let q;for(let k=0;k<40;k++){q=G.make(R.L);if(!R.used.has(q.key))break}R.used.add(q.key);
  Object.assign(R,{q,tries:0,hint:0,solved:false});
  $('#ask').textContent=q.ask;$('#qvis').innerHTML=q.vis||'';$('#hintvis').innerHTML='';
@@ -676,7 +965,7 @@ function nextQ(){stopGame();hush();
  if(S.autoRead)setTimeout(()=>{if(R&&R.q===q&&!R.solved)speak(q.ask+'. '+(q.vis?$('#qvis').textContent:''))},250);
 }
 function setBob(m,anim){const b=$('#bobmini');if(!b)return;b.innerHTML=bobSVG(S.wear,m);if(anim){b.classList.remove('jump','tilt');void b.offsetWidth;b.classList.add(anim)}}
-function showHint(){const hs=getHints();if(R.solved||R.hint>=hs.length)return;const h=hs[R.hint++];say(`<b>Hint:</b> ${esc(h.text)}`);if(h.vis)$('#hintvis').innerHTML=h.vis;if(h.act&&hooks&&hooks.hint)hooks.hint(h.act);updHint();speak(h.text);sfx('tap')}
+function showHint(){const hs=getHints();if(R.solved||R.hint>=hs.length)return;const h=hs[R.hint++];say(`<b>Hint:</b> ${esc(h.text)}`);if(h.vis)$('#hintvis').innerHTML=h.vis;if(h.act==='fives'){const w=$('#qvis .clockwrap')||$('#qplay .clockwrap');w&&w.classList.add('showfives')}if(h.act&&hooks&&hooks.hint)hooks.hint(h.act);updHint();speak(h.text);sfx('tap')}
 function submit(v){if(!R||R.solved)return false;const q=R.q;
  if(String(v)===String(q.answer)){R.solved=true;correct();return true}
  R.tries++;sfx('boing');setBob('oops','tilt');
@@ -707,21 +996,25 @@ function flyBananas(n,from){if(RM||!from)return;const a=from.getBoundingClientRe
   s.animate([{transform:`translate(${x0}px,${y0}px) scale(1)`},{transform:`translate(${(x0+x1)/2}px,${Math.min(y0,y1)-60}px) scale(1.3)`,offset:.4},{transform:`translate(${x1}px,${y1}px) scale(.6)`}],{duration:650+k*90,easing:'ease-in-out'}).onfinish=()=>s.remove()}}
 
 /* ---------- shop ---------- */
+function previewHTML(it){return it.cat==='place'?`<div class="bobwrap scened">${sceneSVG(it.id)}${bobSVG({},'happy')}</div>`:bobSVG({[it.slot]:it.id},'happy')}
+let shopTab='wear';
 function renderShop(msg){
- const card=it=>{const own=S.owned.includes(it.id),on=S.wear[it.slot]===it.id,can=S.bananas>=it.price;
-  return`<div class="item ${on?'wearing':''}"><div class="prev">${bobSVG({[it.slot]:it.id},'happy')}</div><b>${it.name}</b>${own?`<button class="btn ${on?'':'go'}" data-act="wear" data-id="${it.id}">${on?'Take off':(it.cat==='toy'?'Use it':'Wear it')}</button>`:`<span class="price">${BAN} ${it.price}</span><button class="btn yel" data-act="buy" data-id="${it.id}" ${can?'':'disabled'}>${can?'Buy':'Need '+(it.price-S.bananas)+' more'}</button>`}</div>`};
- scr.innerHTML=`<button class="back" data-act="home">← Trails</button><section class="shophead"><div class="bobwrap">${bobSVG(S.wear,'happy')}</div><div><h1>${esc(S.bob)}'s Treehouse Shop</h1><p>You have <b>${S.bananas}</b> bananas. Things you buy are yours forever.</p><div class="say" style="margin-top:10px" id="shopsay">${msg||'What should '+esc(S.bob)+' try on?'}</div></div></section>
- <h2 class="sec-h">Things to wear</h2><div class="items">${ITEMS.filter(i=>i.cat==='wear').map(card).join('')}</div>
- <h2 class="sec-h">Toys &amp; tools</h2><div class="items">${ITEMS.filter(i=>i.cat==='toy').map(card).join('')}</div>`;
+ const card=it=>{const own=S.owned.includes(it.id),on=S.wear[it.slot]===it.id,can=S.bananas>=it.price,goal=S.goal===it.id;
+  return`<div class="item ${on?'wearing':''} ${it.price>=200?'pricey':''}"><div class="prev">${previewHTML(it)}</div><b>${it.name}</b>${own?`<button class="btn ${on?'':'go'}" data-act="wear" data-id="${it.id}">${on?(it.cat==='place'?'Put away':'Take off'):(it.cat==='toy'?'Use it':it.cat==='friend'?'Bring along':it.cat==='place'?'Go there':'Wear it')}</button>`:`<span class="price">${BAN} ${it.price}</span><button class="btn yel" data-act="buy" data-id="${it.id}" ${can?'':'disabled'}>${can?'Buy':'Need '+(it.price-S.bananas)+' more'}</button>${can?'':`<button class="savebtn ${goal?'on':''}" data-act="goal" data-id="${it.id}">${goal?'★ Saving for this':'☆ Save for this'}</button>`}`}</div>`};
+ scr.innerHTML=`<button class="back" data-act="home">← Trails</button><section class="shophead">${bobStage('happy')}<div><h1>${esc(S.bob)}'s Treehouse Shop</h1><p>You have <b>${S.bananas}</b> bananas. Things you buy are yours forever.</p><div class="say" style="margin-top:10px" id="shopsay">${msg||'What should '+esc(S.bob)+' try?'}</div></div></section>
+ <div class="tabs" role="tablist">${TABS.map(([k,l])=>`<button class="tab ${shopTab===k?'on':''}" role="tab" aria-selected="${shopTab===k}" data-act="tab" data-tab="${k}">${l}</button>`).join('')}</div>
+ <div class="items">${ITEMS.filter(i=>i.cat===shopTab).sort((a,b)=>a.price-b.price).map(card).join('')}</div>`;
 }
-function buy(id){const it=ITEMS.find(i=>i.id===id);if(!it||S.owned.includes(id)||S.bananas<it.price)return;S.bananas-=it.price;S.owned.push(id);S.wear[it.slot]=id;save();updateCount(true);sfx('buy');const y=window.scrollY;renderShop(`Yay! ${S.bob} has a new ${it.name.toLowerCase()}!`);window.scrollTo(0,y)}
-function wear(id){const it=ITEMS.find(i=>i.id===id);if(!it)return;if(S.wear[it.slot]===id)delete S.wear[it.slot];else S.wear[it.slot]=id;save();sfx('tap');const y=window.scrollY;renderShop(S.wear[it.slot]===id?`${S.bob} loves the ${it.name.toLowerCase()}!`:`${it.name} put away.`);window.scrollTo(0,y)}
+function rerenderShop(m){const y=window.scrollY;renderShop(m);window.scrollTo(0,y)}
+function buy(id){const it=ITEMS.find(i=>i.id===id);if(!it||S.owned.includes(id)||S.bananas<it.price)return;S.bananas-=it.price;S.owned.push(id);S.wear[it.slot]=id;if(S.goal===id)S.goal=null;save();updateCount(true);sfx('buy');rerenderShop(`Yay! ${S.bob} has a new ${it.name.toLowerCase()}!`)}
+function wear(id){const it=ITEMS.find(i=>i.id===id);if(!it)return;if(S.wear[it.slot]===id)delete S.wear[it.slot];else S.wear[it.slot]=id;save();sfx('tap');rerenderShop(S.wear[it.slot]===id?(it.cat==='place'?`Welcome to the ${it.name.toLowerCase()}!`:`${S.bob} loves the ${it.name.toLowerCase()}!`):`${it.name} put away.`)}
+function setGoal(id){const it=ITEMS.find(i=>i.id===id);if(!it)return;S.goal=S.goal===id?null:id;save();sfx('tap');rerenderShop(S.goal?`Saving up for the ${it.name.toLowerCase()}! Watch the bar on the home page.`:'Okay, no saving goal right now.')}
 
 /* ---------- stickers ---------- */
 function renderStickers(){
+ const row=(g,n,gold)=>STICKERS[g.id].map((e,i)=>i<n?`<div class="sticker ${gold?'gold':''}">${e}</div>`:`<div class="sticker empty" aria-label="empty"></div>`).join('');
  scr.innerHTML=`<button class="back" data-act="home">← Trails</button><h1 style="font-size:32px;color:var(--leaf-d)">${esc(S.name)}'s Sticker Book</h1><p style="margin:4px 0 0;color:var(--ink-2)">Finish a round to get a sticker. Advanced rounds give gold stickers.</p>
- <div class="book">${GAMES.map(g=>{const s=stickerCount(g.id);const row=(n,gold)=>STICKERS[g.id].map((e,i)=>i<n?`<div class="sticker ${gold?'gold':''}">${e}</div>`:`<div class="sticker empty" aria-label="empty"></div>`).join('');
-  return`<div class="bookrow"><h3>${g.name}</h3><div class="srow">${row(s.basic,false)}</div><div class="srow">${row(s.adv,true)}</div></div>`}).join('')}</div>`;
+ ${TOPICS.filter(t=>t.open).map(t=>`<h2 class="sec-h">${t.name.replace('&','&amp;')}</h2><div class="book">${t.games.map(id=>GBY[id]).map(g=>{const s=stickerCount(g.id);return`<div class="bookrow"><h3>${g.name}</h3><div class="srow">${row(g,s.basic,false)}</div><div class="srow">${row(g,s.adv,true)}</div></div>`}).join('')}</div>`).join('')}`;
 }
 
 /* ---------- settings ---------- */
@@ -742,9 +1035,9 @@ function renderSettings(confirming){
 
 /* ---------- global clicks ---------- */
 document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t)return;ac();const a=t.dataset.act;
- if(a==='home')go('home');else if(a==='topic')go('topic');else if(a==='shop')go('shop');else if(a==='stickers')go('stickers');else if(a==='settings')go('settings');
+ if(a==='home')go('home');else if(a==='topic'){if(t.dataset.t)lastTopic=t.dataset.t;go('topic')}else if(a==='shop')go('shop');else if(a==='stickers')go('stickers');else if(a==='settings')go('settings');
  else if(a==='play'){stopGame();hush();window.scrollTo(0,0);startRound(t.dataset.g,t.dataset.l)}
- else if(a==='buy')buy(t.dataset.id);else if(a==='wear')wear(t.dataset.id);
+ else if(a==='buy')buy(t.dataset.id);else if(a==='goal')setGoal(t.dataset.id);else if(a==='tab'){shopTab=t.dataset.tab;rerenderShop()}else if(a==='wear')wear(t.dataset.id);
  else if(a==='reset')renderSettings(true);else if(a==='resetno')renderSettings(false);
  else if(a==='resetyes'){const keep={name:S.name,bob:S.bob,sound:S.sound,autoRead:S.autoRead};S=Object.assign(JSON.parse(JSON.stringify(DEF)),keep);save();updateCount();renderSettings(false)}
 });
