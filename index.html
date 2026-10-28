@@ -263,6 +263,102 @@ h1,h2,h3{font-family:var(--display);font-weight:800;margin:0;text-wrap:balance}
 .flyb{position:fixed;left:0;top:0;width:34px;height:34px;z-index:50;pointer-events:none}
 
 
+
+/* header fit */
+.brand{min-width:0;flex:0 1 auto;overflow:hidden}.brand span{overflow:hidden;text-overflow:ellipsis}
+@media (max-width:420px){.brand{font-size:16px}.pill{font-size:19px;padding:5px 12px 5px 10px}}
+/* levels */
+.tag.basic{background:var(--leaf)}.tag.med{background:var(--sea)}.tag.adv{background:var(--grape)}
+.btn.lvb-basic{background:var(--leaf);color:#fff;box-shadow:0 4px 0 var(--leaf-d)}
+.btn.lvb-med{background:var(--sea);color:#fff;box-shadow:0 4px 0 #1d6f94}
+.btn.lvb-adv{background:var(--grape);color:#fff;box-shadow:0 4px 0 #4f3a9a}
+.gcard .lv .btn{font-size:17px;padding:10px 6px}
+.sticker.silver{border-color:#9AA6B2;background:radial-gradient(circle at 35% 30%,#fff,#D5DCE3)}
+.fact.sm2{font-size:clamp(24px,5vw,32px);color:var(--ink-2)}
+/* bunches adv */
+.pilebox{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;background:var(--banana-l);border-radius:16px;padding:8px 12px;margin-bottom:10px}
+.pile-b{display:flex;flex-wrap:wrap;max-width:420px;justify-content:center}.pile-b .ban{font-size:24px;margin:-2px}
+.pilebox b{font-family:var(--display);font-size:18px}
+/* hop adv */
+.arc.hid,.arcl.hid{opacity:0}.showall .hid{opacity:1}
+/* rows adv */
+.cell.leafy{background:#CFEBD5;border-color:#3FA463}.cell .leaf{width:90%;height:90%}
+.turnbox{display:grid;place-items:center;min-height:300px;width:100%}
+.tray{padding:10px;background:#E0A458;border-radius:16px;border:4px solid #A86F2C;transition:transform .8s cubic-bezier(.4,1.4,.6,1)}
+.tray.turned{transform:rotate(90deg)}
+.tray .grid{width:auto;grid-template-columns:repeat(var(--cols),40px)}
+/* catch family */
+.famhud{font-family:var(--display);font-size:20px;display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:8px}
+.famhud i{display:inline-block;width:24px;height:24px;border-radius:50%;border:3px dashed var(--peel);margin:0 2px}
+.famhud i.on{background:var(--banana);border-style:solid}
+/* machine */
+.mwrap{position:relative;width:min(440px,100%);margin:0 auto}
+.machine{width:100%;height:auto;display:block}
+.mball{position:absolute;width:15%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:clamp(20px,5vw,30px);box-shadow:0 4px 0 rgba(0,0,0,.15);transition:transform .6s,opacity .6s}
+.mball.in{left:28%;top:-4%;background:var(--banana);color:var(--bark);border:3px solid var(--peel)}
+.mball.in.drop{transform:translateY(60%) scale(.4);opacity:0}
+.mball.out{right:1%;top:56%;background:#E3F5E8;color:var(--leaf-d);border:3px solid var(--ok)}
+.mball.out.q{background:#fff;color:var(--peel);border:3px dashed var(--peel)}
+.mball.out.pop{animation:pop .6s}
+.mwrap.run .machine{animation:wob .25s ease-in-out 5}
+@keyframes wob{25%{transform:rotate(-1.5deg)}75%{transform:rotate(1.5deg)}}
+.machine .gear{transform-box:fill-box;transform-origin:center}
+.mwrap.run .gear.g1{animation:spin .6s linear infinite}.mwrap.run .gear.g2{animation:spin .4s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.machine .puff{opacity:0}.mwrap.run .puff{animation:puff 1s ease-out infinite}.mwrap.run .puff.p2{animation-delay:.4s}
+@keyframes puff{0%{opacity:.9;transform:translateY(0)}100%{opacity:0;transform:translateY(-18px)}}
+.mwrap.run .lt{animation:blink .3s steps(2) infinite}.mwrap.run .l2{animation-delay:.1s}.mwrap.run .l3{animation-delay:.2s}
+@keyframes blink{50%{opacity:.25}}
+.mtable{margin:10px auto 0;border-collapse:separate;border-spacing:4px;font-family:var(--display);font-size:22px}
+.mtable th{background:var(--grape);color:#fff;border-radius:10px;padding:4px 12px;font-size:18px}
+.mtable td{background:#fff;border-radius:10px;padding:4px 14px;text-align:center;min-width:44px;box-shadow:0 3px 0 var(--line)}
+.mtable td.q{color:var(--peel);border:3px dashed var(--peel)}
+/* mystery */
+.mys{position:relative;width:min(380px,92vw);aspect-ratio:1;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:0 5px 0 var(--line)}
+.mpic{position:absolute;inset:0;width:100%;height:100%}
+.mpic .scene{position:absolute;inset:0;width:300px;height:300px}
+.mtiles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:3px}
+.mtile{background:var(--leaf);color:#fff;border-radius:12px;font-family:var(--display);font-weight:800;font-size:clamp(17px,4.6vw,24px);box-shadow:inset 0 -5px 0 rgba(0,0,0,.18);transition:opacity .5s,transform .5s;padding:2px}
+.mtile:nth-child(even){background:#3FA463}
+.mtile.sel{background:var(--banana);color:var(--bark);outline:4px solid var(--peel)}
+.mtile.open{opacity:0;transform:scale(.6);pointer-events:none}
+/* stand */
+.stand{background:linear-gradient(#FFF6D6,#FFE9A8);border-radius:24px;overflow:hidden;padding-bottom:12px}
+.awning{height:34px;background:repeating-linear-gradient(90deg,var(--leaf) 0 40px,#fff 40px 80px);border-radius:0 0 50% 50%/0 0 40% 40%}
+.stand-row{display:flex;gap:12px;align-items:flex-end;justify-content:center;flex-wrap:wrap;padding:8px 12px}
+.cust{display:flex;align-items:flex-end;gap:6px}
+.cust .monkey{width:110px;height:auto}
+.cust-say{background:#fff;border-radius:16px;padding:8px 12px;font-family:var(--display);font-size:17px;max-width:180px;box-shadow:0 3px 0 var(--line);margin-bottom:60px}
+.cust.dance .monkey{animation:jump .6s 3}
+.bagbox{display:flex;flex-direction:column;align-items:center;gap:4px}
+.baglbl{font-family:var(--display);font-size:18px}
+.bag{min-width:200px;max-width:300px;min-height:110px;background:#E0C79A;border:4px solid #A8754A;border-radius:12px 12px 30px 30px;display:flex;flex-wrap:wrap;gap:4px;padding:8px;align-content:flex-start;justify-content:center}
+.bagnote{font-size:13px;color:var(--ink-2)}
+.inbag{background:rgba(255,255,255,.6);border-radius:10px;padding:2px 4px}
+.crates{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:4px 10px 0}
+.crate{background:#A8754A;border:3px solid #6B4226;border-radius:14px;padding:8px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff;font-family:var(--display);font-size:16px;min-width:96px;box-shadow:0 4px 0 #6B4226}
+.bunch{display:inline-flex;flex-wrap:wrap;max-width:80px;justify-content:center;background:var(--banana-l);border-radius:10px;padding:2px}
+.bunch .ban{font-size:17px;margin:-2px}
+.bunch.b10{max-width:90px}.bunch.b10 .ban{font-size:14px}
+/* race */
+.race{background:linear-gradient(#CDEFF8,#E6F6D6);border-radius:24px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.lane{position:relative;padding-top:8px}
+.lane .cells{display:grid;grid-template-columns:repeat(13,1fr);gap:3px}
+.lane .cells span{height:34px;border-radius:8px;background:#C9E7B5;font-family:var(--display);font-size:13px;color:#55627A;display:grid;place-items:center}
+.lane.tur .cells span{background:#BFE0EE}
+.lane .cells span.fin{background:repeating-conic-gradient(#22314A 0 25%,#fff 0 50%) 0 0/14px 14px;color:transparent}
+.token{position:absolute;bottom:2px;left:calc(var(--p) * (100% / 13));width:calc(100% / 13);display:flex;justify-content:center;transition:left .6s cubic-bezier(.3,1.4,.6,1)}
+.lane.bob .token svg{width:min(44px,9vw);height:auto;margin-bottom:-2px}
+.lane.tur .token svg{width:min(48px,10vw);height:auto}
+.token.hopr{animation:hopup .6s}
+.racemsg{font-family:var(--display);font-size:18px;text-align:center}
+.picks{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.pickc{width:140px;min-height:110px;border-radius:18px;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-family:var(--display);box-shadow:0 5px 0 rgba(0,0,0,.2)}
+.pickc b{font-size:24px}.pickc span{font-size:16px}
+.pickc.d1,.picked.d1{background:var(--leaf)}.pickc.d2,.picked.d2{background:var(--sea)}.pickc.d3,.picked.d3{background:var(--grape)}
+.picked{color:#fff;font-family:var(--display);font-size:20px;border-radius:999px;padding:6px 18px;margin:0 auto}
+.racewin{font-family:var(--display);font-size:22px;color:var(--leaf-d)}
+@media (max-width:620px){.pickc{width:100px;min-height:96px}.pickc b{font-size:20px}.cust-say{margin-bottom:0}.tray .grid{grid-template-columns:repeat(var(--cols),32px)}.lane .cells span{height:28px;font-size:11px}}
 /* clocks */
 .clock{width:100%;height:auto;display:block}
 .clock .fives,.clock .ghost{opacity:0;transition:opacity .3s}
@@ -390,8 +486,8 @@ const today=()=>new Date().toISOString().slice(0,10);
 
 /* ---------- saved progress ---------- */
 const KEY='bobsBananaHunt_v1';
-const DEF={name:'Tobey',bob:'Bob',bananas:0,owned:[],wear:{},goal:null,stickers:{},sound:true,autoRead:true,tickle:{day:'',n:0}};
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)return Object.assign({},DEF,s)}catch(e){}return JSON.parse(JSON.stringify(DEF))}
+const DEF={name:'Tobey',bob:'Bob',bananas:0,owned:[],wear:{},goal:null,mig3:1,stickers:{},sound:true,autoRead:true,tickle:{day:'',n:0}};
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s){if(!s.mig3){const st=s.stickers||{};['balloon','bunch','hop','rows','catch'].forEach(g=>{if(st[g]&&st[g].adv){st[g].med=(st[g].med||0)+st[g].adv;st[g].adv=0}});s.stickers=st;s.mig3=1}return Object.assign({},DEF,s)}}catch(e){}return JSON.parse(JSON.stringify(DEF))}
 let S=load();
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 
@@ -513,15 +609,16 @@ function bobStage(mood,extra){const sc=S.wear.scene;return `<div class="bobwrap 
 
 /* ---------- content data ---------- */
 const TOPICS=[
- {id:'mult',name:'Times & Groups',blurb:'Equal groups, skip counting and times facts',icon:'×',open:true,games:['balloon','bunch','hop','rows','catch'],intro:'Pick a game. Basic is warm-up. Advanced has bigger numbers and gold stickers.'},
+ {id:'mult',name:'Times & Groups',blurb:'Equal groups, skip counting and times facts',icon:'×',open:true,levels:['basic','med','adv'],games:['balloon','bunch','hop','rows','catch','machine','mystery','stand','race'],intro:'Basic is warm-up. Medium has bigger numbers. Advanced has the trickiest puzzles. Collect silver and gold stickers!'},
  {id:'add',name:'Adding & Taking Away',blurb:'Facts up to 20',icon:'+'},
  {id:'place',name:'Tens & Ones',blurb:'Bundles of ten',icon:'10'},
  {id:'count',name:'Counting to 120',blurb:'Count on and back',icon:'120'},
  {id:'measure',name:'Measuring',blurb:'Longer and shorter',icon:'↔'},
- {id:'time',name:'Telling Time',blurb:'Clocks, half past and a busy day',icon:'◷',open:true,games:['setclock','timepop','memory','day','express'],intro:'Basic is o\'clock and half past. Advanced adds quarter past, quarter to, minutes by 5s and "1 hour later" puzzles.'},
+ {id:'time',name:'Telling Time',blurb:'Clocks, half past and a busy day',icon:'◷',open:true,levels:['basic','adv'],games:['setclock','timepop','memory','day','express'],intro:'Basic is o\'clock and half past. Advanced adds quarter past, quarter to, minutes by 5s and "1 hour later" puzzles.'},
  {id:'shapes',name:'Shapes',blurb:'Flat and solid shapes',icon:'△'}
 ];
-const STICKERS={balloon:['🎈','🎉','🪁','🎊','🌈','⭐'],bunch:['🍌','🧺','🍍','🥥','🍇','🍓'],hop:['🐸','🐇','🦘','🌸','🍀','🐢'],rows:['🌱','🌻','🌴','🌵','🍄','🌳'],catch:['🧢','⚽','🏀','🎯','🪀','🏆'],setclock:['⏰','🕰️','⌚','⏳','🔔','🌞'],timepop:['🎀','🍭','🧁','🎁','🪅','🎠'],memory:['🃏','🧩','🎲','🎴','🔮','💎'],day:['🌅','🏫','🍎','🛁','🌙','🌈'],express:['🚂','🚃','🚉','🛤️','🎫','🏁']};
+const STICKERS={balloon:['🎈','🎉','🪁','🎊','🌈','⭐'],bunch:['🍌','🧺','🍍','🥥','🍇','🍓'],hop:['🐸','🐇','🦘','🌸','🍀','🐢'],rows:['🌱','🌻','🌴','🌵','🍄','🌳'],catch:['🧢','⚽','🏀','🎯','🪀','🏆'],setclock:['⏰','🕰️','⌚','⏳','🔔','🌞'],timepop:['🎀','🍭','🧁','🎁','🪅','🎠'],memory:['🃏','🧩','🎲','🎴','🔮','💎'],day:['🌅','🏫','🍎','🛁','🌙','🌈'],express:['🚂','🚃','🚉','🛤️','🎫','🏁'],machine:['⚙️','🔧','🤖','💡','🔩','🚀'],mystery:['🖼️','🎨','🔍','🗺️','🧭','🌟'],stand:['🛒','🐒','🪙','🛍️','🏪','🍉'],race:['🐢','🏁','🥇','👟','🎽','🏆']};
+const LVN={basic:'Basic',med:'Medium',adv:'Advanced'},TIER={basic:'',med:'silver',adv:'gold'};
 const ITEMS=[
  {id:'party',name:'Party hat',slot:'head',price:6,cat:'wear'},
  {id:'bowtie',name:'Bow tie',slot:'neck',price:10,cat:'wear'},
@@ -714,7 +811,7 @@ const Catch={id:'catch',name:'Banana Catch',blurb:'Move the basket to catch the 
   el.innerHTML=`<div class="field" tabindex="0" aria-label="Catch field. Use the arrow buttons or slide your finger."><div class="canopy"></div><div class="grass"></div><div class="bask2">${CATCH_BASKET}</div></div><div class="ctrl"><button class="btn" data-d="-1" aria-label="Move basket left">◀</button><button class="btn" data-d="1" aria-label="Move basket right">▶</button></div>`;
   const f=$('.field',el),bk=$('.bask2',el);const W=f.clientWidth||600,H=f.clientHeight||370;
   const n=W<520?3:4,lane=W/n;const vals=shuffle([q.answer].concat(q.others.slice(0,n-1)));
-  const sp=(L==='basic'?38:50)*(RM?.6:1);
+  const sp=(q.sp||(L==='basic'?38:50))*(RM?.6:1);
   const fs=vals.map((v,i)=>{const d=document.createElement('div');d.className='fb';d.innerHTML=BAN+`<b>${esc(v)}</b>`;f.appendChild(d);return{el:d,v:String(v),x:(i+.5)*lane,y:20+Math.random()*90-i*25,alive:true}});
   let bx=W/2,tx=W/2;
   const setT=x=>{tx=Math.max(60,Math.min(W-60,x))};
@@ -845,7 +942,7 @@ const BusyDay={id:'day',name:'Bob’s Busy Day',blurb:'Put things in order and t
  icon:`<svg viewBox="0 0 48 48"><circle cx="16" cy="18" r="9" fill="#FFD23F"/><path d="M34 10a10 10 0 1 0 8 15a8 8 0 0 1-8-15z" fill="#7457D1"/><path d="M4 40h40" stroke="#2F8F5B" stroke-width="5" stroke-linecap="round"/></svg>`,
  make(L){const t=L==='basic'?pick(['order','order','part','longer','timeof']):pick(['order','order','howlong','clockpick','timeof']);
   if(t==='order'){const n=L==='basic'?4:5;const set=pick(SEQS.filter(s=>s.items.length>=n));let items=set.items;if(items.length>n){const keep=shuffle(items.map((_,i)=>i)).slice(0,n).sort((a,b)=>a-b);items=keep.map(i=>items[i])}
-   return{key:'o'+set.name+items.map(x=>x[1]).join(),t,set,seq:items,placed:0,ask:`Put ${set.name} in order. Tap what happens first.`,answer:'done',explain:`The order is: ${items.map(x=>x[1].toLowerCase()).join(', then ')}.`}}
+   return{key:'o'+set.name+items.map(x=>x[1]).join(),t,set,seq:items,placed:0,ask:`Put ${set.name} in order. Tap what happens first.`,answer:'done',answerText:items.map(x=>x[1].toLowerCase()).join(', then '),explain:`The order is: ${items.map(x=>x[1].toLowerCase()).join(', then ')}.`}}
   if(t==='part'){const[e,a]=pick(PARTS);return{key:'p'+e,t,ask:`${e}. When does this happen?`,answer:a,rich:['Morning','Afternoon','Night'].map(v=>({v,h:`<span class="emo">${PART_EMO[v]}</span>${v}`})),
    hints:[{text:'Morning is when the day starts. Afternoon is after lunch. Night is when it is dark.'},{text:'Is it light or dark outside? Is it before lunch or after lunch?'},{text:`This happens in the ${a.toLowerCase()}.`}],explain:`${e} in the ${a.toLowerCase()}.`}}
   if(t==='longer'){const[s,l]=pick(LONGER);const fast=Math.random()<.35;const ans=fast?s:l;return{key:'l'+s,t,ask:fast?'Which one is faster?':'Which one takes longer?',answer:ans,rich:shuffle([s,l]).map(v=>({v,h:v})),
@@ -894,7 +991,302 @@ const Express={id:'express',name:'Banana Express',blurb:'Figure out what time th
   return{glow:ch.glow,reveal:go,hint(act){if(act==='spin')go()}};
  }};
 
-const GAMES=[Balloon,Bunch,Hop,Rows,Catch,SetClock,TimePop,Memory,BusyDay,Express];
+/* ================= TIMES & GROUPS: new Advanced levels ================= */
+function balloonAdv(){
+ const t=pick(['big','big','zero','turn','bigger']);
+ if(t==='big'){let a=pick([7,8,9]),b=rnd(2,5);if(Math.random()<.5)[a,b]=[b,a];return qFact(a,b)}
+ if(t==='zero'){const a=rnd(2,10),z=pick([0,1]);const[x,y]=Math.random()<.5?[a,z]:[z,a];const ans=x*y;
+  const oth=(z===0?[a,1,a+1,10]:[a+1,1,0,a-1]).filter((v,i,s)=>v!==ans&&v>=0&&s.indexOf(v)===i).slice(0,3);
+  return{key:'z'+x+'x'+y,ask:`What is ${x} × ${y}?`,vis:factHTML(x,y),answer:ans,others:oth,
+   hints:z===0?[{text:'Times 0 means 0 groups, or groups with nothing in them.'},{text:`${a} empty baskets have no bananas at all.`},{text:`Anything times 0 is 0. ${x} × ${y} = 0.`}]
+     :[{text:'Times 1 means just 1 group, or groups of 1.'},{text:`1 group of ${a} is just ${a}.`},{text:`Anything times 1 stays the same. ${x} × ${y} = ${a}.`}],
+   explain:z===0?`${x} × ${y} = 0. Times 0 is always 0.`:`${x} × ${y} = ${a}. Times 1 keeps the number the same.`}}
+ if(t==='turn'){const a=rnd(2,5),b=pick([6,7,8,9]);return{key:'tn'+a+'x'+b,ask:`${a} × ${b} = ${a*b}. So what is ${b} × ${a}?`,
+  vis:`<div class="fact sm2">${a} × ${b} = ${a*b}</div><div class="fact">${b} × ${a} = <span class="blank">?</span></div>`,answer:a*b,others:distract(a*b,a,b),
+  hints:[{text:'These are turn-around facts. The two numbers swap places.'},{text:`${a} groups of ${b} is the same amount as ${b} groups of ${a}.`},{text:`So ${b} × ${a} = ${a*b} too.`}],explain:`Turn-around facts match: ${b} × ${a} = ${a*b}.`}}
+ const facts=[];let g=0;while(facts.length<4&&g++<300){const a=rnd(2,5),b=rnd(2,6),p=a*b;if(!facts.some(f=>f.p===p||Math.abs(f.p-p)<2))facts.push({p,l:`${a} × ${b}`})}
+ facts.sort((x,y)=>y.p-x.p);const top=facts[0];const all=facts.map(f=>`${f.l} = ${f.p}`);
+ return{key:'bg'+facts.map(f=>f.l).join(),ask:'Pop the balloon with the biggest answer!',answer:top.l,others:shuffle(facts.slice(1).map(f=>f.l)),
+  hints:[{text:'Work out each times fact first, then compare.'},{text:all.slice(1,3).join('. ')+'.'},{text:all.join('. ')+`. The biggest is ${top.p}.`}],explain:`${top.l} = ${top.p}. That is the biggest one.`}
+}
+
+function bunchAdv(){const mode=pick(['share','share','groups']);let a,b;
+ if(mode==='share'){do{a=rnd(2,4);b=rnd(2,5)}while(a*b>20);const N=a*b;
+  return{key:'sh'+N+'/'+a,adv:1,mode,a,b,N,phase:1,ask:`Share ${N} bananas fairly in ${a} baskets.`,answer:b,others:near(b,1,3),explain:`${N} shared by ${a} baskets is ${b} each, because ${a} × ${b} = ${N}.`}}
+ do{b=pick([2,3,4,5]);a=rnd(2,5)}while(a*b>20);const N=a*b;
+ return{key:'gr'+N+'/'+b,adv:1,mode,a,b,N,phase:1,ask:`Put ${b} bananas in each basket until all ${N} are used.`,answer:a,others:near(a,1,3),explain:`${N} bananas in groups of ${b} fill ${a} baskets, because ${a} × ${b} = ${N}.`}}
+function bunchAdvHints(q){const{a,b,N}=q;
+ if(q.mode==='share'){if(q.phase===1)return[{text:'Give one banana to each basket. Then go around again.'},{text:'Keep going around until the pile is empty. Every basket should have the same.'},{text:`Each basket gets ${b}.`}];
+  return[{text:'Count the bananas in one basket.'},{text:`${a} baskets with the same number in each make ${N}.`},{text:`Each basket has ${b}. ${a} × ${b} = ${N}.`}]}
+ if(q.phase===1)return[{text:`Fill one basket with ${b}. Then start the next basket.`},{text:`Count by ${b}s as you fill them: ${skip(b,a).join(', ')}.`},{text:`You need ${a} baskets with ${b} in each.`}];
+ return[{text:'Count the baskets that have bananas in them.'},{text:`Count by ${b}s: ${skip(b,a).join(', ')}. How many numbers did you say?`},{text:`${a} baskets.`}]}
+function bunchAdvMount(q,el,api){const{a,b,N}=q;const nb=q.mode==='share'?a:Math.min(6,a+2);const cnt=Array(nb).fill(0);let pile=N;
+ el.innerHTML=`<div class="pilebox"><span class="pile-b" id="pileB"></span><b id="pileN"></b></div><div class="baskets">${cnt.map((_,i)=>`<div class="basket" data-i="${i}"><button class="bk-tap" aria-label="Add a banana to basket ${i+1}"><div class="bk-bananas"></div>${BASKET_SVG}</button><div class="bk-row"><button class="bk-minus" aria-label="Take a banana out of basket ${i+1}">−</button><span class="bk-count">0</span></div></div>`).join('')}</div><div id="bch"></div>`;
+ const baskets=$$('.basket',el);let ch=null;
+ const drawPile=()=>{$('#pileB',el).innerHTML=BAN.repeat(pile);$('#pileN',el).textContent=pile?`${pile} in the pile`:'Pile is empty!'};
+ function draw(i){const k=baskets[i];$('.bk-bananas',k).innerHTML=BAN.repeat(cnt[i]);$('.bk-count',k).textContent=cnt[i];if(q.mode==='groups'){k.classList.toggle('full',cnt[i]===b);k.classList.toggle('over',cnt[i]>b)}}
+ drawPile();
+ baskets.forEach((k,i)=>{$('.bk-tap',k).addEventListener('click',()=>{if(q.phase!==1)return;if(!pile){api.say('The pile is empty! Use the minus button to move bananas.');return}cnt[i]++;pile--;sfx('tap');draw(i);drawPile();
+   if(q.mode==='groups'&&cnt[i]===b+1)api.say(`That basket has ${cnt[i]}. Each basket needs ${b}.`);check()});
+  $('.bk-minus',k).addEventListener('click',()=>{if(q.phase!==1||!cnt[i])return;cnt[i]--;pile++;sfx('tap');draw(i);drawPile()})});
+ function check(){if(pile)return;
+  if(q.mode==='share'){if(cnt.every(c=>c===cnt[0]))phase2('How many bananas are in each basket?',`Fair share! Every basket has the same.`);else api.say('The pile is empty, but it is not fair yet. Some baskets have more. Use minus to move some.')}
+  else{const used=cnt.filter(c=>c>0);if(used.every(c=>c===b))phase2('How many baskets did you fill?',`Every basket has ${b}!`);else api.say(`Each basket with bananas needs exactly ${b}. Use minus to fix it.`)}}
+ function phase2(ask,msg){q.phase=2;sfx('ding');$$('button',el).forEach(x=>x.disabled=true);api.setAsk(ask);api.resetHints();api.say(msg);
+  const box=$('#bch',el);box.innerHTML=choicesHTML(shuffle([q.answer].concat(q.others)));ch=wireChoices(box,q,api);if(S.autoRead)speak(msg+' '+ask)}
+ return{glow(){ch&&ch.glow()},reveal(){if(q.phase===1){cnt.fill(0);for(let i=0;i<a;i++)cnt[i]=b;pile=0;baskets.forEach((_,i)=>draw(i));drawPile()}}};
+}
+
+function hopAdv(){const bob=S.bob;const t=pick(['back','back','mid','howmany']);
+ if(t==='back'){const s=pick([2,5,10]);const start=s*rnd(6,s===10?9:10);const seq=[0,1,2,3].map(i=>start-i*s);const ans=start-4*s;
+  return{key:'bk'+s+'_'+start,t:'next',s,stones:seq.concat(['?']),bobAt:3,qi:4,ask:`${bob} hops backward by ${s}s. Where does he land next?`,answer:ans,others:near(ans,s,3),
+   hints:[{text:`Going backward, the numbers get ${s} smaller each time.`},{text:`Look: ${seq[0]}, then ${seq[1]}. Each stone is ${s} less.`},{text:`${seq[3]} take away ${s} is ${ans}.`}],explain:`${seq[3]} take away ${s} is ${ans}.`}}
+ if(t==='mid'){let s,n,start;do{s=pick([2,5,10]);n=rnd(2,4);start=rnd(3,20)}while(start+n*s>48);const end=start+n*s;
+  return{key:'md'+s+'_'+n+'_'+start,adv:1,t:'line2',s,n,start,ask:`${bob} starts on ${start} and makes ${n} hops of ${s}. Where does he land?`,answer:end,others:near(end,s,3),
+   hints:[{text:`Each hop adds ${s}.`},{text:`Count on by ${s}s from ${start}: ${skip(s,n,start+s).join(', ')}.`,act:'lbl'},{text:`${bob} lands on ${end}.`,act:'all'}],explain:`From ${start}, ${n} hops of ${s} lands on ${end}.`}}
+ let s,n;do{s=pick([2,5,10]);n=rnd(3,6)}while(n*s>50);const T=n*s;
+ return{key:'hm'+s+'_'+n,adv:1,t:'line2',s,n,start:0,howmany:true,ask:`How many hops of ${s} does ${bob} need to get from 0 to ${T}?`,answer:n,others:near(n,1,3),
+  hints:[{text:`Each hop is ${s} long. Count by ${s}s until you reach ${T}.`},{text:`${skip(s,n).join(', ')}. Count how many numbers you said.`,act:'lbl'},{text:`${n} hops of ${s} make ${T}.`,act:'all'}],explain:`${n} hops of ${s} take ${bob} to ${T}. ${n} × ${s} = ${T}.`}}
+function hopAdvMount(q,el,api){const vals=shuffle([q.answer].concat(q.others));const end=q.start+q.n*q.s;const max=Math.max(10,Math.ceil((end+3)/5)*5);const X=v=>24+v*(612/max);const lab=max>30?10:5;
+ let svg=`<svg viewBox="0 0 660 170" role="img" aria-label="Number line from 0 to ${max}"><line x1="${X(0)}" y1="120" x2="${X(max)}" y2="120" stroke="#55627A" stroke-width="3"/>`;
+ for(let v=0;v<=max;v++){const big=v%5===0;svg+=`<line x1="${X(v)}" y1="${big?108:114}" x2="${X(v)}" y2="${big?132:126}" stroke="#55627A" stroke-width="${big?3:1.2}"/>`;if(v%lab===0)svg+=`<text x="${X(v)}" y="154" text-anchor="middle" font-family="Sniglet,sans-serif" font-size="18" fill="#22314A">${v}</text>`}
+ const hid=q.howmany?' hid':'';
+ for(let i=0;i<q.n;i++){const x1=X(q.start+i*q.s),x2=X(q.start+(i+1)*q.s),h=Math.min(70,22+q.s*5);svg+=`<path class="arc${hid}" d="M${x1} 116 Q${(x1+x2)/2} ${116-h*2} ${x2} 116"/><text class="arcl${hid}" x="${(x1+x2)/2}" y="${116-h-6}" text-anchor="middle">+${q.s}</text><text class="endl${i<q.n-1?' k':''}" x="${x2}" y="102" text-anchor="middle">${q.start+(i+1)*q.s}</text>`}
+ svg+=`<circle cx="${X(q.start)}" cy="120" r="8" fill="#2F8F5B"/>`;
+ if(q.howmany)svg+=`<path d="M${X(end)} 120 V64" stroke="#6B4226" stroke-width="3"/><path d="M${X(end)} 64 l26 9 l-26 9 z" fill="#E8506B"/>`;
+ svg+='</svg>';
+ el.innerHTML=`<div class="line-wrap">${svg}</div>`+choicesHTML(vals);
+ const lw=$('.line-wrap',el);const ch=wireChoices(el,q,api,()=>lw.classList.add('showall'));
+ return{glow:ch.glow,reveal(){lw.classList.add('showall')},hint(act){lw.classList.add(act==='all'?'showall':'showlbl')}};
+}
+
+const LEAF=`<svg class="leaf" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 36 C4 14 18 4 36 4 C36 24 24 36 4 36 Z" fill="#3FA463" stroke="#1E5C3B" stroke-width="2.5"/><path d="M6 34 L30 10" stroke="#1E5C3B" stroke-width="2"/></svg>`;
+function rowsAdv(){const t=pick(['leaf','leaf','turn','rect']);
+ if(t==='leaf'){const r=rnd(3,5),c=rnd(4,7);const lr=rnd(1,r-1),lc=rnd(1,c-2);
+  return{key:'lf'+r+'x'+c,adv:1,t,r,c,lr,lc,ask:`There are ${r} rows with ${c} bananas in each row. A leaf is hiding some! How many bananas in all?`,answer:r*c,others:distract(r*c,r,c),
+   hints:[{text:`Every row has ${c} bananas, even the ones under the leaf.`},{text:`There are ${r} rows. Count by ${c}s, one row at a time.`},{text:`${skip(c,r).join(', ')}. ${r} × ${c} = ${r*c}.`}],explain:`${r} rows of ${c} is ${r*c}, even with a leaf on top.`}}
+ if(t==='turn'){const r=rnd(2,4),c=rnd(4,6);
+  return{key:'tr'+r+'x'+c,adv:1,t,r,c,ask:`This tray has ${r} rows of ${c}. That is ${r*c} bananas. Turn the tray! How many bananas are there now?`,answer:r*c,others:distract(r*c,r,c),
+   hints:[{text:'Tap "Turn the tray" and watch. Turning the tray does not add or take away any bananas.'},{text:`Now it shows ${c} rows of ${r}. ${c} × ${r} is a turn-around fact for ${r} × ${c}.`},{text:`Still ${r*c}!`}],explain:`${c} × ${r} = ${r} × ${c} = ${r*c}. Turning it doesn't change how many.`}}
+ const N=pick([6,8,10,12,12,15,16,18,20,24]);const pairs=[];for(let a=1;a<=6;a++)if(N%a===0&&N/a<=8)pairs.push([a,N/a]);
+ const pp=pairs.find(x=>x[0]>1)||pairs[0];return{key:'rt'+N+'_'+rnd(1,99),adv:1,t,N,pairs,R:6,C:8,answerText:`${pp[0]} rows of ${pp[1]}`,ask:`Make a rectangle with exactly ${N} bananas.`,answer:'rect',explain:`That makes ${N}!`}}
+function rowsAdvHints(q){if(q.t!=='rect')return q.hints;const p=q.pairs.find(x=>x[0]>1)||q.pairs[0];
+ return[{text:'A rectangle has rows that are all the same length. Tap a spot to fill up to it.'},{text:`Try ${p[0]} rows. How many in each row make ${q.N}?`},{text:`One way is ${p[0]} rows of ${p[1]}. Tap the glowing spot, then check.`,act:'target'}]}
+function rowsAdvMount(q,el,api){
+ if(q.t==='leaf'){let g=`<div class="gridwrap"><div class="grid" style="--cols:${q.c}">`;for(let i=0;i<q.r;i++)for(let j=0;j<q.c;j++){const hide=i>=q.lr&&j>=q.lc;g+=hide?`<div class="cell on leafy">${LEAF}</div>`:`<div class="cell on">${BAN}</div>`}
+  g+='</div></div>';el.innerHTML=g+choicesHTML(shuffle([q.answer].concat(q.others)));return wireChoices(el,q,api)}
+ if(q.t==='turn'){let g='';for(let i=0;i<q.r*q.c;i++)g+=`<div class="cell on">${BAN}</div>`;
+  el.innerHTML=`<div class="gridwrap"><div class="rowlbl" id="trl">${q.r} rows of ${q.c}</div><div class="turnbox"><div class="tray" id="tray"><div class="grid" style="--cols:${q.c}">${g}</div></div></div><button class="btn yel" id="turnBtn">Turn the tray ↻</button></div>`+choicesHTML(shuffle([q.answer].concat(q.others)));
+  let turned=false;$('#turnBtn',el).addEventListener('click',()=>{turned=!turned;$('#tray',el).classList.toggle('turned',turned);$('#trl',el).textContent=turned?`${q.c} rows of ${q.r}`:`${q.r} rows of ${q.c}`;sfx('tap')});
+  return wireChoices(el,q,api)}
+ const{R:RR,C}=q;let fr=0,fc=0;let g=`<div class="gridwrap"><div class="rowlbl" aria-live="polite">Tap a spot to start.</div><div class="grid hd" style="--cols:${C}"><span></span>`;
+ for(let j=1;j<=C;j++)g+=`<span class="ghd">${j}</span>`;
+ for(let i=0;i<RR;i++){g+=`<span class="ghd">${i+1}</span>`;for(let j=0;j<C;j++)g+=`<button class="cell" data-r="${i}" data-c="${j}" aria-label="Row ${i+1}, spot ${j+1}">${BAN}</button>`}
+ g+=`</div></div><div class="choices"><button class="btn go big" id="rectBtn">Check my rectangle ✓</button></div>`;el.innerHTML=g;
+ const cells=$$('.cell',el),lbl=$('.rowlbl',el);const rd=api.round();rd.rects=rd.rects||{};
+ const fill=(a,b)=>{fr=a;fc=b;cells.forEach(x=>x.classList.toggle('on',+x.dataset.r<a&&+x.dataset.c<b));lbl.textContent=`${a} ${a===1?'row':'rows'} of ${b}`};
+ cells.forEach(x=>x.addEventListener('click',()=>{if(api.solved())return;fill(+x.dataset.r+1,+x.dataset.c+1);sfx('tap')}));
+ $('#rectBtn',el).addEventListener('click',()=>{if(api.solved())return;if(!fr){api.say('Tap a spot on the grid first.');return}
+  if(fr*fc===q.N){const k=fr+'x'+fc,k2=fc+'x'+fr;const seen=rd.rects[q.N]||[];const fresh=!seen.includes(k)&&!seen.includes(k2);seen.push(k);rd.rects[q.N]=seen;
+   q.explain=`${fr} rows of ${fc} makes ${q.N}.${fresh&&seen.length>1?' A brand new shape!':''} ${q.pairs.length>1?`There are other ways too, like ${q.pairs.filter(p=>!(p[0]===fr&&p[1]===fc)).slice(0,2).map(p=>`${p[0]} rows of ${p[1]}`).join(' or ')}.`:''}`;api.submit('rect');cells.forEach(c=>c.disabled=true)}
+  else{api.submit(`${fr} rows of ${fc}`);if(!api.solved())api.say(`That is ${fr} rows of ${fc}, which makes ${fr*fc}. We need ${q.N}.`)}});
+ return{hint(act){if(act==='target'){const p=q.pairs.find(x=>x[0]>1)||q.pairs[0];const t=cells.find(x=>+x.dataset.r===p[0]-1&&+x.dataset.c===p[1]-1);t&&t.classList.add('target')}},
+  reveal(){const p=q.pairs.find(x=>x[0]>1)||q.pairs[0];fill(p[0],p[1])}};
+}
+
+function catchAdv(){const t=pick(['family','family','two','big']);
+ if(t==='family'){const s=pick([2,5,10,3]);const fam=skip(s,10).filter(x=>x<=50);
+  const tip=s===2?'Numbers in the 2s family end in 0, 2, 4, 6 or 8.':s===5?'Numbers in the 5s family end in 0 or 5.':s===10?'Numbers in the 10s family end in 0.':'Count by 3s: 3, 6, 9, 12, 15, 18, 21, 24, 27, 30.';
+  return{key:'fam'+s+'_'+rnd(1,99),adv:1,family:true,answerText:`numbers like ${fam.slice(0,4).join(', ')}`,s,fam,need:4,ask:`Catch 4 bananas from the ${s}s family! Skip the others.`,answer:'family',sp:46,
+   hints:[{text:`The ${s}s family is ${fam.slice(0,6).join(', ')} and so on.`},{text:tip},{text:'The bananas in the family are glowing now.',act:'glowfam'}],explain:`You caught 4 from the ${s}s family!`}}
+ if(t==='two'){const a=rnd(2,5),b=rnd(2,5),c=rnd(1,4),plus=Math.random()<.7;const ans=a*b+(plus?c:-c);
+  return{key:'two'+a+b+c+plus,ask:`Catch the answer to ${a} × ${b} ${plus?'+':'−'} ${c}!`,vis:`<div class="fact">${a} × ${b} ${plus?'+':'−'} ${c} = <span class="blank">?</span></div>`,answer:ans,others:shuffle([a*b,ans+1,ans-1,ans+2]).filter(x=>x!==ans&&x>0).slice(0,3),sp:62,
+   hints:[{text:'Do the times part first.'},{text:`${a} × ${b} = ${a*b}.`},{text:`${a*b} ${plus?'+':'−'} ${c} = ${ans}.`}],explain:`${a} × ${b} = ${a*b}, and ${a*b} ${plus?'+':'−'} ${c} = ${ans}.`}}
+ let a=pick([7,8,9]),b=rnd(2,5);if(Math.random()<.5)[a,b]=[b,a];const q=qFact(a,b);q.ask=`Catch the answer to ${a} × ${b}!`;q.sp=62;return q}
+function catchFamilyMount(q,el,api){
+ el.innerHTML=`<div class="famhud">Caught: <span id="famdots">${'<i></i>'.repeat(q.need)}</span></div><div class="field" tabindex="0" aria-label="Catch field. Use the arrow buttons or slide your finger."><div class="canopy"></div><div class="grass"></div><div class="bask2">${CATCH_BASKET}</div></div><div class="ctrl"><button class="btn" data-d="-1" aria-label="Move basket left">◀</button><button class="btn" data-d="1" aria-label="Move basket right">▶</button></div>`;
+ const f=$('.field',el),bk=$('.bask2',el);const W=f.clientWidth||600,H=f.clientHeight||370;const n=W<520?3:4,lane=W/n;const sp=q.sp*(RM?.6:1);
+ const inFam=v=>v%q.s===0;let glowing=false,caught=0,done=false;
+ const newVal=(forceFam)=>{if(forceFam||Math.random()<.5)return pick(q.fam);let v;do{v=rnd(1,40)}while(inFam(v));return v};
+ const fs=Array.from({length:n},(_,i)=>{const d=document.createElement('div');d.className='fb';f.appendChild(d);const o={el:d,x:(i+.5)*lane,y:20+Math.random()*90-i*40,alive:true};setV(o,newVal(i===0));return o});
+ function setV(o,v){o.v=v;o.el.innerHTML=BAN+`<b>${v}</b>`;o.el.classList.toggle('glow',glowing&&inFam(v));o.el.classList.remove('burst');o.el.style.opacity=1}
+ function respawn(o){o.y=-80-Math.random()*80;const anyFam=fs.some(x=>x!==o&&inFam(x.v));setV(o,newVal(!anyFam))}
+ let bx=W/2,tx=W/2;const setT=x=>{tx=Math.max(60,Math.min(W-60,x))};
+ f.addEventListener('pointerdown',e=>{const r=f.getBoundingClientRect();setT(e.clientX-r.left);try{f.setPointerCapture(e.pointerId)}catch(_){}});
+ f.addEventListener('pointermove',e=>{if(e.pointerType==='mouse'||e.buttons){const r=f.getBoundingClientRect();setT(e.clientX-r.left)}});
+ $$('.ctrl button',el).forEach(b=>b.addEventListener('click',()=>{const li=Math.round(tx/lane-.5)+(+b.dataset.d);setT((Math.max(0,Math.min(n-1,li))+.5)*lane)}));
+ const onKey=e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();const li=Math.round(tx/lane-.5)+(e.key==='ArrowLeft'?-1:1);setT((Math.max(0,Math.min(n-1,li))+.5)*lane)}};document.addEventListener('keydown',onKey);
+ const dots=()=>{$('#famdots',el).innerHTML=Array.from({length:q.need},(_,i)=>`<i class="${i<caught?'on':''}"></i>`).join('')};
+ let raf,last=performance.now();
+ function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;bx+=(tx-bx)*Math.min(1,dt*9);bk.style.transform=`translateX(${bx-60}px)`;
+  for(const o of fs){o.y+=(done?sp*2:sp)*dt;const bottom=o.y+70,top=H-16-70;
+   if(!done&&bottom>=top+14&&bottom<=top+46&&Math.abs(o.x-bx)<62)grab(o);else if(o.y>H+10){if(done)o.el.style.opacity=0;else respawn(o)}
+   o.el.style.transform=`translate(${o.x-38}px,${o.y}px)`}raf=requestAnimationFrame(loop)}
+ function grab(o){if(api.solved())return;bk.classList.remove('jig');void bk.offsetWidth;bk.classList.add('jig');
+  if(inFam(o.v)){caught++;dots();sfx('pop');api.say(`Yes! ${o.v} is in the ${q.s}s family. ${caught} caught!`);respawn(o);if(caught>=q.need){done=true;api.submit('family')}}
+  else{sfx('boing');const v=o.v;respawn(o);api.submit(v);if(!api.solved())api.say(`${v} is not in the ${q.s}s family. Keep going!`)}}
+ fs.forEach(o=>{o.el.style.transform=`translate(${o.x-38}px,${o.y}px)`});raf=requestAnimationFrame(loop);
+ return{stop(){cancelAnimationFrame(raf);document.removeEventListener('keydown',onKey)},glow(){glowing=true;fs.forEach(o=>o.el.classList.toggle('glow',inFam(o.v)))},hint(act){if(act==='glowfam')this.glow()},reveal(){done=true}};
+}
+
+/* ================= NEW GAME: Bob's Times Machine ================= */
+function gearPath(cx,cy,r,n){let d='';for(let i=0;i<n*2;i++){const a=i/(n*2)*Math.PI*2,rr=i%2?r:r+5;const a2=(i+1)/(n*2)*Math.PI*2;d+=(i?'L':'M')+(cx+rr*Math.cos(a)).toFixed(1)+' '+(cy+rr*Math.sin(a)).toFixed(1)+'L'+(cx+rr*Math.cos(a2)).toFixed(1)+' '+(cy+rr*Math.sin(a2)).toFixed(1)}return d+'Z'}
+const machineSVG=label=>`<svg class="machine" viewBox="0 0 320 230" aria-hidden="true">
+ <rect x="56" y="178" width="14" height="40" fill="#5f6b77"/><rect x="190" y="178" width="14" height="40" fill="#5f6b77"/>
+ <path d="M74 14 H158 L132 60 H100 Z" fill="#C9D3DC" stroke="#6b7785" stroke-width="3.5" stroke-linejoin="round"/>
+ <rect x="186" y="30" width="16" height="30" fill="#9AA6B2" stroke="#6b7785" stroke-width="3"/><circle class="puff" cx="194" cy="20" r="9" fill="#fff"/><circle class="puff p2" cx="206" cy="10" r="7" fill="#fff"/>
+ <rect x="40" y="58" width="184" height="124" rx="20" fill="#7457D1" stroke="#4f3a9a" stroke-width="4"/>
+ <rect x="58" y="76" width="106" height="58" rx="12" fill="#fff" stroke="#4f3a9a" stroke-width="3"/>
+ <text class="mlabel" x="111" y="118" text-anchor="middle" font-family="Sniglet,sans-serif" font-size="34" font-weight="800" fill="#22314A">${label}</text>
+ <g class="gear g1"><path d="${gearPath(194,96,16,9)}" fill="#FFD23F" stroke="#C98A12" stroke-width="2.5"/><circle cx="194" cy="96" r="5" fill="#C98A12"/></g>
+ <g class="gear g2"><path d="${gearPath(196,142,11,7)}" fill="#2FA3D6" stroke="#1d6f94" stroke-width="2.5"/><circle cx="196" cy="142" r="4" fill="#1d6f94"/></g>
+ <circle class="lt l1" cx="72" cy="158" r="7" fill="#E8506B"/><circle class="lt l2" cx="94" cy="158" r="7" fill="#FFD23F"/><circle class="lt l3" cx="116" cy="158" r="7" fill="#2F9E5A"/>
+ <rect x="134" y="150" width="34" height="14" rx="7" fill="#4f3a9a"/>
+ <path d="M224 140 H300 L306 166 H224 Z" fill="#C9D3DC" stroke="#6b7785" stroke-width="3.5" stroke-linejoin="round"/>
+</svg>`;
+function machineQ(L){const t=L==='basic'?pick(['out','out','table']):L==='med'?pick(['out','table','table']):pick(['rule','rule','in','outbig']);
+ let r,n;
+ if(t==='rule'){r=pick([2,3,4,5,10]);let n1=rnd(2,6),n2;do{n2=rnd(2,6)}while(n2===n1);const d=n1*r-n1;const opts=shuffle([2,3,4,5,10].filter(x=>x!==r)).slice(0,2).map(x=>`× ${x}`).concat([`+ ${d}`]);
+  return{key:'mr'+r+n1+n2,t,r,label:'?',inV:n1,outV:n1*r,table:[[n1,n1*r],[n2,n2*r]],ask:`${n1} went in and ${n1*r} came out. Then ${n2} went in and ${n2*r} came out. What is the machine doing?`,answer:`× ${r}`,others:opts,
+   hints:[{text:`Look at the first one: ${n1} goes in, ${n1*r} comes out.`},{text:`Try × ${r}: ${n1} × ${r} = ${n1*r}. Does ${n2} × ${r} = ${n2*r} too?`},{text:`Yes! The machine does × ${r}.`}],explain:`The machine does × ${r}: ${n1} × ${r} = ${n1*r} and ${n2} × ${r} = ${n2*r}.`}}
+ if(t==='in'){r=pick([2,3,4,5,10]);n=rnd(2,6);const N=n*r;return{key:'mi'+r+n,t,r,label:`× ${r}`,inV:'?',outV:N,ask:`This is a × ${r} machine. ${N} came out. What number went in?`,answer:n,others:near(n,1,3),
+   hints:[{text:`Which number times ${r} makes ${N}?`},{text:`Count by ${r}s until you reach ${N}: ${skip(r,n).join(', ')}.`},{text:`${n} × ${r} = ${N}, so ${n} went in.`}],explain:`${n} × ${r} = ${N}, so ${n} went in.`}}
+ if(t==='table'){r=L==='basic'?pick([2,10]):pick([3,4,5]);const ins=[1,2,3,4];const miss=rnd(1,3);n=ins[miss];
+  return{key:'mt'+r+miss,t,r,label:`× ${r}`,inV:n,outV:'?',table:ins.map(x=>[x,x===n?'?':x*r]),ask:`The × ${r} machine made this table. What number is missing?`,answer:n*r,others:distract(n*r,n,r),
+   hints:[{text:`The machine does × ${r} to every number.`},{text:`Look: 1 goes in and ${r} comes out. 2 goes in and ${2*r} comes out.`},{text:`${n} × ${r} = ${n*r}.`}],explain:`${n} × ${r} = ${n*r}.`}}
+ if(t==='outbig'){r=pick([6,7,8,9]);n=rnd(2,5)}else if(L==='basic'){r=pick([2,10]);n=rnd(1,5)}else{r=pick([3,4,5]);n=rnd(2,6)}
+ const hs=factHints(n,r);hs[0]={text:`The machine does × ${r}. So ${n} × ${r} comes out.`};
+ return{key:'mo'+r+n,t:'out',r,label:`× ${r}`,inV:n,outV:'?',ask:`The machine does × ${r}. What comes out when ${n} goes in?`,answer:n*r,others:distract(n*r,n,r),hints:hs,explain:`${n} × ${r} = ${n*r}. Toot toot!`}}
+const Machine={id:'machine',name:'Times Machine',blurb:'Put numbers in Bob’s silly machine and see what comes out.',
+ icon:`<svg viewBox="0 0 48 48"><path d="M12 4h20l-6 9h-8z" fill="#C9D3DC"/><rect x="6" y="13" width="32" height="24" rx="6" fill="#7457D1"/><rect x="10" y="17" width="16" height="10" rx="3" fill="#fff"/><path d="${gearPath(32,30,4,6)}" fill="#FFD23F"/><path d="M38 28h8v6h-8z" fill="#C9D3DC"/></svg>`,
+ make:machineQ,
+ mount(q,el,api){
+  el.innerHTML=`<div class="mwrap"><div class="mball in" id="mIn">${q.inV}</div>${machineSVG(q.label)}<div class="mball out ${q.outV==='?'?'q':''}" id="mOut">${q.outV}</div></div>
+   ${q.table?`<table class="mtable"><thead><tr><th>In</th>${q.table.map(r=>`<td>${r[0]}</td>`).join('')}</tr></thead><tbody><tr><th>Out</th>${q.table.map(r=>`<td class="${r[1]==='?'?'q':''}">${r[1]}</td>`).join('')}</tr></tbody></table>`:''}`+choicesHTML(shuffle([q.answer].concat(q.others)));
+  const mw=$('.mwrap',el),mi=$('#mIn',el),mo=$('#mOut',el);
+  function run(){if(q.t==='in')mi.textContent=q.answer;mi.classList.add('drop');mw.classList.add('run');sfx('kazoo');
+   setTimeout(()=>{mw.classList.remove('run');if(q.t==='out'||q.t==='table')mo.textContent=q.inV*q.r;if(q.t==='rule'){$('.mlabel',el).textContent=q.answer}mo.classList.remove('q');mo.classList.add('pop');sfx('pop');const c=$('td.q',el);if(c){c.textContent=q.answer;c.classList.remove('q')}},1300)}
+  const ch=wireChoices(el,q,api,run);return{glow:ch.glow,reveal:run};
+ }};
+
+/* ================= NEW GAME: Mystery Picture ================= */
+const PICTURES=[
+ {name:'a rocket',svg:()=>`<rect width="300" height="300" fill="#1B1F4B"/>${[[30,40],[250,60],[60,200],[240,230],[150,30],[270,150],[20,130]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="#fff"/>`).join('')}<path d="M150 30 C190 70 195 150 180 200 H120 C105 150 110 70 150 30 Z" fill="#F4F8EE" stroke="#9AA6B2" stroke-width="5"/><path d="M150 30 C165 45 175 60 180 78 H120 C125 60 135 45 150 30Z" fill="#E8506B"/><circle cx="150" cy="120" r="22" fill="#2FA3D6" stroke="#9AA6B2" stroke-width="6"/><path d="M120 160 L82 220 L122 205 Z M180 160 L218 220 L178 205 Z" fill="#E8506B"/><path d="M128 205 L150 278 L172 205 Z" fill="#FFB020"/><path d="M140 205 L150 250 L160 205 Z" fill="#FFF1B8"/>`},
+ {name:'an ice cream cone',svg:()=>`<rect width="300" height="300" fill="#FCD9E6"/><path d="M100 150 L150 285 L200 150 Z" fill="#E0A458" stroke="#A86F2C" stroke-width="5"/><path d="M115 170 L185 170 M125 200 L176 200 M135 230 L166 230 M120 160 L160 260 M180 160 L140 260" stroke="#A86F2C" stroke-width="3"/><circle cx="150" cy="128" r="50" fill="#F7A3B1"/><circle cx="112" cy="105" r="36" fill="#9FE3C1"/><circle cx="188" cy="105" r="36" fill="#7A4A2A"/><circle cx="150" cy="70" r="36" fill="#FFF1B8"/><circle cx="150" cy="30" r="14" fill="#E23B3B"/><path d="M150 18 q8 -14 20 -12" stroke="#2F8F5B" stroke-width="4" fill="none"/>`},
+ {name:'a fish',svg:()=>`<rect width="300" height="300" fill="#7FD0EE"/><rect y="240" width="300" height="60" fill="#F4D9A0"/><path d="M40 250 Q30 200 50 160 M60 250 Q70 210 55 180" stroke="#2F8F5B" stroke-width="8" fill="none"/><ellipse cx="150" cy="140" rx="80" ry="55" fill="#F08A24" stroke="#A85A1E" stroke-width="5"/><path d="M225 140 L280 95 L280 185 Z" fill="#F08A24" stroke="#A85A1E" stroke-width="5" stroke-linejoin="round"/><path d="M130 88 Q150 60 175 90" fill="#FFB020" stroke="#A85A1E" stroke-width="4"/><circle cx="110" cy="125" r="13" fill="#fff"/><circle cx="106" cy="125" r="6" fill="#222"/><path d="M80 150 q10 8 20 0" stroke="#A85A1E" stroke-width="4" fill="none"/><path d="M150 110 v60 M175 112 v56" stroke="#fff" stroke-width="8" opacity=".6"/><circle cx="70" cy="70" r="10" fill="none" stroke="#fff" stroke-width="3"/><circle cx="55" cy="40" r="6" fill="none" stroke="#fff" stroke-width="3"/>`},
+ {name:'a rainbow',svg:()=>`<rect width="300" height="300" fill="#CDEFF8"/>${['#E23B3B','#F08A24','#FFD23F','#2F9E5A','#2F7FD6','#7457D1'].map((c,i)=>`<path d="M${30+i*14} 230 A${120-i*14} ${120-i*14} 0 0 1 ${270-i*14} 230" fill="none" stroke="${c}" stroke-width="14"/>`).join('')}<circle cx="255" cy="50" r="28" fill="#FFE066"/><g fill="#fff"><circle cx="45" cy="230" r="26"/><circle cx="75" cy="238" r="22"/><circle cx="225" cy="232" r="26"/><circle cx="255" cy="238" r="22"/></g>`},
+ {name:'Bob on the beach',svg:()=>`<foreignObject width="300" height="300"><div xmlns="http://www.w3.org/1999/xhtml" style="width:300px;height:300px;position:relative">${sceneSVG('beach')}<div style="position:absolute;left:60px;top:20px;width:180px">${bobSVG({head:'crown',face:'shades',hand:'wand'},'wow')}</div></div></foreignObject>`}
+];
+function mysteryQ(L){const pic=pick(PICTURES);const tiles=[];let g=0;
+ while(tiles.length<9&&g++<400){let a,b,miss=false;
+  if(L==='basic'){b=pick([1,2,10]);a=rnd(1,5)}else if(L==='med'){b=pick([3,4,5]);a=rnd(1,6)}else{a=rnd(2,9);b=rnd(2,5);if(a*b>45)continue;miss=tiles.filter(t=>t.miss).length<3&&Math.random()<.4}
+  if(Math.random()<.5)[a,b]=[b,a];const label=miss?`${a} × ? = ${a*b}`:`${a} × ${b}`;if(tiles.some(t=>t.label===label))continue;
+  tiles.push({a,b,miss,label,ans:miss?b:a*b,done:false})}
+ return{key:'my'+pic.name+tiles.map(t=>t.label).join(),pic,tiles,cur:null,L,ask:'Tap a tile and answer its times fact. Uncover all 9 to see the mystery picture!',answer:'done',explain:`It's ${pic.name}!`}}
+const Mystery={id:'mystery',name:'Mystery Picture',blurb:'Answer times facts to uncover a hidden picture.',rounds:2,
+ icon:`<svg viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="6" fill="#2FA3D6"/><circle cx="30" cy="16" r="6" fill="#FFE066"/><path d="M4 40l14-16 10 10 6-6 10 12z" fill="#2F8F5B"/><rect x="4" y="4" width="20" height="20" fill="#7457D1"/><rect x="24" y="24" width="20" height="20" fill="#7457D1" opacity=".85"/></svg>`,
+ make:mysteryQ,
+ hints(q){const t=q.cur;if(!t)return[{text:'Tap any tile to get a times fact. You can pick them in any order.'}];
+  if(t.miss)return[{text:`We need ${t.a} equal groups that make ${t.a*t.b}.`},{text:`Count by ${t.b}s ${t.a} times: ${skip(t.b,t.a).join(', ')}.`},{text:`The missing number is ${t.b}.`}];return factHints(t.a,t.b)},
+ mount(q,el,api){const lvB=q.L==='adv'?2:1;
+  el.innerHTML=`<div class="mys"><svg class="mpic" viewBox="0 0 300 300" aria-hidden="true">${q.pic.svg()}</svg><div class="mtiles">${q.tiles.map((t,i)=>`<button class="mtile" data-i="${i}">${t.label}</button>`).join('')}</div></div><div id="mch"></div>`;
+  const tiles=$$('.mtile',el),box=$('#mch',el);let tries=0,ch=null;
+  const left=()=>q.tiles.filter(t=>!t.done).length;
+  tiles.forEach(b=>b.addEventListener('click',()=>{if(api.solved())return;const t=q.tiles[+b.dataset.i];if(t.done)return;tiles.forEach(x=>x.classList.remove('sel'));b.classList.add('sel');q.cur=t;tries=0;sfx('tap');
+   api.setAsk(t.miss?`What number goes in the box? ${t.label}`:`What is ${t.label}?`);api.resetHints();
+   const vals=shuffle([t.ans].concat(t.miss?near(t.ans,1,3):distract(t.ans,t.a,t.b)));box.innerHTML=`<div class="choices">${vals.map(v=>`<button class="choice" data-v="${v}">${v}</button>`).join('')}</div>`;
+   $$('.choice',box).forEach(c=>c.addEventListener('click',()=>{if(q.cur!==t||c.disabled)return;
+    if(+c.dataset.v===t.ans){open(b,t,tries===0)}else{tries++;c.disabled=true;c.classList.add('wrong');sfx('boing');
+     if(tries>=3){api.say(`It is <b>${t.ans}</b>. ${t.label.replace('?',t.b)}${t.miss?'':' = '+t.ans}.`);open(b,t,false,true)}else{api.say(`<b>${c.dataset.v}</b> is not it. Try again!${tries===2?' Look for the glowing one.':''}`);if(tries===2)$$('.choice',box).find(x=>+x.dataset.v===t.ans).classList.add('glow')}}}));
+   if(S.autoRead)speak(api.round().q.ask)}));
+  function open(b,t,first,shown){t.done=true;b.classList.remove('sel');b.classList.add('open');q.cur=null;box.innerHTML='';sfx(shown?'tap':'pop');
+   if(!shown){if(first)api.addBananas(lvB,b);api.say(`<b>${pick(['Yes!','Super!','Peel-fect!','You got it!','Banana-tastic!'])}</b> ${t.miss?t.label.replace('?',t.b):t.label+' = '+t.ans}.${first?` +${lvB} `+BAN:''}`)}
+   if(left()===0){setTimeout(()=>api.submit('done'),500)}else{api.setAsk(`Pick another tile! ${left()} left.`);api.resetHints()}}
+  return{reveal(){tiles.forEach(b=>b.classList.add('open'))}};
+ }};
+
+/* ================= NEW GAME: Bob's Banana Stand ================= */
+const MONKEYS=[['Coco','#8B5A33','#E8506B'],['Mango','#A0683B','#2FA3D6'],['Kiki','#6E4528','#FFD23F'],['Pip','#94603A','#2F9E5A'],['Zuzu','#7A4A2A','#7457D1']];
+const monkeySVG=(fur,hat)=>`<svg class="monkey" viewBox="0 0 120 150" aria-hidden="true"><path d="M86 120 q30 -4 24 -34" stroke="${fur}" stroke-width="7" fill="none" stroke-linecap="round"/><ellipse cx="60" cy="118" rx="30" ry="28" fill="${fur}"/><ellipse cx="60" cy="122" rx="18" ry="18" fill="#F1CFA5"/><circle cx="22" cy="58" r="14" fill="${fur}"/><circle cx="22" cy="58" r="8" fill="#F1CFA5"/><circle cx="98" cy="58" r="14" fill="${fur}"/><circle cx="98" cy="58" r="8" fill="#F1CFA5"/><circle cx="60" cy="58" r="36" fill="${fur}"/><path d="M32 66 q0 -22 28 -18 q28 -4 28 18 q0 22 -28 22 q-28 0 -28 -22z" fill="#F1CFA5"/><circle cx="48" cy="58" r="5" fill="#222"/><circle cx="72" cy="58" r="5" fill="#222"/><circle cx="49.5" cy="56.5" r="1.6" fill="#fff"/><circle cx="73.5" cy="56.5" r="1.6" fill="#fff"/><path d="M48 74 q12 10 24 0" stroke="#5a2a1a" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M38 26 q22 -20 44 0 z" fill="${hat}"/><rect x="34" y="24" width="52" height="7" rx="3.5" fill="${hat}"/></svg>`;
+const bunchHTML=k=>`<span class="bunch b${k>=10?'10':''}">${BAN.repeat(k)}</span>`;
+function standQ(L){const[name,fur,hat]=pick(MONKEYS);let t,k,n,k2;
+ if(L==='basic'){t='order';k=pick([2,5,10]);n=k===10?rnd(2,3):rnd(2,4)}else if(L==='med'){t='order';k=pick([3,4,5]);n=rnd(2,5)}
+ else{t=pick(['need','need','mix']);if(t==='need'){k=pick([2,3,4,5,10]);n=k===10?rnd(2,4):rnd(2,5)}else{k=pick([5,10,4]);n=rnd(2,3);k2=pick([2,3])}}
+ const crates=[...new Set([k,k2].filter(Boolean).concat(shuffle([2,3,4,5,10])))].slice(0,4);
+ const T=n*k+(k2||0);
+ const order=t==='need'?`I need ${T} bananas, in bunches of ${k}, please!`:t==='mix'?`${n} bunches of ${k} and 1 bunch of ${k2}, please!`:`${n} bunches of ${k}, please!`;
+ return{key:'st'+t+k+n+(k2||''),t,name,fur,hat,k,n,k2,T,crates:crates.sort((a,b)=>a-b),phase:1,order,ask:`${name} says: "${order}"`,answer:t==='need'?n:T,others:t==='need'?near(n,1,3):distract(T,n,k),
+  explain:t==='need'?`${n} bunches of ${k} make ${T}. ${n} × ${k} = ${T}.`:t==='mix'?`${n} × ${k} = ${n*k}, plus ${k2} makes ${T}.`:`${n} bunches of ${k} is ${T}. ${n} × ${k} = ${T}.`}}
+const Stand={id:'stand',name:'Banana Stand',blurb:'Fill the monkeys’ banana orders.',
+ icon:`<svg viewBox="0 0 48 48"><path d="M4 16 L8 6 H40 L44 16 Z" fill="#FFD23F"/><path d="M8 6h8l-2 10H4zM24 6h8l2 10H22z" fill="#2F8F5B"/><rect x="8" y="16" width="32" height="26" fill="#A8754A"/><use href="#ban" x="14" y="20" width="20" height="20"/></svg>`,
+ make:standQ,
+ hints(q){const{k,n,k2,T,name}=q;
+  if(q.phase===1){if(q.t==='need')return[{text:`Every bunch in that crate has ${k}. Keep adding bunches until you have ${T}.`},{text:`Count by ${k}s as you add them: ${skip(k,n).join(', ')}.`},{text:`You need ${n} bunches of ${k}.`}];
+   if(q.t==='mix')return[{text:`${name} wants two kinds of bunches.`},{text:`Tap the crate of ${k}s ${n} times.`},{text:`Then tap the crate of ${k2}s once.`}];
+   return[{text:`${name} wants bunches with ${k} bananas.`},{text:`Tap the crate with bunches of ${k}.`},{text:`Put ${n} bunches of ${k} in the bag.`}]}
+  if(q.t==='need')return[{text:'Count the bunches in the bag.'},{text:`Each bunch is ${k}. ${skip(k,n).join(', ')}.`},{text:`${n} bunches.`}];
+  if(q.t==='mix')return[{text:`First: ${n} bunches of ${k} is ${n*k}.`},{text:`Then add the bunch of ${k2}.`},{text:`${n*k} + ${k2} = ${T}.`}];
+  return[{text:`There are ${n} bunches with ${k} in each.`},{text:`Count by ${k}s: one number for each bunch.`},{text:`${skip(k,n).join(', ')}. ${n} × ${k} = ${T}.`}]},
+ mount(q,el,api){const bag=[];
+  el.innerHTML=`<div class="stand"><div class="awning"></div><div class="stand-row"><div class="cust" id="cust">${monkeySVG(q.fur,q.hat)}<div class="cust-say">${esc(q.order)}</div></div>
+   <div class="bagbox"><div class="baglbl">${q.t==='need'?'Bag: <b id="bagT">0</b> bananas':'The bag'}</div><div class="bag" id="bag"></div><div class="bagnote">Tap a bunch in the bag to take it out.</div></div></div>
+   <div class="crates">${q.crates.map(k=>`<button class="crate" data-k="${k}" aria-label="Bunch of ${k}">${bunchHTML(k)}<span>bunch of ${k}</span></button>`).join('')}</div></div><div id="sch"></div>`;
+  const bagEl=$('#bag',el);let ch=null;
+  const draw=()=>{bagEl.innerHTML=bag.map((k,i)=>`<button class="inbag" data-i="${i}" aria-label="Take out bunch of ${k}">${bunchHTML(k)}</button>`).join('');const tt=$('#bagT',el);if(tt)tt.textContent=bag.reduce((s,x)=>s+x,0);
+   $$('.inbag',bagEl).forEach(b=>b.addEventListener('click',()=>{if(q.phase!==1)return;bag.splice(+b.dataset.i,1);sfx('tap');draw()}))};
+  const want=()=>{const w={};w[q.k]=q.n;if(q.k2)w[q.k2]=(w[q.k2]||0)+1;return w};
+  $$('.crate',el).forEach(c=>c.addEventListener('click',()=>{if(q.phase!==1)return;const k=+c.dataset.k;const w=want();
+   if(!w[k]){api.say(`That bunch has ${k}. ${q.name} wants ${q.k2?`bunches of ${q.k} and ${q.k2}`:`bunches of ${q.k}`}.`);sfx('boing');return}
+   const have=bag.filter(x=>x===k).length;if(have>=w[k]){api.say(`That's enough bunches of ${k}! Tap one in the bag to take it out if you need to.`);return}
+   bag.push(k);sfx('tap');draw();check()}));
+  function check(){const w=want();if(Object.keys(w).every(k=>bag.filter(x=>x===+k).length===w[k])){q.phase=2;sfx('ding');$$('.crate,.inbag',el).forEach(b=>b.disabled=true);
+   const ask=q.t==='need'?'How many bunches did you put in the bag?':'How many bananas is that in all?';api.setAsk(ask);api.resetHints();api.say(`The order is ready!`);
+   const box=$('#sch',el);box.innerHTML=choicesHTML(shuffle([q.answer].concat(q.others)));ch=wireChoices(box,q,api,()=>{$('#cust',el).classList.add('dance');$('.cust-say',el).textContent='Thank you! Here are some bananas!'});if(S.autoRead)speak('The order is ready! '+ask)}}
+  return{glow(){ch&&ch.glow()},reveal(){if(q.phase===1){bag.length=0;for(let i=0;i<q.n;i++)bag.push(q.k);if(q.k2)bag.push(q.k2);draw()}$('#cust',el).classList.add('dance')}};
+ }};
+
+/* ================= NEW GAME: Banana Race ================= */
+const TURTLE=`<svg viewBox="0 0 80 56" aria-hidden="true"><ellipse cx="14" cy="34" rx="10" ry="8" fill="#8ED08A" stroke="#3C6E4F" stroke-width="2.5"/><path d="M10 31 q3 -2 6 0" stroke="#22314A" stroke-width="2" fill="none"/><ellipse cx="22" cy="46" rx="6" ry="5" fill="#8ED08A"/><ellipse cx="60" cy="46" rx="6" ry="5" fill="#8ED08A"/><path d="M18 44 Q22 8 44 8 Q70 8 72 44 Z" fill="#2F9E5A" stroke="#1E5C3B" stroke-width="3"/><path d="M36 18 l8 -4 l8 4 v9 l-8 4 l-8 -4z M28 34 l6 -4 l6 4 M50 34 l6 -4 l6 4" fill="none" stroke="#9FE3C1" stroke-width="2.5"/><path d="M72 40 l7 3 l-7 2" fill="#8ED08A"/></svg>`;
+const RACE_LEN=12;
+function raceFact(L,d){let a,b,miss=false;
+ if(L==='basic'){b=d===1?pick([1,2]):d===2?pick([5,10]):3;a=rnd(1,5)}
+ else if(L==='med'){if(d===1){b=pick([2,5,10]);a=rnd(2,5)}else if(d===2){b=pick([3,4]);a=rnd(2,6)}else{if(Math.random()<.5){b=6;a=rnd(2,5)}else{b=rnd(2,5);a=rnd(2,5);miss=true}}}
+ else{if(d===1){b=rnd(2,5);a=rnd(2,6)}else if(d===2){b=pick([6,7]);a=rnd(2,5)}else{if(Math.random()<.6){b=pick([8,9]);a=rnd(2,5)}else{b=rnd(3,6);a=rnd(3,6);miss=true}}}
+ if(!miss&&Math.random()<.5)[a,b]=[b,a];
+ if(miss){const q=qMissingB(a,b);return q}return qFact(a,b)}
+const Race={id:'race',name:'Banana Race',blurb:'Answer to race Shelly the turtle to the finish.',rounds:8,
+ icon:`<svg viewBox="0 0 48 48"><path d="M4 40h40" stroke="#A8754A" stroke-width="4"/><path d="M38 8v32" stroke="#6B4226" stroke-width="3"/><path d="M38 8h8v4h-4v4h4v4h-8" fill="#22314A"/><path d="M38 8h4v4h-4zM42 12h4v4h-4zM38 16h4v4h-4z" fill="#fff"/><ellipse cx="16" cy="34" rx="10" ry="6" fill="#2F9E5A"/></svg>`,
+ make(L){return{key:'race'+Math.random(),t:'pick',L,ask:'Pick a card! Harder cards move you further.',answer:'__none__',hints:[{text:'Easy cards move 1 space. Medium cards move 2. Tricky cards move 3!'}],explain:''}},
+ endNote(R){const r=R.race||{bob:0,tur:0};const won=r.bob>=r.tur;return won?`<p class="racewin">🏁 ${esc(S.bob)} won the race! ${esc(S.bob)} got to space ${Math.min(r.bob,RACE_LEN)} and Shelly got to space ${Math.min(r.tur,RACE_LEN)}.</p>`:`<p class="racewin">Shelly the turtle won this time! She is sleepy but sneaky. Rematch?</p>`},
+ mount(q,el,api){const R=api.round();R.race=R.race||{bob:0,tur:0};const rc=R.race;
+  const lane=(who,pos,svg)=>`<div class="lane ${who}"><div class="cells">${Array.from({length:RACE_LEN+1},(_,i)=>`<span class="${i===RACE_LEN?'fin':''}">${i===0?'':i}</span>`).join('')}</div><div class="token" id="tok-${who}" style="--p:${Math.min(pos,RACE_LEN)}">${svg}</div></div>`;
+  el.innerHTML=`<div class="race">${lane('bob',rc.bob,bobSVG(S.wear,'happy'))}${lane('tur',rc.tur,TURTLE)}<div class="racemsg" id="rmsg">Turn ${R.i+1} of ${R.n}. ${esc(S.bob)}: ${rc.bob} · Shelly: ${rc.tur}</div></div>
+   <div class="picks" id="picks"><button class="pickc d1" data-d="1"><b>Easy</b><span>+1 space</span></button><button class="pickc d2" data-d="2"><b>Medium</b><span>+2 spaces</span></button><button class="pickc d3" data-d="3"><b>Tricky</b><span>+3 spaces</span></button></div><div id="rch"></div>`;
+  let ch=null,d=0;
+  const setTok=(who,p)=>{const t=$('#tok-'+who,el);t.style.setProperty('--p',Math.min(p,RACE_LEN));t.classList.remove('hopr');void t.offsetWidth;t.classList.add('hopr')};
+  $$('.pickc',el).forEach(b=>b.addEventListener('click',()=>{if(d)return;d=+b.dataset.d;sfx('tap');$('#picks',el).innerHTML=`<div class="picked d${d}">${['','Easy','Medium','Tricky'][d]} card: +${d}</div>`;
+   const f=raceFact(q.L,d);Object.assign(q,{answer:f.answer,hints:f.hints,explain:f.explain,vis:f.vis,ask:f.ask,move:d});api.setAsk(f.ask);api.setVis(f.vis);api.resetHints();
+   const box=$('#rch',el);box.innerHTML=choicesHTML(shuffle([f.answer].concat(f.others)));ch=wireChoices(box,q,api,()=>after(true));if(S.autoRead)speak(f.ask)}));
+  function after(ok){const mv=ok?(R.tries===0?d:1):0;rc.bob+=mv;if(mv)setTok('bob',rc.bob);
+   setTimeout(()=>{const tm=pick([0,1,1,1,2,2]);rc.tur+=tm;if(tm)setTok('tur',rc.tur);
+    const last=R.i>=R.n-1;let msg=`${esc(S.bob)} moved ${mv} ${mv===1?'space':'spaces'}. Shelly moved ${tm}.`;
+    if(rc.bob>=RACE_LEN||rc.tur>=RACE_LEN||last){R.stop=true;msg+=rc.bob>=rc.tur?` ${esc(S.bob)} wins the race!`:' Shelly wins this time!';if(rc.bob>=rc.tur){sfx('yay');confetti($('.race',el),$('.race',el).clientWidth-40,30)}}
+    $('#rmsg',el).innerHTML=msg+` (${esc(S.bob)}: ${Math.min(rc.bob,RACE_LEN)} · Shelly: ${Math.min(rc.tur,RACE_LEN)})`;const nb=$('#nextBtn');if(nb&&R.stop)nb.textContent='See who won ➜'},700)}
+  return{glow(){ch&&ch.glow()},reveal(){if(d)after(false)}};
+ }};
+
+Hop._m=Hop.mount.bind(Hop);Catch._m=Catch.mount.bind(Catch);
+/* hook the new Advanced levels into the first five games (old Advanced is now Medium) */
+(function(){const wrap=(G,mk,mnt,hn)=>{const om=G.make.bind(G),omo=G.mount.bind(G),oh=G.hints?G.hints.bind(G):null;
+ G.make=L=>L==='adv'?mk():om(L);if(mnt)G.mount=(q,el,api,L)=>q.adv?mnt(q,el,api,L):omo(q,el,api,L);
+ if(hn)G.hints=q=>q.adv?hn(q):(oh?oh(q):q.hints)};
+ wrap(Balloon,balloonAdv);
+ wrap(Bunch,bunchAdv,bunchAdvMount,bunchAdvHints);
+ wrap(Hop,hopAdv,(q,el,api,L)=>q.t==='line2'?hopAdvMount(q,el,api):Hop._m(q,el,api,L));
+ wrap(Rows,rowsAdv,rowsAdvMount,rowsAdvHints);
+ wrap(Catch,catchAdv,(q,el,api,L)=>q.family?catchFamilyMount(q,el,api):Catch._m(q,el,api,L));
+})();
+const GAMES=[Balloon,Bunch,Hop,Rows,Catch,Machine,Mystery,Stand,Race,SetClock,TimePop,Memory,BusyDay,Express];
 const GBY=Object.fromEntries(GAMES.map(g=>[g.id,g]));
 
 /* ---------- screens ---------- */
@@ -904,7 +1296,8 @@ function go(v){stopGame();hush();view=v;window.scrollTo(0,0);({home:renderHome,t
 function updateCount(bump){$('#bcount').textContent=S.bananas;if(bump){const p=$('#pill');p.classList.remove('bump');void p.offsetWidth;p.classList.add('bump')}}
 function setBrand(){$('#brandName').textContent=`${S.bob}'s Banana Hunt`;document.title=`${S.bob}'s Banana Hunt`}
 
-function stickerCount(gid){const s=S.stickers[gid]||{};return{basic:s.basic||0,adv:s.adv||0}}
+function stickerCount(gid){const s=S.stickers[gid]||{};return{basic:s.basic||0,med:s.med||0,adv:s.adv||0}}
+const topicOf=gid=>TOPICS.find(t=>t.games&&t.games.includes(gid))||TOPICS[0];
 
 function goalHTML(){const it=S.goal&&ITEMS.find(i=>i.id===S.goal);if(!it||S.owned.includes(it.id))return '';const have=Math.min(S.bananas,it.price),pct=Math.round(have/it.price*100);
  return `<div class="goal"><div class="goal-prev">${previewHTML(it)}</div><div class="goal-main"><div class="goal-top"><span>Saving for: <b>${it.name}</b></span><span class="goal-num">${BAN} ${have} / ${it.price}</span></div><div class="bar"><i style="width:${pct}%"></i></div>${S.bananas>=it.price?`<div class="goal-ready">You have enough! <button class="btn yel sm2" data-act="shop">Go buy it</button></div>`:`<div class="goal-left">${it.price-S.bananas} more to go!</div>`}</div></div>`}
@@ -931,14 +1324,14 @@ function tickle(tw){if(S.tickle.day!==today())S.tickle={day:today(),n:0};
 function renderTopic(){const T=TOPICS.find(t=>t.id===lastTopic&&t.open)||TOPICS[0];
  scr.innerHTML=`<button class="back" data-act="home">← Trails</button><h1 style="font-size:32px;color:var(--leaf-d)">${T.name.replace('&','&amp;')}</h1><p style="margin:4px 0 0;color:var(--ink-2)">${esc(T.intro)}</p>
  <div class="games">${T.games.map(id=>GBY[id]).map(g=>{const s=stickerCount(g.id);return`<div class="gcard"><div class="gh"><div class="gi">${g.icon}</div><div><h3>${g.name}</h3><p>${g.blurb}</p></div></div>
- <div class="stk">Stickers: ${s.basic}/6 &nbsp;·&nbsp; Gold: ${s.adv}/6</div><div class="lv"><button class="btn go" data-act="play" data-g="${g.id}" data-l="basic">Basic</button><button class="btn pur" data-act="play" data-g="${g.id}" data-l="adv">Advanced</button></div></div>`}).join('')}</div>`;
+ <div class="stk">${T.levels.map(l=>`${l==='basic'?'Stickers':l==='med'?'Silver':'Gold'}: ${s[l]}/6`).join(' &nbsp;·&nbsp; ')}</div><div class="lv" style="grid-template-columns:repeat(${T.levels.length},1fr)">${T.levels.map(l=>`<button class="btn lvb-${l}" data-act="play" data-g="${g.id}" data-l="${l}">${LVN[l]}</button>`).join('')}</div></div>`}).join('')}</div>`;
 }
 
 /* ---------- play engine ---------- */
 const SPK=`<svg viewBox="0 0 24 24" fill="none" stroke="#1E5C3B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z" fill="#1E5C3B"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>`;
 function startRound(gid,L){view='play';const G=GBY[gid];const n=G.rounds||5;R={gid,L,n,i:0,earned:0,bonus:rnd(1,n-1),used:new Set(),res:[]};
  lastTopic=(TOPICS.find(t=>t.games&&t.games.includes(gid))||TOPICS[0]).id;
- scr.innerHTML=`<section class="play"><div class="playbar"><button class="back" data-act="topic">← Games</button><div class="ptitle">${G.name}<span class="tag ${L==='adv'?'adv':''}">${L==='adv'?'Advanced':'Basic'}</span></div><div class="dots" id="dots"></div></div>
+ scr.innerHTML=`<section class="play"><div class="playbar"><button class="back" data-act="topic">← Games</button><div class="ptitle">${G.name}<span class="tag ${L}">${LVN[L]}</span></div><div class="dots" id="dots"></div></div>
  <div id="pbody"><div class="qcard"><div class="qtop"><div class="ask" id="ask" aria-live="polite"></div><button class="speak" id="speakBtn" aria-label="Read it to me">${SPK}</button></div><div id="bonusTag"></div><div id="qvis"></div><div id="hintvis"></div></div>
  <div id="qplay"></div>
  <div class="bobrow"><div class="bobmini" id="bobmini">${bobSVG(S.wear,'happy')}</div><div class="bubble" id="bubble" aria-live="polite"></div><div class="actions"><button class="btn yel" id="hintBtn">Hint</button><button class="btn go" id="nextBtn" hidden>Next ➜</button></div></div></div></section>`;
@@ -948,14 +1341,15 @@ function startRound(gid,L){view='play';const G=GBY[gid];const n=G.rounds||5;R={g
 }
 const api={
  submit(v){return submit(v)},say(t){say(t)},solved:()=>R&&R.solved,
- setAsk(t){R.q.ask=t;$('#ask').textContent=t},resetHints(){R.hint=0;$('#hintvis').innerHTML='';updHint()}
+ setAsk(t){R.q.ask=t;$('#ask').textContent=t},resetHints(){R.hint=0;$('#hintvis').innerHTML='';updHint()},round:()=>R,setVis(h){$('#qvis').innerHTML=h||''},
+ addBananas(n,from){S.bananas+=n;R.earned+=n;save();flyBananas(n,from||$('#bobmini'));setTimeout(()=>updateCount(true),650)}
 };
 function say(t){const b=$('#bubble');if(b)b.innerHTML=t}
 function drawDots(){$('#dots').innerHTML=Array.from({length:R.n},(_,i)=>`<span class="dot ${R.res[i]||''} ${i===R.i&&!R.res[i]?'now':''}">${BAN}</span>`).join('')}
 function updHint(){const b=$('#hintBtn');if(!b)return;const hs=getHints();const left=hs.length-R.hint;b.disabled=left<=0||R.solved;b.textContent=left>0?`Hint (${left})`:'No more hints'}
 function getHints(){const G=GBY[R.gid];return(G.hints?G.hints(R.q):R.q.hints)||[]}
 function nextQ(){stopGame();hush();
- if(R.i>=R.n)return endRound();
+ if(R.i>=R.n||R.stop)return endRound();
  const G=GBY[R.gid];let q;for(let k=0;k<40;k++){q=G.make(R.L);if(!R.used.has(q.key))break}R.used.add(q.key);
  Object.assign(R,{q,tries:0,hint:0,solved:false});
  $('#ask').textContent=q.ask;$('#qvis').innerHTML=q.vis||'';$('#hintvis').innerHTML='';
@@ -971,24 +1365,26 @@ function submit(v){if(!R||R.solved)return false;const q=R.q;
  R.tries++;sfx('boing');setBob('oops','tilt');
  if(R.tries>=3){reveal()}else{say(`<b>${esc(v)}</b> is not it. Try again! ${R.tries===2?'Look for the glowing one.':'You can tap Hint for help.'}`);if(R.tries===2&&hooks&&hooks.glow)hooks.glow()}
  updHint();return false}
-function correct(){const q=R.q;const base=R.L==='basic'?(R.tries===0?2:1):(R.tries===0?4:2);const bonus=R.i===R.bonus;const got=base*(bonus?2:1);
+function reward(L,first){const three=topicOf(R.gid).levels.length===3;const t={basic:[2,1],med:[4,2],adv:three?[6,3]:[4,2]}[L]||[2,1];return first?t[0]:t[1]}
+function correct(){const q=R.q;const base=reward(R.L,R.tries===0);const bonus=R.i===R.bonus;const got=base*(bonus?2:1);
  S.bananas+=got;R.earned+=got;save();R.res[R.i]=R.tries===0?'star':'ok';drawDots();
  const cheer=pick(CHEERS);say(`<b>${cheer}</b> ${esc(q.explain)} <b>+${got}</b> ${BAN}${bonus?' (bonus!)':''}`);
  setBob('wow','jump');sfx('ding');flyBananas(got,$('#bobmini'));setTimeout(()=>updateCount(true),650);
  $('#nextBtn').hidden=false;updHint();setTimeout(()=>{const n=$('#nextBtn');n&&n.focus({preventScroll:true})},50);
  if(S.autoRead)speak(cheer+' '+q.explain)}
 function reveal(){const q=R.q;R.solved=true;R.res[R.i]='shown';drawDots();
- say(`The answer is <b>${esc(q.answer)}</b>. ${esc(q.explain)} Let's try the next one!`);
+ say(`The answer is <b>${esc(q.answerText||q.answer)}</b>. ${esc(q.explain)} Let's try the next one!`);
  if(hooks&&hooks.reveal)hooks.reveal();if(hooks&&hooks.glow)hooks.glow();$('#nextBtn').hidden=false;updHint();
- if(S.autoRead)speak(`The answer is ${q.answer}. ${q.explain}`)}
-function endRound(){stopGame();const G=GBY[R.gid];const lv=R.L==='adv'?'adv':'basic';
- S.stickers[R.gid]=S.stickers[R.gid]||{basic:0,adv:0};const cur=S.stickers[R.gid][lv]||0;let stk='';
- if(cur<6){S.stickers[R.gid][lv]=cur+1;const e=STICKERS[R.gid][cur];stk=`<div class="sticker ${lv==='adv'?'gold':''} newp">${e}</div><p>New ${lv==='adv'?'gold ':''}sticker for your book!</p>`}
- else{S.bananas+=3;R.earned+=3;stk=`<p>Your ${lv==='adv'?'gold ':''}${G.name} stickers are all collected! Here are 3 extra bananas.</p>`}
+ if(S.autoRead)speak(`The answer is ${q.answerText||q.answer}. ${q.explain}`)}
+function endRound(){stopGame();const G=GBY[R.gid];const lv=R.L;const tier=TIER[lv]||'';const T=topicOf(R.gid);
+ S.stickers[R.gid]=S.stickers[R.gid]||{};const cur=S.stickers[R.gid][lv]||0;let stk='';
+ if(cur<6){S.stickers[R.gid][lv]=cur+1;const e=STICKERS[R.gid][cur];stk=`<div class="sticker ${tier} newp">${e}</div><p>New ${tier?tier+' ':''}sticker for your book!</p>`}
+ else{S.bananas+=3;R.earned+=3;stk=`<p>Your ${tier?tier+' ':''}${G.name} stickers are all collected! Here are 3 extra bananas.</p>`}
+ const nxL=T.levels[T.levels.indexOf(lv)+1];const note=G.endNote?G.endNote(R):'';
  save();updateCount(true);sfx('yay');
  const stars=R.res.filter(x=>x==='star').length;
- $('#pbody').innerHTML=`<div class="endcard"><div class="bigbob">${bobSVG(S.wear,'wow')}</div><h2>Round done, ${esc(S.name)}!</h2><p>You earned <b>${R.earned} bananas</b>.${stars?` ${stars} right on the first try!`:''}</p>${stk}
- <div class="endbtns"><button class="btn go" data-act="play" data-g="${R.gid}" data-l="${R.L}">Play again</button>${R.L==='basic'?`<button class="btn pur" data-act="play" data-g="${R.gid}" data-l="adv">Try Advanced</button>`:''}<button class="btn" data-act="topic">Other games</button><button class="btn yel" data-act="shop">${BAN} Shop</button></div></div>`;
+ $('#pbody').innerHTML=`<div class="endcard"><div class="bigbob">${bobSVG(S.wear,'wow')}</div><h2>Round done, ${esc(S.name)}!</h2>${note}<p>You earned <b>${R.earned} bananas</b>.${stars?` ${stars} right on the first try!`:''}</p>${stk}
+ <div class="endbtns"><button class="btn go" data-act="play" data-g="${R.gid}" data-l="${R.L}">Play again</button>${nxL?`<button class="btn lvb-${nxL}" data-act="play" data-g="${R.gid}" data-l="${nxL}">Try ${LVN[nxL]}</button>`:''}<button class="btn" data-act="topic">Other games</button><button class="btn yel" data-act="shop">${BAN} Shop</button></div></div>`;
  drawDots();if(S.autoRead)speak(`Round done! You earned ${R.earned} bananas.`)}
 function flyBananas(n,from){if(RM||!from)return;const a=from.getBoundingClientRect(),b=$('#pill').getBoundingClientRect();
  for(let k=0;k<Math.min(n,6);k++){const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('class','flyb');s.innerHTML='<use href="#ban"/>';document.body.appendChild(s);
@@ -1012,9 +1408,9 @@ function setGoal(id){const it=ITEMS.find(i=>i.id===id);if(!it)return;S.goal=S.go
 
 /* ---------- stickers ---------- */
 function renderStickers(){
- const row=(g,n,gold)=>STICKERS[g.id].map((e,i)=>i<n?`<div class="sticker ${gold?'gold':''}">${e}</div>`:`<div class="sticker empty" aria-label="empty"></div>`).join('');
- scr.innerHTML=`<button class="back" data-act="home">← Trails</button><h1 style="font-size:32px;color:var(--leaf-d)">${esc(S.name)}'s Sticker Book</h1><p style="margin:4px 0 0;color:var(--ink-2)">Finish a round to get a sticker. Advanced rounds give gold stickers.</p>
- ${TOPICS.filter(t=>t.open).map(t=>`<h2 class="sec-h">${t.name.replace('&','&amp;')}</h2><div class="book">${t.games.map(id=>GBY[id]).map(g=>{const s=stickerCount(g.id);return`<div class="bookrow"><h3>${g.name}</h3><div class="srow">${row(g,s.basic,false)}</div><div class="srow">${row(g,s.adv,true)}</div></div>`}).join('')}</div>`).join('')}`;
+ const row=(g,n,tier)=>STICKERS[g.id].map((e,i)=>i<n?`<div class="sticker ${tier}">${e}</div>`:`<div class="sticker empty" aria-label="empty"></div>`).join('');
+ scr.innerHTML=`<button class="back" data-act="home">← Trails</button><h1 style="font-size:32px;color:var(--leaf-d)">${esc(S.name)}'s Sticker Book</h1><p style="margin:4px 0 0;color:var(--ink-2)">Finish a round to get a sticker. Medium rounds give silver stickers and Advanced rounds give gold ones.</p>
+ ${TOPICS.filter(t=>t.open).map(t=>`<h2 class="sec-h">${t.name.replace('&','&amp;')}</h2><div class="book">${t.games.map(id=>GBY[id]).map(g=>{const s=stickerCount(g.id);return`<div class="bookrow"><h3>${g.name}</h3>${t.levels.map(l=>`<div class="srow">${row(g,s[l],TIER[l])}</div>`).join('')}</div>`}).join('')}</div>`).join('')}`;
 }
 
 /* ---------- settings ---------- */
